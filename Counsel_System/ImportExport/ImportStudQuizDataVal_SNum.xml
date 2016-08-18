@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="format.xsl" ?>
+<ValidateRule Name="學生測驗資料">
+  <DuplicateDetection>
+    <Detector Name="PrimaryKey1">
+      <Field Name="學號" />
+      <Field Name="狀態" />
+    </Detector>
+  </DuplicateDetection>
+  <FieldList>
+    <Field Required="True" Name="學號">
+      <Validate AutoCorrect="False" Description="「學號」不允許空白。" ErrorType="Error" Validator="不可空白" When="" />
+    </Field>
+    <Field Required="True" Name="狀態">
+      <Validate AutoCorrect="False" Description="「狀態」請填入「一般、延修、休學、輟學、畢業或離校」。" ErrorType="Error" Validator="不可空白" When="" />
+    </Field>
+    
+    <Field Required="False" Name="姓名">      
+    </Field>
+
+    <Field Required="True" Name="實施日期" EmptyAlsoValidate="False">
+      <Validate AutoCorrect="False" Description="「實施日期」格式錯誤。" ErrorType="Error" Validator="合法日期" When="" />
+    </Field>
+
+    <Field Required="True" Name="解析日期" EmptyAlsoValidate="False">
+      <Validate AutoCorrect="False" Description="「解析日期」格式錯誤。" ErrorType="Error" Validator="合法日期" When="" />
+    </Field>
+    
+  </FieldList>
+  <ValidatorList>
+    <FieldValidator Name="不可空白" Type="STRINGLENGTH">
+      <MinLength>1</MinLength>
+    </FieldValidator>
+    <RowValidator Name="學生測驗是否存在" Type="STUDDATACHECKQUIZDATASTUDENTNUMBERRVAL"/>
+    <RowValidator Name="學號是否存在" Type="COUNSELSTUDCHECKSTUDENTNUMBERSTATUSVAL"/>
+    
+    <FieldValidator Name="合法日期" Type="MixDate">
+      <!-- Gregorian | Taiwan-->
+      <!-- Pattern 中需要 Year,Month,Day 三個 Group。-->
+      <!-- 2007/8/8 (年/月/日) -->
+      <ValidPattern DateType="Gregorian">
+        <![CDATA[^(?<Year>[0-9]{4})/(?<Month>[0-9]{1,2})/(?<Day>[0-9]{1,2})$]]>
+      </ValidPattern>
+      <Matchs CorrectTo="yyyy/MM/dd">
+        <!-- 96/8/8 (年/月/日)-->
+        <Match DateType="Taiwan"><![CDATA[^(?<Year>1?[0-9]{2})/(?<Month>[0-9]{1,2})/(?<Day>[0-9]{1,2})$]]></Match>
+        <!-- 96-8-8 (年-月-日)-->
+        <Match DateType="Taiwan"><![CDATA[^(?<Year>1?[0-9]{2})-(?<Month>[0-9]{1,2})-(?<Day>[0-9]{1,2})$]]></Match>
+        <!-- 960808 (年月日)-->
+        <Match DateType="Taiwan"><![CDATA[^(?<Year>1?[0-9]{2})(?<Month>[0-9]{2})(?<Day>[0-9]{2})$]]></Match>
+        <!-- 2007-8-8 (年/月/日)-->
+        <Match DateType="Gregorian"><![CDATA[^(?<Year>[0-9]{4})-(?<Month>[0-9]{1,2})-(?<Day>[0-9]{1,2})$]]></Match>
+        <!-- 8-8-2007 (月/日/年)-->
+        <Match DateType="Gregorian"><![CDATA[^(?<Month>[0-9]{1,2})-(?<Day>[0-9]{1,2})-(?<Year>[0-9]{4})$]]></Match>
+        <!-- 20070812 (年月日)-->
+        <Match DateType="Gregorian"><![CDATA[^(?<Year>[0-9]{4})(?<Month>[0-9]{2})(?<Day>[0-9]{2})$]]></Match>
+      </Matchs>
+    </FieldValidator>
+  </ValidatorList>
+  <RowValidate>
+    <Validate AutoCorrect="False" Description="「學生測驗內容」已存在於系統中，匯入將會被覆蓋。" ErrorType="Warning" Validator="學生測驗是否存在" When=""/>
+    <Validate AutoCorrect="False" Description="「學號+狀態」不存在系統內。" ErrorType="Error" Validator="學號是否存在" When=""/>
+  </RowValidate>
+  <ConditionList/>
+</ValidateRule>

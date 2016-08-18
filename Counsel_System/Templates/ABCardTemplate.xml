@@ -1,0 +1,623 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Subjects>
+  <Subject label="1.本人概況">
+    <!-- 大題 -->
+    <QG label="血型">
+      <!-- 題組 -->
+      <Choices>
+        <!-- 選項清單 -->
+        <Item label="A" />
+        <Item label="B" />
+        <Item label="O" selected="true" />
+        <!-- default selected -->
+        <Item label="AB" />
+        <Item label="其它" hasText="true" />
+      </Choices>
+      <Qs>
+        <!-- 題目清單 -->
+        <Q type="combobox" name="AAA10000001" label="" />
+        <!-- 題目 -->
+      </Qs>
+    </QG>
+    <QG label="宗教">
+      <Choices>
+        <Item label="無" selected="true" />
+        <Item label="佛教" />
+        <Item label="基督教" />
+        <Item label="天主教" />
+        <Item label="回教" />
+        <Item label="道教" />
+      </Choices>
+      <Qs>
+        <Q type="combobox" label="" name="AAA10000002" />
+      </Qs>
+    </QG>
+    <QG label="身高">
+      <Qs>
+        <Q type="text" label="一上" name="AAA10000005" width="50" />
+        <Q type="text" label="二上" name="AAA10000006" width="50" />
+        <Q type="text" label="三上" name="AAA10000007" width="50" />
+      </Qs>
+    </QG>
+    <QG label="體重">
+      <Qs>
+        <Q type="text" label="一上" name="AAA10000008" width="50" />
+        <Q type="text" label="二上" name="AAA10000009" width="50" />
+        <Q type="text" label="三上" name="AAA10000010" width="50" />
+      </Qs>
+    </QG>
+    <QG label="生理缺陷">
+      <Choices>
+        <Item label="無" />
+        <Item label="近視" />
+        <Item label="其它視覺障礙" />
+        <Item label="聽覺障礙" />
+        <Item label="肢體障礙" />
+        <Item label="其它" hasText="true" />
+      </Choices>
+      <Qs>
+        <Q type="checkbox" name="AAA10000011" label="" />
+      </Qs>
+    </QG>
+    <QG label="曾患特殊疾病">
+      <Choices>
+        <Item label="無" selected="true" />
+        <Item label="腦炎" />
+        <Item label="癲癇" />
+        <Item label="心臟病" />
+        <Item label="小兒麻痺" />
+        <Item label="氣喘" />
+        <Item label="過敏症" />
+        <Item label="肺結核" />
+        <Item label="其它" hasText="true" />
+      </Choices>
+      <Qs>
+        <Q type="checkbox" name="AAA10000012" label="" />
+      </Qs>
+    </QG>
+  </Subject>
+  <Subject label="5.自我認識">
+    <!-- 大題 -->
+    <QG label="" hideLabel="true">
+      <!-- 題組 -->
+      <Qs>
+        <!-- 題目清單 -->
+        <Q type="grid" name="AAE10000001" label="" rows="4">
+          <!-- 題目 -->
+          <Cols>
+            <Col name="年級" width="60" />
+            <Col name="1.我的個性(如溫和、急躁、、)" width="" />
+            <Col name="2.我的優點" width="150" />
+            <Col name="3.我需要改進的地方" width="150" />
+            <Col name="填寫日期" width="" />
+          </Cols>
+        </Q>
+      </Qs>
+    </QG>
+  </Subject>
+  <Subject label="8.備註">
+    <!-- 大題 -->
+    <QG label="" hideLabel="true">
+      <Qs>
+        <Q type="textarea" label="" name="AAH10000001" width="Fill" rows="5" />
+      </Qs>
+    </QG>
+  </Subject>
+  <Subject label="4.自傳">
+    <!-- 大題 -->
+    <QG label="" hideLabel="true">
+      <Qs>
+        <Q type="text" label="家中最了解我的人是：" name="AAD10000001" width="Fill" />
+      </Qs>
+    </QG>
+    <QG label="" hideLabel="true">
+      <Qs>
+        <Q type="text" label="常指導我做功課的人是：" name="AAD10000002" width="Fill" />
+      </Qs>
+    </QG>
+    <QG label="" hideLabel="true">
+      <Qs>
+        <Q type="text" label="我讀過且印象最深刻的課外書是：" name="AAD10000003" width="Fill" />
+      </Qs>
+    </QG>
+    <QG label="" hideLabel="true">
+      <Qs>
+        <Q type="text" label="我喜歡的人是：" name="AAD10000004" />
+        <Q type="text" label="因為：" name="AAD10000005" width="180" />
+      </Qs>
+    </QG>
+    <QG label="" hideLabel="true">
+      <Qs>
+        <Q type="text" label="我最要好的朋友是：" name="AAD10000006" />
+        <Q type="text" label="他是怎樣的人？(請加描述)" name="AAD10000007" width="Fill" />
+      </Qs>
+    </QG>
+    <QG label="" hideLabel="true">
+      <Qs>
+        <Q type="text" label="我最喜歡做的事是：" name="AAD10000008" />
+        <Q type="text" label="因為：" name="AAD10000009" />
+      </Qs>
+    </QG>
+    <QG label="" hideLabel="true">
+      <Qs>
+        <Q type="text" label="我最不喜歡做的事是：" name="AAD100000010" />
+        <Q type="text" label="因為：" name="AAD100000011" />
+      </Qs>
+    </QG>
+    <QG label="" hideLabel="true">
+      <Qs>
+        <Q type="text" label="我國中時的學校生活是：" name="AAD10000016" width="Fill" />
+      </Qs>
+    </QG>
+    <QG label="" hideLabel="true">
+      <Qs>
+        <Q type="textarea" label="我最快樂的回憶：" name="AAD10000017" width="Fill" rows="3" />
+      </Qs>
+    </QG>
+    <QG label="" hideLabel="true">
+      <Qs>
+        <Q type="textarea" label="我最痛苦的回憶：" name="AAD10000018" width="Fill" />
+      </Qs>
+    </QG>
+    <QG label="" hideLabel="true">
+      <Qs>
+        <Q type="textarea" label="最足以描述自己的幾句話是：" name="AAD10000019" width="Fill" />
+      </Qs>
+    </QG>
+  </Subject>
+  <Subject label="7.畢業後計畫">
+    <!-- 大題 -->
+    <QG label="1.升學意願(不升學者免填)">
+      <Choices>
+        <Item label="理" />
+        <Item label="工" />
+        <Item label="文史" />
+        <Item label="法" />
+        <Item label="商" />
+        <Item label="醫" />
+        <Item label="農" />
+        <Item label="教育" />
+        <Item label="藝術" />
+        <Item label="海洋" />
+        <Item label="軍" />
+        <Item label="警" />
+        <Item label="其它" hasText="true" />
+      </Choices>
+      <Qs>
+        <Q type="checkbox" name="AAG10000001" label="" />
+      </Qs>
+    </QG>
+    <QG label="2.就業意願(升學者免填)">
+      <Choices>
+        <Item label="自行就業" />
+        <Item label="需要輔導就業" />
+        <Item label="希望參加職業訓練" />
+        <Item label="其它" hasText="true" />
+      </Choices>
+      <Qs>
+        <Q type="checkbox" name="AAG10000002" label="" />
+      </Qs>
+    </QG>
+    <QG label="3.希望參加職業訓練種類">
+      <Choices>
+        <Item label="機械加工" />
+        <Item label="機密機械加工" />
+        <Item label="金屬加工" />
+        <Item label="焊接及切割" />
+        <Item label="電子及儀表" />
+        <Item label="電機及電工" />
+        <Item label="家用電器" />
+        <Item label="營建土木" />
+        <Item label="車輛修護" />
+        <Item label="農業機械" />
+        <Item label="農業經營" />
+        <Item label="園藝經營" />
+        <Item label="農產加工" />
+        <Item label="畜牧" />
+        <Item label="船員訓練" />
+        <Item label="縫紉" />
+        <Item label="美容" />
+        <Item label="會計" />
+        <Item label="護理" />
+        <Item label="其它" />
+      </Choices>
+      <Qs>
+        <Q type="checkbox" name="AAG10000003" label="" />
+      </Qs>
+    </QG>
+    <QG label="受訓地區">
+      <Choices>
+        <Item label="北區" />
+        <Item label="中區" />
+        <Item label="南區" />
+        <Item label="東區" />
+        <Item label="其它" />
+      </Choices>
+      <Qs>
+        <Q type="checkbox" name="AAG10000004" label="" />
+      </Qs>
+    </QG>
+    <QG label="4.將來職業意願">
+      <Choices>
+        <Item label="機械加工" />
+        <Item label="機密機械加工" />
+        <Item label="金屬加工" />
+        <Item label="焊接及切割" />
+        <Item label="電子及儀表" />
+        <Item label="電機及電工" />
+        <Item label="家用電器" />
+        <Item label="營建土木" />
+        <Item label="車輛修護" />
+        <Item label="農業機械" />
+        <Item label="農業經營" />
+        <Item label="園藝經營" />
+        <Item label="農產加工" />
+        <Item label="畜牧" />
+        <Item label="船員訓練" />
+        <Item label="縫紉" />
+        <Item label="美容" />
+        <Item label="會計" />
+        <Item label="護理" />
+        <Item label="其它" />
+      </Choices>
+      <Qs>
+        <Q type="combobox" name="AAG10000005" label="1." />
+        <Q type="combobox" name="AAG10000006" label="2." />
+        <Q type="combobox" name="AAG10000007" label="3." />
+      </Qs>
+    </QG>
+    <QG label="就業地區">
+      <Choices>
+        <Item label="北區" />
+        <Item label="中區" />
+        <Item label="南區" />
+        <Item label="東區" />
+        <Item label="其它" />
+      </Choices>
+      <Qs>
+        <Q type="combobox" name="AAG10000008" label="1." />
+        <Q type="combobox" name="AAG10000009" label="2." />
+        <Q type="combobox" name="AAG100000010" label="3." />
+      </Qs>
+    </QG>
+  </Subject>
+  <Subject label="3.學習狀況">
+    <!-- 大題 -->
+    <QG label="最喜歡的學科">
+      <Qs>
+        <Q type="text" label="一年" name="AAC10000001" />
+        <Q type="text" label="二年" name="AAC10000002" />
+        <Q type="text" label="三年" name="AAC10000003" />
+        <Q type="text" label="四年" name="AAC10000004" />
+      </Qs>
+    </QG>
+    <QG label="最感困難的學科">
+      <Qs>
+        <Q type="text" label="一年" name="AAC10000005" />
+        <Q type="text" label="二年" name="AAC10000006" />
+        <Q type="text" label="三年" name="AAC10000007" />
+        <Q type="text" label="四年" name="AAC10000008" />
+      </Qs>
+    </QG>
+    <QG label="特殊專長">
+      <Choices>
+        <Item label="球類" selected="true" />
+        <Item label="田徑" />
+        <Item label="游泳" />
+        <Item label="國術" />
+        <Item label="美術" />
+        <Item label="樂器演奏" />
+        <Item label="唱歌" />
+        <Item label="工藝" />
+        <Item label="家事" />
+        <Item label="演說" />
+        <Item label="寫作" />
+        <Item label="舞蹈" />
+        <Item label="戲劇" />
+        <Item label="書法" />
+        <Item label="珠算" />
+        <Item label="外語" />
+        <Item label="英打" />
+        <Item label="中打" />
+        <Item label="會計" />
+        <Item label="統計" />
+        <Item label="領導" />
+      </Choices>
+      <Qs>
+        <Q type="textboxdropdown" name="AAC10000009" label="一年" width="Fill" />
+        <Q type="textboxdropdown" name="AAC10000010" label="二年" width="Fill" />
+        <Q type="textboxdropdown" name="AAC10000011" label="三年" width="Fill" />
+        <Q type="textboxdropdown" name="AAC10000012" label="四年" width="Fill" />
+      </Qs>
+    </QG>
+    <QG label="休閒興趣">
+      <Choices>
+        <Item label="電影欣賞" selected="true" />
+        <Item label="閱讀" />
+        <Item label="登山" />
+        <Item label="露營" />
+        <Item label="旅行郊遊" />
+        <Item label="划船游泳" />
+        <Item label="釣魚" />
+        <Item label="樂器演奏" />
+        <Item label="唱歌" />
+        <Item label="音樂欣賞" />
+        <Item label="舞蹈" />
+        <Item label="繪畫" />
+        <Item label="集郵" />
+        <Item label="打球" />
+        <Item label="國術" />
+        <Item label="編織" />
+        <Item label="下棋" />
+        <Item label="養小動物" />
+        <Item label="作物栽培" />
+      </Choices>
+      <Qs>
+        <Q type="textboxdropdown" name="AAC10000013" label="一年" width="Fill" />
+        <Q type="textboxdropdown" name="AAC10000014" label="二年" width="Fill" />
+        <Q type="textboxdropdown" name="AAC10000015" label="三年" width="Fill" />
+        <Q type="textboxdropdown" name="AAC10000016" label="四年" width="Fill" />
+      </Qs>
+    </QG>
+    <QG label="參加校內社團及擔任班級幹部">
+      <Qs>
+        <Q type="text" label="一年" name="AAC10000017" />
+        <Q type="text" label="二年" name="AAC10000018" />
+        <Q type="text" label="三年" name="AAC10000019" />
+        <Q type="text" label="四年" name="AAC10000020" />
+      </Qs>
+    </QG>
+  </Subject>
+  <Subject label="6.生活感想">
+    <!-- 大題 -->
+    <QG label="一年級" width="20">
+      <Qs>
+        <Q type="text" label="◎我對自己的期望：" name="AAF10000001" width="Fill" />
+        <Q type="text" label="◎為達到理想，我所需要的努力：" name="AAF10000002" width="Fill" />
+        <Q type="text" label="◎期望師長給予我的幫助：" name="AAF10000003" width="Fill" />
+        <Q type="text" label="填寫日期：" name="AAF10000004" />
+      </Qs>
+    </QG>
+    <QG label="二年級" width="20">
+      <Qs>
+        <Q type="text" label="◎一年來的感想：" name="AAF10000005" width="Fill" />
+        <Q type="text" label="◎今後努力的目標：" name="AAF10000006" width="Fill" />
+        <Q type="text" label="◎期望師長給予我的幫助：" name="AAF10000007" width="Fill" />
+        <Q type="text" label="填寫日期：" name="AAF10000008" />
+      </Qs>
+    </QG>
+  </Subject>
+  <Subject label="2.家庭狀況">
+    <!-- 大題 -->
+    <QG label="直系血親">
+      <!-- 題組 -->
+      <Qs>
+        <!-- 題目清單 -->
+        <Q type="grid" name="AAB10000001" label="" rows="6">
+          <!-- 題目 -->
+          <Cols>
+            <Col name="稱謂" width="60" />
+            <Col name="存、歿" width="" />
+            <Col name="出生年" width="" />
+          </Cols>
+          <Default>
+            <Item>
+              <Field key="稱謂" value="父" />
+            </Item>
+            <Item>
+              <Field key="稱謂" value="母" />
+            </Item>
+            <Item>
+              <Field key="稱謂" value="祖父" />
+            </Item>
+            <Item>
+              <Field key="稱謂" value="祖母" />
+            </Item>
+            <Item>
+              <Field key="稱謂" value="曾祖父" />
+            </Item>
+            <Item>
+              <Field key="稱謂" value="曾祖母" />
+            </Item>
+          </Default>
+        </Q>
+      </Qs>
+    </QG>
+    <QG label="父母教育程度">
+      <Choices>
+        <!-- 選項清單 -->
+        <Item label="不識字" />
+        <Item label="識字(未就學)" />
+        <Item label="小學" selected="true" />
+        <!-- default selected -->
+        <Item label="初中(職)" />
+        <Item label="高中(職)" />
+        <Item label="專科" />
+        <Item label="學士" />
+        <Item label="碩士" />
+        <Item label="博士" />
+      </Choices>
+      <Qs>
+        <!-- 題目清單 -->
+        <Q type="combobox" name="AAB10000002" label="父" />
+        <!-- 題目 -->
+        <Q type="combobox" name="AAB10000003" label="母" />
+        <!-- 題目 -->
+      </Qs>
+    </QG>
+    <QG label="家長">
+      <!-- 題組 -->
+      <Qs>
+        <!-- 題目清單 -->
+        <Q type="grid" name="AAB10000004" label="" rows="3">
+          <!-- 題目 -->
+          <Cols>
+            <Col name="稱謂" width="60" />
+            <Col name="姓名" width="" />
+            <Col name="職業" width="" />
+            <Col name="工作機構" width="" />
+            <Col name="職稱" width="" />
+            <Col name="電話" width="" />
+            <Col name="備註" width="" />
+          </Cols>
+          <Default>
+            <Item>
+              <Field key="稱謂" value="父" />
+            </Item>
+            <Item>
+              <Field key="稱謂" value="母" />
+            </Item>
+          </Default>
+        </Q>
+      </Qs>
+    </QG>
+    <QG label="監護人">
+      <Qs>
+        <Q type="text" label="姓名" name="AAB10000005" />
+        <Q type="text" label="性別" name="AAB10000006" />
+        <Q type="text" label="關係" name="AAB10000007" />
+        <Q type="text" label="電話" name="AAB10000009" />
+        <Q type="text" label="通訊處" name="AAB10000008" width="Fill" />
+      </Qs>
+    </QG>
+    <QG label="兄弟姊妹">
+      <!-- 題組 -->
+      <Qs>
+        <!-- 題目清單 -->
+        <Q type="text" label="我排行第幾" name="AAB10000010" />
+        <Q type="grid" name="AAB10000011" label="" rows="6">
+          <!-- 題目 -->
+          <Cols>
+            <Col name="稱謂" width="60" />
+            <Col name="姓名" width="" />
+            <Col name="畢(肆)業學校" width="" />
+            <Col name="出生年次" width="" />
+            <Col name="備註" width="" />
+          </Cols>
+        </Q>
+      </Qs>
+    </QG>
+    <QG label="父母關係">
+      <Choices>
+        <Item label="同住" />
+        <Item label="分住" />
+        <Item label="分居" />
+      </Choices>
+      <Qs>
+        <Q type="combobox" label="一年" name="AAB10000012" />
+        <Q type="combobox" label="二年" name="AAB10000013" />
+        <Q type="combobox" label="三年" name="AAB10000014" />
+        <Q type="combobox" label="四年" name="AAB10000015" />
+      </Qs>
+    </QG>
+    <QG label="家庭氣氛">
+      <Choices>
+        <Item label="很和諧" />
+        <Item label="和諧" />
+        <Item label="普通" />
+        <Item label="不和諧" />
+        <Item label="很不和諧" />
+      </Choices>
+      <Qs>
+        <Q type="combobox" label="一年" name="AAB10000016" />
+        <Q type="combobox" label="二年" name="AAB10000017" />
+        <Q type="combobox" label="三年" name="AAB10000018" />
+        <Q type="combobox" label="四年" name="AAB10000019" />
+      </Qs>
+    </QG>
+    <QG label="父親管教方式">
+      <Choices>
+        <Item label="民主式" />
+        <Item label="權威式" />
+        <Item label="放任式" />
+      </Choices>
+      <Qs>
+        <Q type="combobox" label="一年" name="AAB10000020" />
+        <Q type="combobox" label="二年" name="AAB10000021" />
+        <Q type="combobox" label="三年" name="AAB10000022" />
+        <Q type="combobox" label="四年" name="AAB10000023" />
+      </Qs>
+    </QG>
+    <QG label="母親管教方式">
+      <Choices>
+        <Item label="民主式" />
+        <Item label="權威式" />
+        <Item label="放任式" />
+      </Choices>
+      <Qs>
+        <Q type="combobox" label="一年" name="AAB10000024" />
+        <Q type="combobox" label="二年" name="AAB10000025" />
+        <Q type="combobox" label="三年" name="AAB10000026" />
+        <Q type="combobox" label="四年" name="AAB10000027" />
+      </Qs>
+    </QG>
+    <QG label="居住環境">
+      <Choices>
+        <Item label="住宅區" />
+        <Item label="商業區" />
+        <Item label="混和(住商工)區" />
+        <Item label="軍眷區" />
+        <Item label="農村" />
+        <Item label="漁村" />
+        <Item label="工礦區" />
+        <Item label="山地" />
+      </Choices>
+      <Qs>
+        <Q type="combobox" label="一年" name="AAB10000028" />
+        <Q type="combobox" label="二年" name="AAB10000029" />
+        <Q type="combobox" label="三年" name="AAB10000030" />
+        <Q type="combobox" label="四年" name="AAB10000031" />
+      </Qs>
+    </QG>
+    <QG label="本人住宿">
+      <Choices>
+        <Item label="在家裡" />
+        <Item label="寄居親友家裡" />
+        <Item label="住校" />
+        <Item label="在外賃屋" />
+      </Choices>
+      <Qs>
+        <Q type="combobox" label="一年" name="AAB10000032" />
+        <Q type="combobox" label="二年" name="AAB10000033" />
+        <Q type="combobox" label="三年" name="AAB10000034" />
+        <Q type="combobox" label="四年" name="AAB10000035" />
+      </Qs>
+    </QG>
+    <QG label="經濟狀況">
+      <Choices>
+        <Item label="富裕" />
+        <Item label="小康" />
+        <Item label="普通" />
+        <Item label="清寒" />
+        <Item label="貧困" />
+      </Choices>
+      <Qs>
+        <Q type="combobox" label="一年" name="AAB10000036" />
+        <Q type="combobox" label="二年" name="AAB10000037" />
+        <Q type="combobox" label="三年" name="AAB10000038" />
+        <Q type="combobox" label="四年" name="AAB10000039" />
+      </Qs>
+    </QG>
+    <QG label="每星期零用錢(元)">
+      <Qs>
+        <Q type="text" label="一年" name="AAB10000040" />
+        <Q type="text" label="二年" name="AAB10000041" />
+        <Q type="text" label="三年" name="AAB10000042" />
+        <Q type="text" label="四年" name="AAB10000043" />
+      </Qs>
+    </QG>
+    <QG label="我覺得是否足夠">
+      <Choices>
+        <Item label="足夠" />
+        <Item label="剛好" />
+        <Item label="不足" />
+      </Choices>
+      <Qs>
+        <Q type="combobox" label="一年" name="AAB10000044" />
+        <Q type="combobox" label="二年" name="AAB10000045" />
+        <Q type="combobox" label="三年" name="AAB10000046" />
+        <Q type="combobox" label="四年" name="AAB10000047" />
+      </Qs>
+    </QG>
+  </Subject>
+</Subjects>

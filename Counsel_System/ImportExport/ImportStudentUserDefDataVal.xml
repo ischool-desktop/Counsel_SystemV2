@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="format.xsl" ?>
+<ValidateRule Name="學生使用者自訂欄位">
+  <DuplicateDetection>
+    <Detector Name="PrimaryKey1">
+      <Field Name="學號" />
+      <Field Name="狀態" />
+      <Field Name="欄位名稱" />
+    </Detector>
+  </DuplicateDetection>
+  <FieldList>
+
+    <Field Required="True" Name="學號">
+      <Validate AutoCorrect="False" Description="「學號」不允許空白。" ErrorType="Error" Validator="不可空白" When="" />
+    </Field>
+
+    <Field Required="True" Name="狀態">
+      <Validate AutoCorrect="False" Description="「狀態」請填入「一般、延修、休學、輟學、畢業或離校」。" ErrorType="Error" Validator="不可空白" When="" />
+    </Field>
+
+    <Field Required="False" Name="姓名">      
+    </Field>
+
+    <Field Required="True" Name="欄位名稱">
+      <Validate AutoCorrect="False" Description="「欄位名稱」不允許空白。" ErrorType="Error" Validator="不可空白" When="" />
+    </Field>
+
+    <Field Required="True" Name="值">      
+    </Field>
+
+  </FieldList>
+  <ValidatorList>
+    <FieldValidator Name="不可空白" Type="STRINGLENGTH">
+      <MinLength>1</MinLength>
+    </FieldValidator>
+    <RowValidator Name="學號是否存在" Type="COUNSELSTUDCHECKSTUDENTNUMBERSTATUSVAL"/>
+  </ValidatorList>
+  <RowValidate>
+    <Validate AutoCorrect="False" Description="「學號+狀態」不存在系統內。" ErrorType="Error" Validator="學號是否存在" When=""/>
+  </RowValidate>
+  <ConditionList/>
+</ValidateRule>

@@ -1,0 +1,815 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{97FA20D1-ED9D-46E2-A353-E8EE30118D0B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Counsel_System2</RootNamespace>
+    <AssemblyName>Counsel_System2</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\ischool desktop\addmodules\Counsel_System_V2\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Counsel_System.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells, Version=4.3.0.0, Culture=neutral, PublicKeyToken=9a40d5a4b59e5256, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\Aspose.Cells.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Aspose.Words_201402, Version=14.1.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\Aspose.Words_201402.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Campus.DocumentValidator, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\Campus.DocumentValidator.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Campus.Import, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\Campus.Import.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Campus.Report, Version=1.0.0.11, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\Campus.Report.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Campus.Validator, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\Campus.Validator.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Campus.Windows, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\Campus.Windows.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar2, Version=9.5.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\DevComponents.DotNetBar2.dll</HintPath>
+    </Reference>
+    <Reference Include="FISCA, Version=2.1.2.10, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\FISCA.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA.Authentication, Version=1.9.0.11, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\FISCA.Authentication.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA.Data, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\FISCA.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA.DSAClient">
+      <HintPath>..\..\..\..\..\..\ischool\kernel\FISCA.DSAClient.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA.DSAUtil">
+      <HintPath>..\..\..\..\..\..\ischool\kernel\FISCA.DSAUtil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA.LogAgent, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\FISCA.LogAgent.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA.Permission, Version=1.1.0.11, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\FISCA.Permission.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA.Presentation, Version=1.1.0.15, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\FISCA.Presentation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FISCA.UDT, Version=1.0.2.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\FISCA.UDT.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Framework, Version=1.0.0.10, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\Framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="IntelliSchool.DSA.ClientFramework, Version=1.2.2.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\IntelliSchool.DSA.ClientFramework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="JHSchool.Data, Version=1.4.0.8, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\JHSchool.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="K12.BusinessLogic, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\K12.BusinessLogic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="K12.Data, Version=1.8.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\K12.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="K12.Presentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\K12.Presentation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SmartSchool.API.PlugIn, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\SmartSchool.API.PlugIn.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SmartSchool.Common.DotNetBar, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\SmartSchool.Common.DotNetBar.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SmartSchool.Customization.PlugIn, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>RefDLL\SmartSchool.Customization.PlugIn.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Contents\BasicInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\BasicInfo.designer.cs">
+      <DependentUpon>BasicInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\CounselStudentListAContent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\CounselStudentListAContent.Designer.cs">
+      <DependentUpon>CounselStudentListAContent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\CounselStudentListBContent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\CounselStudentListBContent.Designer.cs">
+      <DependentUpon>CounselStudentListBContent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\CounselStudentListContent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\CounselStudentListContent.Designer.cs">
+      <DependentUpon>CounselStudentListContent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\StudABCard01Content.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\StudABCard01Content.Designer.cs">
+      <DependentUpon>StudABCard01Content.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\StudABCard02Content.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\StudABCard02Content.Designer.cs">
+      <DependentUpon>StudABCard02Content.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\StudABCard03Content.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\StudABCard03Content.Designer.cs">
+      <DependentUpon>StudABCard03Content.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\StudABCard04Content.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\StudABCard04Content.Designer.cs">
+      <DependentUpon>StudABCard04Content.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\StudABCard05Content.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\StudABCard05Content.Designer.cs">
+      <DependentUpon>StudABCard05Content.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\StudABCard06Content.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\StudABCard06Content.Designer.cs">
+      <DependentUpon>StudABCard06Content.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\StudABCard07Content.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\StudABCard07Content.Designer.cs">
+      <DependentUpon>StudABCard07Content.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\StudABCard08Content.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\StudABCard08Content.Designer.cs">
+      <DependentUpon>StudABCard08Content.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\StudABCard09Content.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\StudABCard09Content.Designer.cs">
+      <DependentUpon>StudABCard09Content.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\StudCareRecordContent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\StudCareRecordContent.designer.cs">
+      <DependentUpon>StudCareRecordContent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\StudCaseMeetingRecordContent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\StudCaseMeetingRecordContent.designer.cs">
+      <DependentUpon>StudCaseMeetingRecordContent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\StudInterviewDataContent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\StudInterviewDataContent.designer.cs">
+      <DependentUpon>StudInterviewDataContent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\StudQuizDataContent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\StudQuizDataContent.Designer.cs">
+      <DependentUpon>StudQuizDataContent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Contents\CounselUserDefineDataItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Contents\CounselUserDefineDataItem.Designer.cs">
+      <DependentUpon>CounselUserDefineDataItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CounselAdmin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CounselAdmin.Designer.cs">
+      <DependentUpon>CounselAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\ABCardPrintManager.cs" />
+    <Compile Include="DAO\ABCardQuestionDataManager.cs" />
+    <Compile Include="DAO\ABCardTemplateTransfer.cs" />
+    <Compile Include="DAO\ABCard_StudentTextScore.cs" />
+    <Compile Include="DAO\ABRptMergeBaseData.cs" />
+    <Compile Include="DAO\AB_RptColIdx.cs" />
+    <Compile Include="DAO\AB_RptCounselData.cs" />
+    <Compile Include="DAO\AB_SemsDomainScore.cs" />
+    <Compile Include="DAO\AB_StudDateString.cs" />
+    <Compile Include="DAO\AB_StudSemsDomainScore.cs" />
+    <Compile Include="DAO\AB_StudText.cs" />
+    <Compile Include="DAO\AnswerPkey.cs" />
+    <Compile Include="DAO\CareRecordItemManager.cs" />
+    <Compile Include="DAO\DataGridViewComboBoxExColumn.cs" />
+    <Compile Include="DAO\DocTemplateTransfer.cs" />
+    <Compile Include="DAO\DocumentMerge.cs" />
+    <Compile Include="DAO\EnumControlType.cs" />
+    <Compile Include="DAO\EnumQuestionType.cs" />
+    <Compile Include="DAO\EnumRptMergeType.cs" />
+    <Compile Include="DAO\QuestionData.cs" />
+    <Compile Include="DAO\QuestionGroupConfig.cs" />
+    <Compile Include="DAO\QuestionItem.cs" />
+    <Compile Include="DAO\QuestionPKey.cs" />
+    <Compile Include="DAO\Rpt_InterviewRecord.cs" />
+    <Compile Include="DAO\SchoolYearSemester.cs" />
+    <Compile Include="DAO\AB_SchoolYearSemesterIdx.cs" />
+    <Compile Include="DAO\SortData1.cs" />
+    <Compile Include="DAO\StudentInfo.cs" />
+    <Compile Include="DAO\StudentInfoTransfer.cs" />
+    <Compile Include="DAO\SubjectGroupConfig.cs" />
+    <Compile Include="DAO\UDTMultipleRecordDef.cs" />
+    <Compile Include="DAO\UDTPriorityDataDef.cs" />
+    <Compile Include="DAO\UDTQuestionsDataDef.cs" />
+    <Compile Include="DAO\UDTRelativeDef.cs" />
+    <Compile Include="DAO\UDTSemesterDataDef.cs" />
+    <Compile Include="DAO\UDTSiblingDef.cs" />
+    <Compile Include="DAO\UDTSingleRecordDef.cs" />
+    <Compile Include="DAO\UDTYearlyDataDef.cs" />
+    <Compile Include="DAO\UDT_ABCardDataDef.cs" />
+    <Compile Include="DAO\CounselTeacherRecord.cs" />
+    <Compile Include="DAO\LogTransfer.cs" />
+    <Compile Include="DAO\LogValue.cs" />
+    <Compile Include="DAO\StudSortEntity.cs" />
+    <Compile Include="DAO\UDT_ABCardTemplateDefinitionDef.cs" />
+    <Compile Include="DAO\UDTTransfer.cs" />
+    <Compile Include="DAO\UDT_CounselCareRecordDef.cs" />
+    <Compile Include="DAO\UDT_CounselCaseMeetingRecordDef.cs" />
+    <Compile Include="DAO\UDT_CounselStudentInterviewRecordDef.cs" />
+    <Compile Include="DAO\UDT_CounselStudent_ListDef.cs" />
+    <Compile Include="DAO\UDT_CounselUserDefDataDef.cs" />
+    <Compile Include="DAO\UDT_QuizDef.cs" />
+    <Compile Include="DAO\UDT_StudQuizDataDef.cs" />
+    <Compile Include="DAO\UDT_SystemListDef.cs" />
+    <Compile Include="EventHub.cs" />
+    <Compile Include="Forms\ABCardPrintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ABCardPrintForm.Designer.cs">
+      <DependentUpon>ABCardPrintForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ABCardQuestionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ABCardQuestionsForm.Designer.cs">
+      <DependentUpon>ABCardQuestionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddABCardSubjectNameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddABCardSubjectNameForm.Designer.cs">
+      <DependentUpon>AddABCardSubjectNameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddQuizNameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddQuizNameForm.Designer.cs">
+      <DependentUpon>AddQuizNameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DelStudentQuizDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DelStudentQuizDataForm.Designer.cs">
+      <DependentUpon>DelStudentQuizDataForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ImportStudQuizDataSelectQuizNameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImportStudQuizDataSelectQuizNameForm.designer.cs">
+      <DependentUpon>ImportStudQuizDataSelectQuizNameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\QuizForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\QuizForm.designer.cs">
+      <DependentUpon>QuizForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SetABCardAccessStartingDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SetABCardAccessStartingDate.Designer.cs">
+      <DependentUpon>SetABCardAccessStartingDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SetABCardTemplateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SetABCardTemplateForm.Designer.cs">
+      <DependentUpon>SetABCardTemplateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SetABTemplateXMLForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SetABTemplateXMLForm.Designer.cs">
+      <DependentUpon>SetABTemplateXMLForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SetCounselTeacherForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SetCounselTeacherForm.Designer.cs">
+      <DependentUpon>SetCounselTeacherForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SetUserDefineDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SetUserDefineDataForm.designer.cs">
+      <DependentUpon>SetUserDefineDataForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudABCard02_RelativeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudABCard02_RelativeForm.Designer.cs">
+      <DependentUpon>StudABCard02_RelativeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudABCard02_SiblingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudABCard02_SiblingForm.Designer.cs">
+      <DependentUpon>StudABCard02_SiblingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudABCardReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudABCardReportForm.Designer.cs">
+      <DependentUpon>StudABCardReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudABCardReportForm_ErrorMsg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudABCardReportForm_ErrorMsg.Designer.cs">
+      <DependentUpon>StudABCardReportForm_ErrorMsg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudABCard_PriorityForm_Combo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudABCard_PriorityForm_Combo.Designer.cs">
+      <DependentUpon>StudABCard_PriorityForm_Combo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudABCard_YearlyForm_03.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudABCard_YearlyForm_03.Designer.cs">
+      <DependentUpon>StudABCard_YearlyForm_03.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudABCard_YearlyForm_Combo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudABCard_YearlyForm_Combo.Designer.cs">
+      <DependentUpon>StudABCard_YearlyForm_Combo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudABCard_YearlyForm_Text.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudABCard_YearlyForm_Text.Designer.cs">
+      <DependentUpon>StudABCard_YearlyForm_Text.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudABCard_YearlyForm_TextDropDown.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudABCard_YearlyForm_TextDropDown.Designer.cs">
+      <DependentUpon>StudABCard_YearlyForm_TextDropDown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudCareRecordAddItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudCareRecordAddItemForm.Designer.cs">
+      <DependentUpon>StudCareRecordAddItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudCareRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudCareRecordForm.designer.cs">
+      <DependentUpon>StudCareRecordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudCaseMeetingRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudCaseMeetingRecordForm.designer.cs">
+      <DependentUpon>StudCaseMeetingRecordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudInterviewDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudInterviewDataForm.designer.cs">
+      <DependentUpon>StudInterviewDataForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudInterviewDataReport1Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudInterviewDataReport1Form.Designer.cs">
+      <DependentUpon>StudInterviewDataReport1Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudInterviewDataReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudInterviewDataReportForm.Designer.cs">
+      <DependentUpon>StudInterviewDataReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudQuizDataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudQuizDataForm.designer.cs">
+      <DependentUpon>StudQuizDataForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Global.cs" />
+    <Compile Include="ImportExport\ExportABCardData.cs" />
+    <Compile Include="ImportExport\ExportCareRecord.cs" />
+    <Compile Include="ImportExport\ExportCaseMeetingRecord.cs" />
+    <Compile Include="ImportExport\ExportInterViewData.cs" />
+    <Compile Include="ImportExport\ExportStudentV2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportExport\ExportStudentV2.designer.cs">
+      <DependentUpon>ExportStudentV2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExport\ExportStudentUserDefData.cs" />
+    <Compile Include="ImportExport\ImportStudentCareRecord.cs" />
+    <Compile Include="ImportExport\ImportStudentCaseMeetingRecord.cs" />
+    <Compile Include="ImportExport\ImportStudentInterViewData.cs" />
+    <Compile Include="ImportExport\ImportStudQuizData.cs" />
+    <Compile Include="ImportExport\ImportStudentUserDefData.cs" />
+    <Compile Include="Parser\Answer.cs" />
+    <Compile Include="Parser\AnswerItem.cs" />
+    <Compile Include="Parser\Answers.cs" />
+    <Compile Include="Parser\GridColumn.cs" />
+    <Compile Include="Parser\Question.cs" />
+    <Compile Include="Parser\QuestionGroup.cs" />
+    <Compile Include="Parser\QuestionListItem.cs" />
+    <Compile Include="Parser\Subject.cs" />
+    <Compile Include="PermissionCode.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\QGUIMaker.cs" />
+    <Compile Include="UI\QuestionGroupPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\QuestionGroupPanel.designer.cs">
+      <DependentUpon>QuestionGroupPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\QuestionGroupUIDefinition.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\QuestionGroupUIDefinition.designer.cs">
+      <DependentUpon>QuestionGroupUIDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\QuestionUIDefinition.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\QuestionUIDefinition.designer.cs">
+      <DependentUpon>QuestionUIDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SubjectUIDefinition.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\SubjectUIDefinition.designer.cs">
+      <DependentUpon>SubjectUIDefinition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SubjectUIMaker.cs" />
+    <Compile Include="UI\TextBoxDropDownDecorator.cs" />
+    <Compile Include="Utility.cs" />
+    <Compile Include="ValidationRule\CounselRowValidatorFactory.cs" />
+    <Compile Include="ValidationRule\RowValidator\CheckTeacherNameRVal.cs" />
+    <Compile Include="ValidationRule\RowValidator\StudCheckClassSeatNoStatusVal.cs" />
+    <Compile Include="ValidationRule\RowValidator\StudCheckStudentNumberStatusVal.cs" />
+    <Compile Include="ValidationRule\RowValidator\StudDataCheckQuizDataStudentNumberRVal.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Contents\BasicInfo.resx">
+      <DependentUpon>BasicInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\CounselStudentListAContent.resx">
+      <DependentUpon>CounselStudentListAContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\CounselStudentListBContent.resx">
+      <DependentUpon>CounselStudentListBContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\CounselStudentListContent.resx">
+      <DependentUpon>CounselStudentListContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\StudABCard01Content.resx">
+      <DependentUpon>StudABCard01Content.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\StudABCard02Content.resx">
+      <DependentUpon>StudABCard02Content.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\StudABCard03Content.resx">
+      <DependentUpon>StudABCard03Content.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\StudABCard04Content.resx">
+      <DependentUpon>StudABCard04Content.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\StudABCard05Content.resx">
+      <DependentUpon>StudABCard05Content.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\StudABCard06Content.resx">
+      <DependentUpon>StudABCard06Content.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\StudABCard07Content.resx">
+      <DependentUpon>StudABCard07Content.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\StudABCard08Content.resx">
+      <DependentUpon>StudABCard08Content.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\StudABCard09Content.resx">
+      <DependentUpon>StudABCard09Content.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\StudCareRecordContent.resx">
+      <DependentUpon>StudCareRecordContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\StudCaseMeetingRecordContent.resx">
+      <DependentUpon>StudCaseMeetingRecordContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\StudInterviewDataContent.resx">
+      <DependentUpon>StudInterviewDataContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\StudQuizDataContent.resx">
+      <DependentUpon>StudQuizDataContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Contents\CounselUserDefineDataItem.resx">
+      <DependentUpon>CounselUserDefineDataItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CounselAdmin.resx">
+      <DependentUpon>CounselAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ABCardPrintForm.resx">
+      <DependentUpon>ABCardPrintForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ABCardQuestionsForm.resx">
+      <DependentUpon>ABCardQuestionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddABCardSubjectNameForm.resx">
+      <DependentUpon>AddABCardSubjectNameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddQuizNameForm.resx">
+      <DependentUpon>AddQuizNameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DelStudentQuizDataForm.resx">
+      <DependentUpon>DelStudentQuizDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImportStudQuizDataSelectQuizNameForm.resx">
+      <DependentUpon>ImportStudQuizDataSelectQuizNameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\QuizForm.resx">
+      <DependentUpon>QuizForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SetABCardAccessStartingDate.resx">
+      <DependentUpon>SetABCardAccessStartingDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SetABCardTemplateForm.resx">
+      <DependentUpon>SetABCardTemplateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SetABTemplateXMLForm.resx">
+      <DependentUpon>SetABTemplateXMLForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SetCounselTeacherForm.resx">
+      <DependentUpon>SetCounselTeacherForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SetUserDefineDataForm.resx">
+      <DependentUpon>SetUserDefineDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudABCard02_RelativeForm.resx">
+      <DependentUpon>StudABCard02_RelativeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudABCard02_SiblingForm.resx">
+      <DependentUpon>StudABCard02_SiblingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudABCardReportForm.resx">
+      <DependentUpon>StudABCardReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudABCardReportForm_ErrorMsg.resx">
+      <DependentUpon>StudABCardReportForm_ErrorMsg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudABCard_PriorityForm_Combo.resx">
+      <DependentUpon>StudABCard_PriorityForm_Combo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudABCard_YearlyForm_03.resx">
+      <DependentUpon>StudABCard_YearlyForm_03.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudABCard_YearlyForm_Combo.resx">
+      <DependentUpon>StudABCard_YearlyForm_Combo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudABCard_YearlyForm_Text.resx">
+      <DependentUpon>StudABCard_YearlyForm_Text.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudABCard_YearlyForm_TextDropDown.resx">
+      <DependentUpon>StudABCard_YearlyForm_TextDropDown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudCareRecordAddItemForm.resx">
+      <DependentUpon>StudCareRecordAddItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudCareRecordForm.resx">
+      <DependentUpon>StudCareRecordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudCaseMeetingRecordForm.resx">
+      <DependentUpon>StudCaseMeetingRecordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudInterviewDataForm.resx">
+      <DependentUpon>StudInterviewDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudInterviewDataReport1Form.resx">
+      <DependentUpon>StudInterviewDataReport1Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudInterviewDataReportForm.resx">
+      <DependentUpon>StudInterviewDataReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudQuizDataForm.resx">
+      <DependentUpon>StudQuizDataForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportExport\ExportStudentV2.resx">
+      <DependentUpon>ExportStudentV2.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\QuestionGroupPanel.resx">
+      <DependentUpon>QuestionGroupPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\QuestionGroupUIDefinition.resx">
+      <DependentUpon>QuestionGroupUIDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\QuestionUIDefinition.resx">
+      <DependentUpon>QuestionUIDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SubjectUIDefinition.resx">
+      <DependentUpon>SubjectUIDefinition.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\reload_64.png" />
+    <Content Include="ImportExport\ImportStudentCareRecordVal.xml" />
+    <Content Include="ImportExport\ImportStudentCaseMeetingRecordVal.xml" />
+    <Content Include="ImportExport\ImportStudentInterViewDataVal.xml" />
+    <Content Include="ImportExport\ImportStudQuizDataVal_SNum.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="ImportExport\ImportStudentUserDefDataVal.xml" />
+    <Content Include="ImportExport\ImportStudQuizDataVa_CSeatNo.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Library\Aspose.Cells.dll" />
+    <Content Include="Library\Aspose.Cells.xml" />
+    <Content Include="Library\Aspose.Words_201402.dll" />
+    <Content Include="Library\Aspose.Words_201402.xml" />
+    <Content Include="Library\Campus.DocumentValidator.dll" />
+    <Content Include="Library\Campus.Import.dll" />
+    <Content Include="Library\Campus.Report.dll" />
+    <Content Include="Library\Campus.Validator.dll" />
+    <Content Include="Library\Campus.Windows.dll" />
+    <Content Include="Library\DevComponents.DotNetBar2.dll" />
+    <Content Include="Library\FISCA.Authentication.dll" />
+    <Content Include="Library\FISCA.Data.dll" />
+    <Content Include="Library\FISCA.dll" />
+    <Content Include="Library\FISCA.DSAClient.dll" />
+    <Content Include="Library\FISCA.DSAClient.pdb" />
+    <Content Include="Library\FISCA.DSAClient.xml" />
+    <Content Include="Library\FISCA.DSAUtil.dll" />
+    <Content Include="Library\FISCA.DSAUtil.pdb" />
+    <Content Include="Library\FISCA.DSAUtil.xml" />
+    <Content Include="Library\FISCA.LogAgent.dll" />
+    <Content Include="Library\FISCA.Permission.dll" />
+    <Content Include="Library\FISCA.Presentation.dll" />
+    <Content Include="Library\FISCA.UDT.dll" />
+    <Content Include="Library\Framework.dll" />
+    <Content Include="Library\IntelliSchool.DSA.ClientFramework.dll" />
+    <Content Include="Library\JHSchool.Data.dll" />
+    <Content Include="Library\K12.BusinessLogic.dll" />
+    <Content Include="Library\K12.Data.dll" />
+    <Content Include="Library\K12.Presentation.dll" />
+    <Content Include="Library\SmartSchool.API.PlugIn.dll" />
+    <Content Include="Library\SmartSchool.Common.DotNetBar.dll" />
+    <Content Include="Library\SmartSchool.Customization.PlugIn.dll" />
+    <Content Include="Resources\Export.Image.png" />
+    <Content Include="Resources\Import.Image.png" />
+    <Content Include="Resources\parent_coordinator_next_64.png" />
+    <Content Include="Resources\Report.png" />
+    <Content Include="Resources\設定.png" />
+    <Content Include="Templates\ABCardTemplate.xml" />
+    <Content Include="xml\ABCardTransferDataOldMapping.xml" />
+    <Content Include="xml\Questions.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\學生晤談記錄表_新範本.docx" />
+    <None Include="Resources\輔導資料紀錄表範本.doc" />
+    <None Include="Templates\晤談紀錄簽認表樣版.xls" />
+    <None Include="Templates\綜合表現紀錄表-樣版.doc" />
+    <None Include="Templates\綜合表現紀錄表合併欄位說明.doc" />
+    <None Include="Templates\輔導紀錄_樣板.doc" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

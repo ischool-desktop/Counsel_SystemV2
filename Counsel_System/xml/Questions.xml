@@ -1,0 +1,942 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Questions>
+  <Question>
+    <Group>本人概況</Group>
+    <Name>血型</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>RADIO_BUTTON</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>1</DisplayOrder>
+    <Items>
+      <item key="A" has_remark="False" />
+      <item key="B" has_remark="False" />
+      <item key="O" has_remark="False" />
+      <item key="AB" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>本人概況</Group>
+    <Name>宗教</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>RADIO_BUTTON</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>2</DisplayOrder>
+    <Items>
+      <item key="無" has_remark="False" />
+      <item key="佛教" has_remark="False" />
+      <item key="基督教" has_remark="False" />
+      <item key="天主教" has_remark="False" />
+      <item key="回教" has_remark="False" />
+      <item key="道教" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>本人概況</Group>
+    <Name>身高</Name>
+    <QuestionType>SEMESTER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>3</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>本人概況</Group>
+    <Name>體重</Name>
+    <QuestionType>SEMESTER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>4</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>本人概況</Group>
+    <Name>生理缺陷</Name>
+    <QuestionType>MULTI_ANSWER</QuestionType>
+    <ControlType>CHECKBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>5</DisplayOrder>
+    <Items>
+      <item key="無" has_remark="False" />
+      <item key="近視" has_remark="False" />
+      <item key="其它視覺障礙" has_remark="False" />
+      <item key="聽覺障礙" has_remark="False" />
+      <item key="肢體障礙" has_remark="False" />
+      <item key="其它" has_remark="True" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>本人概況</Group>
+    <Name>曾患特殊疾病</Name>
+    <QuestionType>MULTI_ANSWER</QuestionType>
+    <ControlType>CHECKBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>6</DisplayOrder>
+    <Items>
+      <item key="無" has_remark="False" />
+      <item key="腦炎" has_remark="False" />
+      <item key="癲癇" has_remark="False" />
+      <item key="心臟病" has_remark="False" />
+      <item key="小兒麻痺" has_remark="False" />
+      <item key="氣喘" has_remark="False" />
+      <item key="過敏症" has_remark="False" />
+      <item key="肺結核" has_remark="False" />
+      <item key="其它" has_remark="True" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>直系血親_稱謂</Name>
+    <QuestionType>Relative</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>1</DisplayOrder>
+    <Items>
+      <item key="父" has_remark="False" />
+      <item key="母" has_remark="False" />
+      <item key="祖父" has_remark="False" />
+      <item key="祖母" has_remark="False" />
+      <item key="曾祖父" has_remark="False" />
+      <item key="曾祖母" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>直系血親_姓名</Name>
+    <QuestionType>Relative</QuestionType>
+    <ControlType>GRID_TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>2</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>直系血親_存、歿</Name>
+    <QuestionType>Relative</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>3</DisplayOrder>
+    <Items>
+      <item key="存" has_remark="False" />
+      <item key="沒" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>直系血親_出生年</Name>
+    <QuestionType>Relative</QuestionType>
+    <ControlType>GRID_TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>4</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>直系血親_職業</Name>
+    <QuestionType>Relative</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>5</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>直系血親_工作機構</Name>
+    <QuestionType>Relative</QuestionType>
+    <ControlType>GRID_TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>6</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>直系血親_職稱</Name>
+    <QuestionType>Relative</QuestionType>
+    <ControlType>GRID_TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>7</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>直系血親_教育程度</Name>
+    <QuestionType>Relative</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>8</DisplayOrder>
+    <Items>
+      <item key="不識字" has_remark="False" />
+      <item key="識字(未就學)" has_remark="False" />
+      <item key="小學 " has_remark="False" />
+      <item key="初中(職)" has_remark="False" />
+      <item key="高中(職)" has_remark="False" />
+      <item key="專科" has_remark="False" />
+      <item key="學士" has_remark="False" />
+      <item key="碩士" has_remark="False" />
+      <item key="博士" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>兄弟姊妹_稱謂</Name>
+    <QuestionType>Sibling</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>9</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>兄弟姊妹_姓名</Name>
+    <QuestionType>Sibling</QuestionType>
+    <ControlType>GRID_TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>10</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>兄弟姊妹_畢肆業學校</Name>
+    <QuestionType>Sibling</QuestionType>
+    <ControlType>GRID_TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>11</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>兄弟姊妹_出生年次</Name>
+    <QuestionType>Sibling</QuestionType>
+    <ControlType>GRID_TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>12</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>兄弟姊妹_備註</Name>
+    <QuestionType>Sibling</QuestionType>
+    <ControlType>GRID_TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>13</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>父母關係</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>14</DisplayOrder>
+    <Items>
+      <item key="同住" has_remark="False" />
+      <item key="分住" has_remark="False" />
+      <item key="分居" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>家庭氣氛</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>15</DisplayOrder>
+    <Items>
+      <item key="很和諧" has_remark="False" />
+      <item key="和諧" has_remark="False" />
+      <item key="普通" has_remark="False" />
+      <item key="不和諧" has_remark="False" />
+      <item key="很不和諧" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>父親管教方式</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>16</DisplayOrder>
+    <Items>
+      <item key="民主式" has_remark="False" />
+      <item key="權威式" has_remark="False" />
+      <item key="放任式" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>母親管教方式</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>17</DisplayOrder>
+    <Items>
+      <item key="民主式" has_remark="False" />
+      <item key="權威式" has_remark="False" />
+      <item key="放任式" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>居住環境</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>18</DisplayOrder>
+    <Items>
+      <item key="住宅區" has_remark="False" />
+      <item key="商業區" has_remark="False" />
+      <item key="混和(住商工)區" has_remark="False" />
+      <item key="軍眷區" has_remark="False" />
+      <item key="農村" has_remark="False" />
+      <item key="漁村" has_remark="False" />
+      <item key="工礦區" has_remark="False" />
+      <item key="山地" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>本人住宿</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>19</DisplayOrder>
+    <Items>
+      <item key="在家裡" has_remark="False" />
+      <item key="寄居親友家裡" has_remark="False" />
+      <item key="住校" has_remark="False" />
+      <item key="在外賃屋" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>經濟狀況</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>20</DisplayOrder>
+    <Items>
+      <item key="富裕" has_remark="False" />
+      <item key="小康" has_remark="False" />
+      <item key="普通" has_remark="False" />
+      <item key="清寒" has_remark="False" />
+      <item key="貧困" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>每星期零用錢(元)</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>21</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>家庭狀況</Group>
+    <Name>我覺得是否足夠</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>22</DisplayOrder>
+    <Items>
+      <item key="足夠" has_remark="False" />
+      <item key="剛好" has_remark="False" />
+      <item key="不足" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>學習狀況</Group>
+    <Name>最喜歡的學科</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>1</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>學習狀況</Group>
+    <Name>最感困難的學科</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>2</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>學習狀況</Group>
+    <Name>特殊專長</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_TEXTBOXDROPDOWN</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>3</DisplayOrder>
+    <Items>
+      <item key="球類" has_remark="False" />
+      <item key="田徑" has_remark="False" />
+      <item key="游泳" has_remark="False" />
+      <item key="國術" has_remark="False" />
+      <item key="美術" has_remark="False" />
+      <item key="樂器演奏" has_remark="False" />
+      <item key="唱歌" has_remark="False" />
+      <item key="工藝" has_remark="False" />
+      <item key="家事" has_remark="False" />
+      <item key="演說" has_remark="False" />
+      <item key="寫作" has_remark="False" />
+      <item key="舞蹈" has_remark="False" />
+      <item key="戲劇" has_remark="False" />
+      <item key="書法" has_remark="False" />
+      <item key="珠算" has_remark="False" />
+      <item key="外語" has_remark="False" />
+      <item key="英打" has_remark="False" />
+      <item key="中打" has_remark="False" />
+      <item key="會計" has_remark="False" />
+      <item key="統計" has_remark="False" />
+      <item key="領導" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>學習狀況</Group>
+    <Name>休閒興趣</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_TEXTBOXDROPDOWN</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>4</DisplayOrder>
+    <Items>
+      <item key="電影欣賞" has_remark="False" />
+      <item key="閱讀" has_remark="False" />
+      <item key="登山" has_remark="False" />
+      <item key="露營" has_remark="False" />
+      <item key="旅行郊遊" has_remark="False" />
+      <item key="划船游泳" has_remark="False" />
+      <item key="釣魚" has_remark="False" />
+      <item key="樂器演奏" has_remark="False" />
+      <item key="唱歌" has_remark="False" />
+      <item key="音樂欣賞" has_remark="False" />
+      <item key="舞蹈" has_remark="False" />
+      <item key="繪畫" has_remark="False" />
+      <item key="集郵" has_remark="False" />
+      <item key="打球" has_remark="False" />
+      <item key="國術" has_remark="False" />
+      <item key="編織" has_remark="False" />
+      <item key="下棋" has_remark="False" />
+      <item key="養小動物" has_remark="False" />
+      <item key="作物栽培" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>學習狀況</Group>
+    <Name>社團幹部</Name>
+    <QuestionType>SEMESTER</QuestionType>
+    <ControlType>GRID_TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>5</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>學習狀況</Group>
+    <Name>班級幹部</Name>
+    <QuestionType>SEMESTER</QuestionType>
+    <ControlType>GRID_TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>6</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>自傳</Group>
+    <Name>家中最了解我的人是</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>1</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>自傳</Group>
+    <Name>常指導我做功課的人是</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>2</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>自傳</Group>
+    <Name>我讀過且印象最深刻的課外書是</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>3</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>自傳</Group>
+    <Name>我喜歡的人是</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>4</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>自傳</Group>
+    <Name>我最要好的朋友是</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>5</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>自傳</Group>
+    <Name>我最喜歡做的事是</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>6</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>自傳</Group>
+    <Name>我最不喜歡做的事是</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>7</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>自傳</Group>
+    <Name>我國中時的學校生活是</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>8</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>自傳</Group>
+    <Name>我最快樂的回憶</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>9</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>自傳</Group>
+    <Name>我最痛苦的回憶</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>10</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>自傳</Group>
+    <Name>最足以描述自己的幾句話是</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>11</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>自我認識</Group>
+    <Name>我的個性(如溫和、急躁、、)</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_TEXTBOXDROPDOWN</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>1</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>自我認識</Group>
+    <Name>我的優點</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_TEXTBOXDROPDOWN</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>2</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>自我認識</Group>
+    <Name>我需要改進的地方</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_TEXTBOXDROPDOWN</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>3</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>自我認識</Group>
+    <Name>填寫日期</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_TEXTBOXDROPDOWN</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>4</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>生活感想</Group>
+    <Name>◎我對自己的期望(一年級)</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>1</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>生活感想</Group>
+    <Name>◎為達到理想，我所需要的努力(一年級)</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>2</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>生活感想</Group>
+    <Name>◎期望師長給予我的幫助(一年級)</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>3</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>生活感想</Group>
+    <Name>填寫日期(一年級)</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>4</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>生活感想</Group>
+    <Name>◎一年來的感想(二年級)</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>5</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>生活感想</Group>
+    <Name>◎今後努力的目標(二年級)</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>6</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>生活感想</Group>
+    <Name>◎期望師長給予我的幫助(二年級)</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>7</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>生活感想</Group>
+    <Name>填寫日期(二年級)</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>8</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>畢業後計畫</Group>
+    <Name>升學意願</Name>
+    <QuestionType>MULTI_ANSWER</QuestionType>
+    <ControlType>CHECKBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>1</DisplayOrder>
+    <Items>
+      <item key="理" has_remark="False" />
+      <item key="工" has_remark="False" />
+      <item key="文史" has_remark="False" />
+      <item key="法" has_remark="False" />
+      <item key="商" has_remark="False" />
+      <item key="醫" has_remark="False" />
+      <item key="農" has_remark="False" />
+      <item key="教育" has_remark="False" />
+      <item key="藝術" has_remark="False" />
+      <item key="海洋" has_remark="False" />
+      <item key="軍" has_remark="False" />
+      <item key="警" has_remark="False" />
+      <item key="其它" has_remark="True" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>畢業後計畫</Group>
+    <Name>就業意願</Name>
+    <QuestionType>MULTI_ANSWER</QuestionType>
+    <ControlType>CHECKBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>2</DisplayOrder>
+    <Items>
+      <item key="自行就業" has_remark="False" />
+      <item key="需要輔導就業" has_remark="False" />
+      <item key="希望參加職業訓練" has_remark="False" />
+      <item key="其它" has_remark="True" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>畢業後計畫</Group>
+    <Name>參加職業訓練</Name>
+    <QuestionType>MULTI_ANSWER</QuestionType>
+    <ControlType>CHECKBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>3</DisplayOrder>
+    <Items>
+      <item key="機械加工" has_remark="False" />
+      <item key="機密機械加工" has_remark="False" />
+      <item key="金屬加工" has_remark="False" />
+      <item key="焊接及切割" has_remark="False" />
+      <item key="電子及儀表" has_remark="False" />
+      <item key="電機及電工" has_remark="False" />
+      <item key="家用電器" has_remark="False" />
+      <item key="營建土木" has_remark="False" />
+      <item key="車輛修護" has_remark="False" />
+      <item key="農業機械" has_remark="False" />
+      <item key="農業經營" has_remark="False" />
+      <item key="園藝經營" has_remark="False" />
+      <item key="農產加工" has_remark="False" />
+      <item key="畜牧" has_remark="False" />
+      <item key="船員訓練" has_remark="False" />
+      <item key="縫紉" has_remark="False" />
+      <item key="美容" has_remark="False" />
+      <item key="會計" has_remark="False" />
+      <item key="護理" has_remark="False" />
+      <item key="其它" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>畢業後計畫</Group>
+    <Name>受訓地區</Name>
+    <QuestionType>MULTI_ANSWER</QuestionType>
+    <ControlType>CHECKBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>4</DisplayOrder>
+    <Items>
+      <item key="北區" has_remark="False" />
+      <item key="中區" has_remark="False" />
+      <item key="南區" has_remark="False" />
+      <item key="東區" has_remark="False" />
+      <item key="其它" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>畢業後計畫</Group>
+    <Name>將來職業</Name>
+    <QuestionType>PRIORITY</QuestionType>
+    <ControlType>COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>5</DisplayOrder>
+    <Items>
+      <item key="機械加工" has_remark="False" />
+      <item key="機密機械加工" has_remark="False" />
+      <item key="金屬加工" has_remark="False" />
+      <item key="焊接及切割" has_remark="False" />
+      <item key="電子及儀表" has_remark="False" />
+      <item key="電機及電工" has_remark="False" />
+      <item key="家用電器" has_remark="False" />
+      <item key="營建土木" has_remark="False" />
+      <item key="車輛修護" has_remark="False" />
+      <item key="農業機械" has_remark="False" />
+      <item key="農業經營" has_remark="False" />
+      <item key="園藝經營" has_remark="False" />
+      <item key="農產加工" has_remark="False" />
+      <item key="畜牧" has_remark="False" />
+      <item key="船員訓練" has_remark="False" />
+      <item key="縫紉" has_remark="False" />
+      <item key="美容" has_remark="False" />
+      <item key="會計" has_remark="False" />
+      <item key="護理" has_remark="False" />
+      <item key="其它" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>畢業後計畫</Group>
+    <Name>就業地區</Name>
+    <QuestionType>PRIORITY</QuestionType>
+    <ControlType>COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>6</DisplayOrder>
+    <Items>
+      <item key="北區" has_remark="False" />
+      <item key="中區" has_remark="False" />
+      <item key="南區" has_remark="False" />
+      <item key="東區" has_remark="False" />
+      <item key="其它" has_remark="False" />
+    </Items>
+  </Question>
+  <Question>
+    <Group>備註</Group>
+    <Name>備註</Name>
+    <QuestionType>SINGLE_ANSWER</QuestionType>
+    <ControlType>TEXTBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>1</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>適應情形</Group>
+    <Name>生活習慣</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>1</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>適應情形</Group>
+    <Name>人際關係</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>2</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>適應情形</Group>
+    <Name>外向行為</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>3</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>適應情形</Group>
+    <Name>內向行為</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>4</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>適應情形</Group>
+    <Name>學習動機</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>5</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>適應情形</Group>
+    <Name>服務熱忱</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>6</DisplayOrder>
+  </Question>
+  <Question>
+    <Group>適應情形</Group>
+    <Name>人生態度</Name>
+    <QuestionType>YEARLY</QuestionType>
+    <ControlType>GRID_COMBOBOX</ControlType>
+    <CanPrint>True</CanPrint>
+    <CanTeacherEdit>True</CanTeacherEdit>
+    <CanStudentEdit>True</CanStudentEdit>
+    <DisplayOrder>7</DisplayOrder>
+  </Question>
+</Questions>
