@@ -91,16 +91,23 @@ namespace CounselTools
                 // 取得學生資料
                 List<ClassStudent> ClassStudents = Utility.GetClassStudentByStudentIDList(_StudentIDList);
                 _bgLoadData.ReportProgress(65);
+
                 List<string> cpGNameList = new List<string>();
-                cpGNameList.Add("本人概況");
-                cpGNameList.Add("家庭狀況");
-                cpGNameList.Add("學習狀況");
-                cpGNameList.Add("自傳");
+                
+                cpGNameList.Add("個人資料");
+
+                //2016/9/8 穎驊新增欄位
+                cpGNameList.Add("監護人資料");                
+                cpGNameList.Add("尊親屬資料");
+                cpGNameList.Add("兄弟姊妹資料");
+                cpGNameList.Add("身高及體重");
+                cpGNameList.Add("家庭訊息");
+                cpGNameList.Add("學習");
+                cpGNameList.Add("幹部資訊");                                                
                 cpGNameList.Add("自我認識");
                 cpGNameList.Add("生活感想");
-                cpGNameList.Add("畢業後計畫");
-                cpGNameList.Add("備註");
-                cpGNameList.Add("適應情形");
+                cpGNameList.Add("畢業後規劃");
+                cpGNameList.Add("自傳");
 
                 foreach (ClassStudent cs in ClassStudents)
                 {
@@ -109,35 +116,54 @@ namespace CounselTools
                     foreach (string cpGName in cpGNameList)
                     {
                         switch (cpGName)
-                        { 
-                            case "本人概況":
+                        {                          
+                            case "個人資料":
                                 CheckProcDict.Add(cpGName, new CheckProcess1());
                                 break;
-                            case "家庭狀況":
-                                CheckProcDict.Add(cpGName, new CheckProcess2());
+
+                            case "監護人資料":
+                                CheckProcDict.Add(cpGName, new CheckProcess11());
                                 break;
-                            case "學習狀況":
+
+                            case "尊親屬資料":
+                                CheckProcDict.Add(cpGName, new CheckProcess13());
+                                break;
+
+                            case "兄弟姊妹資料":
+                                CheckProcDict.Add(cpGName, new CheckProcess15());
+                                break;
+
+                            case "身高及體重":
+                                CheckProcDict.Add(cpGName, new CheckProcess10());
+                                break;
+
+                            case "家庭訊息":
+                                CheckProcDict.Add(cpGName, new CheckProcess14());
+                                break;
+
+                            case "學習":                            
                                 CheckProcDict.Add(cpGName, new CheckProcess3());
                                 break;
-                            case "自傳":
-                                CheckProcDict.Add(cpGName, new CheckProcess4());
-                                break;
+
+                            case "幹部資訊":
+                                CheckProcDict.Add(cpGName, new CheckProcess12());
+                                break;                            
+
                             case "自我認識":
                                 CheckProcDict.Add(cpGName, new CheckProcess5());
                                 break;
                             case "生活感想":
                                 CheckProcDict.Add(cpGName, new CheckProcess6());
                                 break;
-                            case "畢業後計畫":
+
+                            case "畢業後規劃":
                                 CheckProcDict.Add(cpGName, new CheckProcess7());
                                 break;
-                            case "備註":
-                                CheckProcDict.Add(cpGName, new CheckProcess8());
-                                break;
-                            case "適應情形":
-                                CheckProcDict.Add(cpGName, new CheckProcess9());
-                                break;
 
+                            case "自傳":
+                                CheckProcDict.Add(cpGName, new CheckProcess4());
+                                break;
+      
                         }
                     }
 
@@ -149,11 +175,17 @@ namespace CounselTools
                             cp.SetGroupName(cpGName);
                             cp.SetStudent(cs);
                             cp.Start();
-                            if (cp.GetErrorCount() > 0)
-                            {
+
+                            //2016/穎驊註解，經由與恩正討論，現在無論有缺漏，全部人的資料都要顯示出來，故將條件註解掉
+                            //if (cp.GetErrorCount() > 0)
+                            //{
                                 if (!cs.NonInputCompleteDict.ContainsKey(cpGName))
                                     cs.NonInputCompleteDict.Add(cpGName, cp.GetMessage());
-                            }
+                            //}
+
+                            cs.All_ErrorCount += cp.GetErrorCount();
+                            cs.All_TotalCount += cp.GetTotalCount();
+
                         }
                     }
                 }
@@ -169,13 +201,17 @@ namespace CounselTools
                 foreach (string cpName in cpGNameList)
                     gpColIdx.Add(cpName, col++);
 
-                // 學號,班級,座號,姓名,本人概況,家庭狀況,學習狀況,自傳,自我認識,生活感想,畢業後計畫,備註,適應情形
+                //2016/9/9 穎驊註解，此為給文華高中 輔導系統2.0 的欄位項目
+                //個人資料	監護人資料	尊親屬資料	兄弟姊妹資料	身高及體重	家庭訊息	學習	幹部資訊	自我認識	生活感想	畢業後規劃	自傳	完成百分比
+                
                 int rowIdx = 1;
                 foreach (ClassStudent cs in ClassStudents)
                 {
-                    // 有缺才填入
-                    if (cs.NonInputCompleteDict.Count > 0)
-                    {
+
+                    //2016/穎驊註解，經由與恩正討論，現在無論有缺漏，全部人的資料都要顯示出來，故將條件註解掉
+                    //// 有缺才填入
+                    //if (cs.NonInputCompleteDict.Count > 0)
+                    //{
                         wb.Worksheets[0].Cells[rowIdx, 0].PutValue(cs.StudentNumber);
                         wb.Worksheets[0].Cells[rowIdx, 1].PutValue(cs.GradeYearDisplay);
                         wb.Worksheets[0].Cells[rowIdx,2].PutValue(cs.ClassName);
@@ -187,8 +223,16 @@ namespace CounselTools
                             if (gpColIdx.ContainsKey(key))
                                 wb.Worksheets[0].Cells[rowIdx, gpColIdx[key]].PutValue(cs.NonInputCompleteDict[key]);
                         }
+
+                        //2016/9/9 穎驊新增，計算學生完成百分比
+                   
+                        int InputCompletePrecent = (int) ((((decimal)cs.All_TotalCount -(decimal)(cs.All_ErrorCount))/ ((decimal)cs.All_TotalCount))*100);
+
+                        wb.Worksheets[0].Cells[rowIdx, 17].PutValue(InputCompletePrecent+"%");
+
                         rowIdx++;
-                    }                
+                    //}
+                
                 }
                 _bgLoadData.ReportProgress(95);
 

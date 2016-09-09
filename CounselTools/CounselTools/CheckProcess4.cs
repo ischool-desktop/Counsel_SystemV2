@@ -43,27 +43,34 @@ namespace CounselTools
             List<string> chkItems1 = new List<string>();
             chkItems1.Add("小學（國中）老師或同學常說我是");
             chkItems1.Add("小學（國中）時我曾在班上登任過的職務有");
-            chkItems1.Add("他是怎樣的人");
+            //chkItems1.Add("他是怎樣的人");
 
-            List<string> items = new List<string>();
-            items.Add("年級_我目前最需要的協助是");
-            items.Add("年級_我目前遇到最大的困難是");
-            string strItem = "";
-            for (int g = 1; g <= _Student.GradeYear; g++)
-            {
-                foreach (string str in items)
-                {
-                    string ssItem = "";
-                    switch (g)
-                    {
-                        case 1: ssItem = "一"; break;
-                        case 2: ssItem = "二"; break;
-                        case 3: ssItem = "三"; break;                        
-                    }
-                    strItem = "自我的心聲_" + ssItem + str;
-                    chkItems1.Add(strItem);
-                }
-            }
+            //List<string> items = new List<string>();
+            //items.Add("年級_我目前最需要的協助是");
+            //items.Add("年級_我目前遇到最大的困難是");
+            //string strItem = "";
+            //for (int g = 1; g <= _Student.GradeYear; g++)
+            //{
+            //    foreach (string str in items)
+            //    {
+            //        string ssItem = "";
+            //        switch (g)
+            //        {
+            //            case 1: ssItem = "一"; break;
+            //            case 2: ssItem = "二"; break;
+            //            case 3: ssItem = "三"; break;                        
+            //        }
+            //        strItem = "自我的心聲_" + ssItem + str;
+            //        chkItems1.Add(strItem);
+            //    }
+            //}
+            chkItems1.Add("自我的心聲_一年級_我目前遇到最大的困難是");
+            chkItems1.Add("自我的心聲_一年級_我目前最需要的協助是");
+            chkItems1.Add("自我的心聲_二年級_我目前遇到最大的困難是");
+            chkItems1.Add("自我的心聲_二年級_我目前最需要的協助是");
+            chkItems1.Add("自我的心聲_三年級_我目前遇到最大的困難是");
+            chkItems1.Add("自我的心聲_三年級_我目前最需要的協助是");
+
 
             chkItems1.Add("我在小學（國中）得過的獎有");
             chkItems1.Add("我在家中最怕的人是");
@@ -85,6 +92,8 @@ namespace CounselTools
             chkItems1.Add("最快樂的回憶");
             chkItems1.Add("最足以描述自己的幾句話");
             chkItems1.Add("最要好的朋友");
+            chkItems1.Add("他是怎樣的人");
+            chkItems1.Add("自傳");
             chkItems1.Add("最喜歡的國小（國中）老師");
             chkItems1.Add("最喜歡的國小（國中）老師__因為");
             chkItems1.Add("最喜歡做的事");
@@ -101,12 +110,15 @@ namespace CounselTools
 
         public string GetMessage()
         {
+            //2016/9/9 穎驊註解，經由與恩正討論，現在無論有缺漏，全部人的資料都要顯示出來，
             if (_ErrorCount > 0)
             {
-                return "未輸入完整：" + _ErrorCount + "/" + _TotalCount;
+                //return "未輸入完整：" + _ErrorCount + "/" + _TotalCount;
+                return "輸入況狀：" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
             }
             else
-                return "";
+                //return "";
+                return "輸入況狀：" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
         }
 
 

@@ -47,7 +47,9 @@ namespace CounselTools
             items.Add("內容1");
             items.Add("內容2");
             items.Add("內容3");
-            items.Add("填寫日期");
+
+            //2016/9/9  由於此項目在WEB上目前不會自動產生日期，故先不驗
+            //items.Add("填寫日期");
 
             for(int g=1;g<=_Student.GradeYear;g++)
             {
@@ -63,12 +65,15 @@ namespace CounselTools
 
         public string GetMessage()
         {
+            //2016/9/9 穎驊註解，經由與恩正討論，現在無論有缺漏，全部人的資料都要顯示出來，
             if (_ErrorCount > 0)
             {
-                return "未輸入完整：" + _ErrorCount + "/" + _TotalCount;
+                //return "未輸入完整：" + _ErrorCount + "/" + _TotalCount;
+                return "輸入況狀：" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
             }
             else
-                return "";
+                //return "";
+                return "輸入況狀：" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
         }
 
 

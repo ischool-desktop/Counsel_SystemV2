@@ -288,11 +288,10 @@ namespace Counsel_System2.Contents
             // 將來就業意願
             if (_PriorityData1 != null)
             {
-                dgPriority.Columns[1].Tag = _PriorityData1;
-                
+                dgPriority.Columns[1].Tag = _PriorityData1;                
                 dgPriority.Rows[0].Cells[1].Value = _PriorityData1.P1;
                 dgPriority.Rows[1].Cells[1].Value = _PriorityData1.P2;
-                dgPriority.Rows[2].Cells[1].Value = _PriorityData1.P3;
+                dgPriority.Rows[2].Cells[1].Value = _PriorityData1.P3;                              
             }
 
             // 就業地區

@@ -6,10 +6,13 @@ using System.Data;
 
 namespace CounselTools
 {
+    //2016/9/8 穎驊仿作
+
     /// <summary>
-    /// 備註
+    /// 身高及體重
     /// </summary>
-    public class CheckProcess8:ICheckProcess
+
+   public  class CheckProcess10:ICheckProcess
     {
         string _GroupName;
         ClassStudent _Student;
@@ -20,8 +23,7 @@ namespace CounselTools
         {
             _GroupName = GroupName;
         }
-
-     
+       
         public Dictionary<string, string> GetErrorData()
         {
             return _ErrorDict;
@@ -39,14 +41,20 @@ namespace CounselTools
 
         public void Start()
         {
-            #region SINGLE_ANSWER
+            #region SEMESTER
             List<string> chkItems1 = new List<string>();
-            chkItems1.Add("備註");
+            chkItems1.Add("身高");
+            chkItems1.Add("體重");
 
-            // SINGLE_ANSWER
-            _ErrorCount += CheckDataTransfer.CheckSINGLE_ANSWER_Error(_GroupName, chkItems1, _Student);
-            _TotalCount += chkItems1.Count;
+            if (CheckDataTransfer.CheckSEMESTER_Error("本人概況", chkItems1, _Student)>0)
+                _ErrorCount += 1;
+
+            _TotalCount += 1;
+
             #endregion
+
+
+
         }
 
         public string GetMessage()
@@ -59,7 +67,7 @@ namespace CounselTools
             }
             else
                 //return "";
-                return "輸入況狀：" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
+            return "輸入況狀：" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
         }
 
 

@@ -7,9 +7,9 @@ using System.Data;
 namespace CounselTools
 {
     /// <summary>
-    /// 備註
+    /// 家庭訊息
     /// </summary>
-    public class CheckProcess8:ICheckProcess
+    public class CheckProcess14:ICheckProcess
     {
         string _GroupName;
         ClassStudent _Student;
@@ -21,7 +21,6 @@ namespace CounselTools
             _GroupName = GroupName;
         }
 
-     
         public Dictionary<string, string> GetErrorData()
         {
             return _ErrorDict;
@@ -39,13 +38,29 @@ namespace CounselTools
 
         public void Start()
         {
-            #region SINGLE_ANSWER
-            List<string> chkItems1 = new List<string>();
-            chkItems1.Add("備註");
+     
+            #region YEARLY
+            List<string> chkItems4 = new List<string>();
+            chkItems4.Add("父母關係");
+            chkItems4.Add("父親管教方式");
+            chkItems4.Add("本人住宿");
+            chkItems4.Add("母親管教方式");
+            chkItems4.Add("我覺得是否足夠");
+            chkItems4.Add("每星期零用錢");
+            chkItems4.Add("居住環境");
+            chkItems4.Add("家庭氣氛");
+            chkItems4.Add("經濟狀況");
 
-            // SINGLE_ANSWER
-            _ErrorCount += CheckDataTransfer.CheckSINGLE_ANSWER_Error(_GroupName, chkItems1, _Student);
-            _TotalCount += chkItems1.Count;
+
+            _ErrorCount += CheckDataTransfer.CheckYEARLY_Error("家庭狀況", chkItems4, _Student);
+
+            _TotalCount += chkItems4.Count;
+
+            //// 這算一項
+            //if (CheckDataTransfer.CheckYEARLY_Error("家庭狀況", chkItems4, _Student) > 0)
+            //    _ErrorCount += 1;
+            //_TotalCount += 1;
+
             #endregion
         }
 

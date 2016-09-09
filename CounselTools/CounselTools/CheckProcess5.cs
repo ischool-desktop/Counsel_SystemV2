@@ -61,12 +61,15 @@ namespace CounselTools
 
         public string GetMessage()
         {
+            //2016/9/9 穎驊註解，經由與恩正討論，現在無論有缺漏，全部人的資料都要顯示出來，
             if (_ErrorCount > 0)
             {
-                return "未輸入完整：" + _ErrorCount + "/" + _TotalCount;
+                //return "未輸入完整：" + _ErrorCount + "/" + _TotalCount;
+                return "輸入況狀：" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
             }
             else
-                return "";
+                //return "";
+                return "輸入況狀：" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
         }
 
 

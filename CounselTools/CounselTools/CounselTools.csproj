@@ -81,8 +81,14 @@
   <ItemGroup>
     <Compile Include="CheckDataTransfer.cs" />
     <Compile Include="CheckProcess1.cs" />
+    <Compile Include="CheckProcess13.cs" />
+    <Compile Include="CheckProcess14.cs" />
+    <Compile Include="CheckProcess15.cs" />
     <Compile Include="CheckProcess2.cs" />
+    <Compile Include="CheckProcess10.cs" />
+    <Compile Include="CheckProcess12.cs" />
     <Compile Include="CheckProcess3.cs" />
+    <Compile Include="CheckProcess11.cs" />
     <Compile Include="CheckProcess4.cs" />
     <Compile Include="CheckProcess5.cs" />
     <Compile Include="CheckProcess6.cs" />

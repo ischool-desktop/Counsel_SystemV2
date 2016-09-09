@@ -7,9 +7,13 @@ using System.Data;
 namespace CounselTools
 {
     /// <summary>
-    /// 備註
+    /// 學習狀況
     /// </summary>
-    public class CheckProcess8:ICheckProcess
+    /// 
+    /// <summary>
+    /// 幹部資訊
+    /// </summary>
+   public  class CheckProcess12:ICheckProcess
     {
         string _GroupName;
         ClassStudent _Student;
@@ -20,8 +24,7 @@ namespace CounselTools
         {
             _GroupName = GroupName;
         }
-
-     
+       
         public Dictionary<string, string> GetErrorData()
         {
             return _ErrorDict;
@@ -39,14 +42,34 @@ namespace CounselTools
 
         public void Start()
         {
-            #region SINGLE_ANSWER
+            #region SEMESTER
             List<string> chkItems1 = new List<string>();
-            chkItems1.Add("備註");
+            chkItems1.Add("社團幹部");
+            chkItems1.Add("班級幹部");
+            if (CheckDataTransfer.CheckSEMESTER_Error("學習狀況", chkItems1, _Student)>0)
+                _ErrorCount += 1;
 
-            // SINGLE_ANSWER
-            _ErrorCount += CheckDataTransfer.CheckSINGLE_ANSWER_Error(_GroupName, chkItems1, _Student);
-            _TotalCount += chkItems1.Count;
+            _TotalCount += 1;
+
             #endregion
+
+
+            // 2016/9/8 穎驊註解，因應文華專屬的輔導系統，在既有的項目將會做調整
+            //原名:學期狀況表格 底下包括下面的項目，新版不需要了 故註解掉
+
+            //#region YEARLY
+            //List<string> chkItems2 = new List<string>();
+            //chkItems2.Add("休閒興趣");
+            //chkItems2.Add("特殊專長");
+            //chkItems2.Add("最喜歡的學科");
+            //chkItems2.Add("最感困難的學科");
+            //if (CheckDataTransfer.CheckYEARLY_Error(_GroupName, chkItems2, _Student)>0)
+            //    _ErrorCount+=1;
+            //_TotalCount+=1;
+
+            //#endregion
+
+
         }
 
         public string GetMessage()

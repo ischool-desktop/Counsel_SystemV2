@@ -270,26 +270,66 @@ namespace CounselTools
                         chkDict.Add(key, dr);
                 }
 
-                foreach (string ss in Items)
+            //      { ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_稱謂', Alias: '稱謂', TagName: 'Title', ControlType: 'select' },
+            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_姓名', Alias: '姓名', TagName: 'Name' },
+            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_出生年', Alias: '出生年', TagName: 'BirthYear', Validator: '{digits:true, range:[1, ' + (new Date().getFullYear()-1911) + ']}' },
+            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_存、歿', Alias: '存歿', TagName: 'IsAlive', ControlType: 'select' },
+            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_電話', Alias: '電話', TagName: 'Phone' },
+            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_職業', Alias: '職業', TagName: 'Job' },
+            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_工作機構', Alias: '工作機構', TagName: 'Institute' },
+            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_職稱', Alias: '職稱', TagName: 'JobTitle' },
+            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_教育程度', Alias: '教育程度', TagName: 'EduDegree', ControlType: 'select' },
+            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_國籍', Alias: '國籍', TagName: 'National' },
+            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_行動電話', Alias: '手機', TagName: 'CellPhone' }
+
+                //2016/9/9 穎驊新增，由於舊的邏輯無法處理新的直系血親關係，寫新的邏輯來做判斷未填寫數量
+                List<string> chkTagNames_Relative = new List<string>();
+                
+                chkTagNames_Relative.Add("Name");
+                chkTagNames_Relative.Add("birth_year");
+                chkTagNames_Relative.Add("is_alive");
+                chkTagNames_Relative.Add("Phone");
+                chkTagNames_Relative.Add("Job");
+                chkTagNames_Relative.Add("Institute");
+                chkTagNames_Relative.Add("job_title");
+                chkTagNames_Relative.Add("edu_degree");
+                chkTagNames_Relative.Add("National");
+                chkTagNames_Relative.Add("cell_phone");
+
+               
+               foreach(string key_Titles in chkDict.Keys)
                 {
-                    string key1 = GroupName + "_" + ss;
-                    if (chkDict.ContainsKey(key1))
-                    {
-                        if (chkDict[key1] == null)
-                            retError++;
-                        else
-                        { 
-                            // 檢查 name 是否輸入
-                            if (chkDict[key1]["name"] == null)
-                                retError++;
-                            else
-                                if (chkDict[key1]["name"].ToString() == "")
-                                    retError++;
-                        }
-                    }
-                    else
-                        retError++;
+                 foreach (string TagName in chkTagNames_Relative)                  
+                 {
+                     if (chkDict[key_Titles][TagName] == null || chkDict[key_Titles][TagName]+"" =="") 
+                     {
+                         retError++;                     
+                     }                    
+                    
+                 }                                                
                 }
+
+
+                //foreach (string ss in Items)
+                //{
+                //    string key1 = GroupName + "_" + ss;
+                //    if (chkDict.ContainsKey(key1))
+                //    {
+                //        if (chkDict[key1] == null)
+                //            retError++;
+                //        else
+                //        { 
+                //            // 檢查 name 是否輸入
+                //            if (chkDict[key1]["name"] == null)
+                //                retError++;
+                //            else
+                //                if (chkDict[key1]["name"].ToString() == "")
+                //                    retError++;
+                //        }
+                //    }
+                //    else
+                //        retError++;
+                //}
 
             }
             else
@@ -312,26 +352,46 @@ namespace CounselTools
                         chkDict.Add(key, dr);
                 }
 
-                foreach (string ss in Items)
+                //2016/9/9 穎驊新增，由於舊的邏輯無法處理新的兄弟姊妹資料，寫新的邏輯來做判斷未填寫數量
+                List<string> chkTagNames_Sibling = new List<string>();
+
+                chkTagNames_Sibling.Add("Name");
+                chkTagNames_Sibling.Add("birth_year");
+                chkTagNames_Sibling.Add("school_name");
+            
+
+                foreach (string key_Titles in chkDict.Keys)
                 {
-                    string key1 = GroupName + "_" + ss;
-                    if (chkDict.ContainsKey(key1))
+                    foreach (string TagName in chkTagNames_Sibling)
                     {
-                        if (chkDict[key1] == null)
-                            retError++;
-                        else
+                        if (chkDict[key_Titles][TagName] == null || chkDict[key_Titles][TagName] + "" == "")
                         {
-                            // 檢查 name 是否輸入
-                            if (chkDict[key1]["name"] == null)
-                                retError++;
-                            else
-                                if (chkDict[key1]["name"].ToString() == "")
-                                    retError++;
+                            retError++;
                         }
+
                     }
-                    else
-                        retError++;
                 }
+
+                //foreach (string ss in Items)
+                //{
+                //    string key1 = GroupName + "_" + ss;
+                //    if (chkDict.ContainsKey(key1))
+                //    {
+                //        if (chkDict[key1] == null)
+                //            retError++;
+                //        else
+                //        {
+                //            // 檢查 name 是否輸入
+                //            if (chkDict[key1]["name"] == null)
+                //                retError++;
+                //            else
+                //                if (chkDict[key1]["name"].ToString() == "")
+                //                    retError++;
+                //        }
+                //    }
+                //    else
+                //        retError++;
+                //}
 
             }
             else

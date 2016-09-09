@@ -6,22 +6,25 @@ using System.Data;
 
 namespace CounselTools
 {
+    //2016/9/8 穎驊仿作
+
     /// <summary>
-    /// 備註
+    /// 監護人資料
     /// </summary>
-    public class CheckProcess8:ICheckProcess
+    
+    public class CheckProcess11:ICheckProcess
     {
         string _GroupName;
         ClassStudent _Student;
         int _ErrorCount = 0, _TotalCount = 0;
         Dictionary<string, string> _ErrorDict = new Dictionary<string, string>();
-
         public void SetGroupName(string GroupName)
         {
             _GroupName = GroupName;
         }
 
      
+
         public Dictionary<string, string> GetErrorData()
         {
             return _ErrorDict;
@@ -41,10 +44,15 @@ namespace CounselTools
         {
             #region SINGLE_ANSWER
             List<string> chkItems1 = new List<string>();
-            chkItems1.Add("備註");
+            chkItems1.Add("監護人_姓名");
+            chkItems1.Add("監護人_性別");
+            chkItems1.Add("監護人_關係");
+            chkItems1.Add("監護人_電話");
+            chkItems1.Add("監護人_通訊地址");
+         
 
             // SINGLE_ANSWER
-            _ErrorCount += CheckDataTransfer.CheckSINGLE_ANSWER_Error(_GroupName, chkItems1, _Student);
+            _ErrorCount += CheckDataTransfer.CheckSINGLE_ANSWER_Error("家庭狀況", chkItems1, _Student);
             _TotalCount += chkItems1.Count;
             #endregion
         }

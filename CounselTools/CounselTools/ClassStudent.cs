@@ -23,5 +23,17 @@ namespace CounselTools
         public string StudentName { get; set; }
 
         public Dictionary<string, string> NonInputCompleteDict = new Dictionary<string, string>();
+
+
+        
+
+
+        public int All_ErrorCount { get; set; }
+
+        
+
+
+        public int All_TotalCount { get; set; }
+
     }
 }

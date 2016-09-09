@@ -7,9 +7,9 @@ using System.Data;
 namespace CounselTools
 {
     /// <summary>
-    /// 家庭狀況
+    /// 兄弟姊妹資料
     /// </summary>
-    public class CheckProcess2:ICheckProcess
+    public class CheckProcess15:ICheckProcess
     {
         string _GroupName;
         ClassStudent _Student;
@@ -38,58 +38,52 @@ namespace CounselTools
 
         public void Start()
         {
-            #region RELATIVE
-            List<string> chkItems1 = new List<string>();
-            chkItems1.Add("直系血親_工作機構");
-            chkItems1.Add("直系血親_出生年");
-            chkItems1.Add("直系血親_存、歿");
-            chkItems1.Add("直系血親_姓名");
-            chkItems1.Add("直系血親_原國籍");
-            chkItems1.Add("直系血親_教育程度");
-            chkItems1.Add("直系血親_電話");
-            chkItems1.Add("直系血親_稱謂");
-            chkItems1.Add("直系血親_職業");
-            chkItems1.Add("直系血親_職稱");
-            // 這算一項
-            if (CheckDataTransfer.CheckRELATIVE_Error(_GroupName, chkItems1, _Student)>0)
-                _ErrorCount += 1; ;
+            #region SINGLE_ANSWER
+
+            List<string> chkItems3 = new List<string>();
+            chkItems3.Add("兄弟姊妹_排行");
+            //chkItems3.Add("監護人_姓名");
+            //chkItems3.Add("監護人_性別");
+            //chkItems3.Add("監護人_通訊地址");
+            //chkItems3.Add("監護人_電話");
+            //chkItems3.Add("監護人_關係");
+
+            _ErrorCount += CheckDataTransfer.CheckSINGLE_ANSWER_Error("家庭狀況", chkItems3, _Student);
+
+            _TotalCount += chkItems3.Count;
+
+
+            //// 這算一項
+            //if (CheckDataTransfer.CheckSINGLE_ANSWER_Error("家庭狀況", chkItems3, _Student) > 0)
+            //    _ErrorCount += 1;
+
+            //_TotalCount += 1;
+
+            #endregion       
+
+
+            #region SIBLING
+            List<string> chkItems2 = new List<string>();
+            chkItems2.Add("兄弟姊妹_出生年次");
+            chkItems2.Add("兄弟姊妹_姓名");
+            chkItems2.Add("兄弟姊妹_畢肆業學校");
+            chkItems2.Add("兄弟姊妹_備註");
+            chkItems2.Add("兄弟姊妹_稱謂");
+
+
+            _ErrorCount += CheckDataTransfer.CheckSIBLING_Error("家庭狀況", chkItems2, _Student);
+
+            _TotalCount += chkItems2.Count;
+
+            //// 這算一項
+            //if (CheckDataTransfer.CheckSIBLING_Error("家庭狀況", chkItems2, _Student) > 0)
+            //    _ErrorCount += 1;
             
-            _TotalCount += 1;
+            //_TotalCount += 1;
+
             #endregion
-            
-            //#region SIBLING
-            //List<string> chkItems2 = new List<string>();
-            //chkItems2.Add("兄弟姊妹_出生年次");
-            //chkItems2.Add("兄弟姊妹_姓名");
-            //chkItems2.Add("兄弟姊妹_畢肆業學校");
-            //chkItems2.Add("兄弟姊妹_備註");
-            //chkItems2.Add("兄弟姊妹_稱謂");
 
-            //// 這算一項
-            //if (CheckDataTransfer.CheckSIBLING_Error(_GroupName, chkItems2, _Student) > 0)
-            //    _ErrorCount += 1;
-            
-            //_TotalCount += 1;
 
-            //#endregion
-
-            //#region SINGLE_ANSWER
-
-            //List<string> chkItems3 = new List<string>();
-            //chkItems3.Add("兄弟姊妹_排行");
-            ////chkItems3.Add("監護人_姓名");
-            ////chkItems3.Add("監護人_性別");
-            ////chkItems3.Add("監護人_通訊地址");
-            ////chkItems3.Add("監護人_電話");
-            ////chkItems3.Add("監護人_關係");
-            
-            //// 這算一項
-            //if (CheckDataTransfer.CheckSINGLE_ANSWER_Error(_GroupName, chkItems3, _Student)>0)
-            //    _ErrorCount += 1;
-
-            //_TotalCount += 1;
-
-            //#endregion
 
             //#region YEARLY
             //List<string> chkItems4 = new List<string>();

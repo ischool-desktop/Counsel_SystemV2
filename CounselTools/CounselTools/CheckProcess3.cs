@@ -6,8 +6,9 @@ using System.Data;
 
 namespace CounselTools
 {
+ 
     /// <summary>
-    /// 學習狀況
+    /// 學習
     /// </summary>
    public  class CheckProcess3:ICheckProcess
     {
@@ -38,38 +39,40 @@ namespace CounselTools
 
         public void Start()
         {
-            #region SEMESTER
-            List<string> chkItems1 = new List<string>();
-            chkItems1.Add("社團幹部");
-            chkItems1.Add("班級幹部");
-            if (CheckDataTransfer.CheckSEMESTER_Error(_GroupName, chkItems1, _Student)>0)
-                _ErrorCount += 1;
-
-            _TotalCount += 1;
-
-            #endregion
-
             #region YEARLY
             List<string> chkItems2 = new List<string>();
             chkItems2.Add("休閒興趣");
             chkItems2.Add("特殊專長");
             chkItems2.Add("最喜歡的學科");
             chkItems2.Add("最感困難的學科");
-            if (CheckDataTransfer.CheckYEARLY_Error(_GroupName, chkItems2, _Student)>0)
-                _ErrorCount+=1;
-            _TotalCount+=1;
+            chkItems2.Add("特殊專長_樂器演奏");
+            chkItems2.Add("特殊專長_外語能力");
+
+
+            _ErrorCount += CheckDataTransfer.CheckYEARLY_Error("學習狀況", chkItems2, _Student);
+
+            _TotalCount = chkItems2.Count;
+
+            //if (CheckDataTransfer.CheckYEARLY_Error(_GroupName, chkItems2, _Student) > 0)
+            //    _ErrorCount += 1;
+            //_TotalCount += 1;
 
             #endregion
+
+
         }
 
         public string GetMessage()
         {
+            //2016/9/9 穎驊註解，經由與恩正討論，現在無論有缺漏，全部人的資料都要顯示出來，
             if (_ErrorCount > 0)
             {
-                return "未輸入完整：" + _ErrorCount + "/" + _TotalCount;
+                //return "未輸入完整：" + _ErrorCount + "/" + _TotalCount;
+                return "輸入況狀：" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
             }
             else
-                return "";
+                //return "";
+                return "輸入況狀：" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
         }
 
 
