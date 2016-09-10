@@ -35,13 +35,38 @@ namespace CounselTools
                 foreach (string ss in Items)
                 {
                     string key = GroupName + "_" + ss;
-                    if (chkDict.ContainsKey(key))
+
+
+                    //2016/9/10 穎驊註解，由於卡在目前系統既有架構之下，在最小修改原則，只能先將就這樣驗證。
+                    //狀況是這樣，如果問卷填答使用者在Web2填寫輔導問卷的兄弟姊妹資料，選擇我是獨子，目前並沒有直接存這個訊息的功能
+                    //取而代之則是儲存像是[家庭狀況_兄弟姊妹_排行,""]的狀況，也就是沒有兄弟姊妹排名 = 獨子
+                    //而該如何判斷使用者搞不好是連填寫都沒有填寫的狀況? 與恩正、俊傑看過Web的程式碼確認後，
+                    //如果是沒有填寫的狀況，此時連"家庭狀況_兄弟姊妹_排行" 此項的Key值都不會出現，所以就可以判斷
+
+                    #region 驗證兄弟姊妹資料使用
+                    if (key == "家庭狀況_兄弟姊妹_排行")
                     {
-                        if (chkDict[key] == "")
+                        if (chkDict.ContainsKey(key))
+                        {
+                            //[家庭狀況_兄弟姊妹_排行,""]的狀況，表示"我是獨子"，先暫時回傳retError = 99999，供前一個涵式判斷;
+                            if (chkDict[key] == "")
+                                retError = 99999;
+                        }
+                        else
+                            retError++;
+                    } 
+                    #endregion
+
+                    else
+                    {
+                        if (chkDict.ContainsKey(key))
+                        {
+                            if (chkDict[key] == "")
+                                retError++;
+                        }
+                        else
                             retError++;
                     }
-                    else
-                        retError++;
                 }
             }
             else
@@ -270,17 +295,7 @@ namespace CounselTools
                         chkDict.Add(key, dr);
                 }
 
-            //      { ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_稱謂', Alias: '稱謂', TagName: 'Title', ControlType: 'select' },
-            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_姓名', Alias: '姓名', TagName: 'Name' },
-            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_出生年', Alias: '出生年', TagName: 'BirthYear', Validator: '{digits:true, range:[1, ' + (new Date().getFullYear()-1911) + ']}' },
-            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_存、歿', Alias: '存歿', TagName: 'IsAlive', ControlType: 'select' },
-            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_電話', Alias: '電話', TagName: 'Phone' },
-            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_職業', Alias: '職業', TagName: 'Job' },
-            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_工作機構', Alias: '工作機構', TagName: 'Institute' },
-            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_職稱', Alias: '職稱', TagName: 'JobTitle' },
-            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_教育程度', Alias: '教育程度', TagName: 'EduDegree', ControlType: 'select' },
-            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_國籍', Alias: '國籍', TagName: 'National' },
-            //{ ID: 'A3', GroupName: '家庭狀況', Name: '直系血親_行動電話', Alias: '手機', TagName: 'CellPhone' }
+
 
                 //2016/9/9 穎驊新增，由於舊的邏輯無法處理新的直系血親關係，寫新的邏輯來做判斷未填寫數量
                 List<string> chkTagNames_Relative = new List<string>();

@@ -16,6 +16,9 @@ namespace CounselTools
         int _ErrorCount = 0, _TotalCount = 0;
         Dictionary<string, string> _ErrorDict = new Dictionary<string, string>();
 
+
+        Boolean IamTheOnlySon =false;
+
         public void SetGroupName(string GroupName)
         {
             _GroupName = GroupName;
@@ -53,6 +56,17 @@ namespace CounselTools
             _TotalCount += chkItems3.Count;
 
 
+            //2016/9/10 穎驊註解，如果這邊看不懂可以去看CheckDataTransfer.CheckSINGLE_ANSWER_Error涵式的註解說明，
+            //基本上礙於現有架構之下，只能先暫時這樣子做，如果回傳 _ErrorCount == 99999，則我們視此資料為獨子，就不會再做兄弟姊妹的判斷
+
+            if (_ErrorCount == 99999) 
+            {
+                IamTheOnlySon = true;
+
+                _ErrorCount = 0;
+            }
+
+
             //// 這算一項
             //if (CheckDataTransfer.CheckSINGLE_ANSWER_Error("家庭狀況", chkItems3, _Student) > 0)
             //    _ErrorCount += 1;
@@ -61,28 +75,28 @@ namespace CounselTools
 
             #endregion       
 
+            //我是獨子=false 才會繼續
+            if (IamTheOnlySon == false)
+            {
+                #region SIBLING
+                List<string> chkItems2 = new List<string>();
+                chkItems2.Add("兄弟姊妹_出生年次");
+                chkItems2.Add("兄弟姊妹_姓名");
+                chkItems2.Add("兄弟姊妹_畢肆業學校");                
+                chkItems2.Add("兄弟姊妹_稱謂");
+                //chkItems2.Add("兄弟姊妹_備註");
 
-            #region SIBLING
-            List<string> chkItems2 = new List<string>();
-            chkItems2.Add("兄弟姊妹_出生年次");
-            chkItems2.Add("兄弟姊妹_姓名");
-            chkItems2.Add("兄弟姊妹_畢肆業學校");
-            chkItems2.Add("兄弟姊妹_備註");
-            chkItems2.Add("兄弟姊妹_稱謂");
+                _ErrorCount += CheckDataTransfer.CheckSIBLING_Error("家庭狀況", chkItems2, _Student);
+                _TotalCount += chkItems2.Count;
 
+                //// 這算一項
+                //if (CheckDataTransfer.CheckSIBLING_Error("家庭狀況", chkItems2, _Student) > 0)
+                //    _ErrorCount += 1;
 
-            _ErrorCount += CheckDataTransfer.CheckSIBLING_Error("家庭狀況", chkItems2, _Student);
+                //_TotalCount += 1;
 
-            _TotalCount += chkItems2.Count;
-
-            //// 這算一項
-            //if (CheckDataTransfer.CheckSIBLING_Error("家庭狀況", chkItems2, _Student) > 0)
-            //    _ErrorCount += 1;
-            
-            //_TotalCount += 1;
-
-            #endregion
-
+                #endregion
+            }
 
 
             //#region YEARLY
