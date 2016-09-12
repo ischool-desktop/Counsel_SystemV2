@@ -98,8 +98,8 @@ namespace Counsel_System2.Contents
             _ColumIndexDict.Add(GroupName + "_休閒興趣", 2);
             _ColumIndexDict.Add(GroupName + "_最喜歡的學科", 3);
             _ColumIndexDict.Add(GroupName + "_最感困難的學科", 4);
-            _ColumIndexDict.Add(GroupName + "_特殊專長樂器演奏", 5);
-            _ColumIndexDict.Add(GroupName + "_特殊專長外語能力", 6);
+            _ColumIndexDict.Add(GroupName + "_特殊專長_樂器演奏", 5);
+            _ColumIndexDict.Add(GroupName + "_特殊專長_外語能力", 6);
             //_ColumIndexDict.Add(GroupName + "_社團幹部", 5);
             //_ColumIndexDict.Add(GroupName + "_班級幹部", 6);
 
