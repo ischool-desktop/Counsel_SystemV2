@@ -25,8 +25,8 @@ namespace Counsel_System2.Forms
         string key4 = "學習狀況_休閒興趣";
         string key5 = "學習狀況_社團幹部";
         string key6 = "學習狀況_班級幹部";
-        string key7 = "學習狀況_特殊專長樂器演奏";
-        string key8 = "學習狀況_特殊專長外語能力";
+        string key7 = "學習狀況_特殊專長_樂器演奏";
+        string key8 = "學習狀況_特殊專長_外語能力";
 
 
         public StudABCard_YearlyForm_03(Dictionary<string,UDTYearlyDataDef> data,string gradeyearStr)
