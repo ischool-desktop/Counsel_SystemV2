@@ -134,7 +134,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Template\未輸入完整名單樣版.xls" />
+    <None Include="Template\綜合紀錄表輸入進度表樣版.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

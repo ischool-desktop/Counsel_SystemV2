@@ -15,10 +15,10 @@ namespace CounselTools
         List<string> _StudentIDList;
         BackgroundWorker _bgLoadData;
 
-        
+
 
         public ExportNotInputABCardComplete(List<string> StudentIDList)
-        {            
+        {
             _bgLoadData = new BackgroundWorker();
             _bgLoadData.DoWork += _bgLoadData_DoWork;
             _bgLoadData.ProgressChanged += _bgLoadData_ProgressChanged;
@@ -34,14 +34,14 @@ namespace CounselTools
 
         void _bgLoadData_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            FISCA.Presentation.MotherForm.SetStatusBarMessage("綜合紀錄表未輸入完整名單產生中", e.ProgressPercentage);
+            FISCA.Presentation.MotherForm.SetStatusBarMessage("綜合紀錄表輸入進度表產生中", e.ProgressPercentage);
         }
 
         void _bgLoadData_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Error !=null)
+            if (e.Error != null)
             {
-                FISCA.Presentation.Controls.MsgBox.Show("產生過程發生錯誤,"+e.Error.Message);
+                FISCA.Presentation.Controls.MsgBox.Show("產生過程發生錯誤," + e.Error.Message);
             }
             else
             {
@@ -50,7 +50,7 @@ namespace CounselTools
                     Workbook wb = e.Result as Workbook;
                     if (wb != null)
                     {
-                        Utility.CompletedXls("輔導綜合紀錄表未輸入完整名單", wb);
+                        Utility.CompletedXlsx("輔導綜合紀錄表輸入進度表", wb);
                     }
                 }
                 catch (Exception ex)
@@ -58,7 +58,7 @@ namespace CounselTools
                     FISCA.Presentation.Controls.MsgBox.Show("產生 Excel 失敗," + ex.Message);
                 }
             }
-            
+
         }
 
         void _bgLoadData_DoWork(object sender, DoWorkEventArgs e)
@@ -93,17 +93,17 @@ namespace CounselTools
                 _bgLoadData.ReportProgress(65);
 
                 List<string> cpGNameList = new List<string>();
-                
+
                 cpGNameList.Add("個人資料");
 
                 //2016/9/8 穎驊新增欄位
-                cpGNameList.Add("監護人資料");                
+                cpGNameList.Add("監護人資料");
                 cpGNameList.Add("尊親屬資料");
                 cpGNameList.Add("兄弟姊妹資料");
                 cpGNameList.Add("身高及體重");
                 cpGNameList.Add("家庭訊息");
                 cpGNameList.Add("學習");
-                cpGNameList.Add("幹部資訊");                                                
+                cpGNameList.Add("幹部資訊");
                 cpGNameList.Add("自我認識");
                 cpGNameList.Add("生活感想");
                 cpGNameList.Add("畢業後規劃");
@@ -111,12 +111,12 @@ namespace CounselTools
 
                 foreach (ClassStudent cs in ClassStudents)
                 {
-                    Dictionary<string, ICheckProcess> CheckProcDict = new Dictionary<string, ICheckProcess>();        
+                    Dictionary<string, ICheckProcess> CheckProcDict = new Dictionary<string, ICheckProcess>();
                     // 開始檢查
                     foreach (string cpGName in cpGNameList)
                     {
                         switch (cpGName)
-                        {                          
+                        {
                             case "個人資料":
                                 CheckProcDict.Add(cpGName, new CheckProcess1());
                                 break;
@@ -141,13 +141,13 @@ namespace CounselTools
                                 CheckProcDict.Add(cpGName, new CheckProcess14());
                                 break;
 
-                            case "學習":                            
+                            case "學習":
                                 CheckProcDict.Add(cpGName, new CheckProcess3());
                                 break;
 
                             case "幹部資訊":
                                 CheckProcDict.Add(cpGName, new CheckProcess12());
-                                break;                            
+                                break;
 
                             case "自我認識":
                                 CheckProcDict.Add(cpGName, new CheckProcess5());
@@ -163,7 +163,7 @@ namespace CounselTools
                             case "自傳":
                                 CheckProcDict.Add(cpGName, new CheckProcess4());
                                 break;
-      
+
                         }
                     }
 
@@ -179,8 +179,8 @@ namespace CounselTools
                             //2016/穎驊註解，經由與恩正討論，現在無論有缺漏，全部人的資料都要顯示出來，故將條件註解掉
                             //if (cp.GetErrorCount() > 0)
                             //{
-                                if (!cs.NonInputCompleteDict.ContainsKey(cpGName))
-                                    cs.NonInputCompleteDict.Add(cpGName, cp.GetMessage());
+                            if (!cs.NonInputCompleteDict.ContainsKey(cpGName))
+                                cs.NonInputCompleteDict.Add(cpGName, cp.GetMessage());
                             //}
 
                             cs.All_ErrorCount += cp.GetErrorCount();
@@ -193,17 +193,17 @@ namespace CounselTools
                 _bgLoadData.ReportProgress(80);
 
                 // 讀取樣版
-                Workbook wb = new Workbook(new MemoryStream(Properties.Resources.未輸入完整名單樣版));
+                Workbook wb = new Workbook(new MemoryStream(Properties.Resources.綜合紀錄表輸入進度表樣版));
 
                 // 綜合紀錄索引
                 Dictionary<string, int> gpColIdx = new Dictionary<string, int>();
-                int col = 5;
+                int col = 6;
                 foreach (string cpName in cpGNameList)
                     gpColIdx.Add(cpName, col++);
 
                 //2016/9/9 穎驊註解，此為給文華高中 輔導系統2.0 的欄位項目
                 //個人資料	監護人資料	尊親屬資料	兄弟姊妹資料	身高及體重	家庭訊息	學習	幹部資訊	自我認識	生活感想	畢業後規劃	自傳	完成百分比
-                
+
                 int rowIdx = 1;
                 foreach (ClassStudent cs in ClassStudents)
                 {
@@ -212,27 +212,26 @@ namespace CounselTools
                     //// 有缺才填入
                     //if (cs.NonInputCompleteDict.Count > 0)
                     //{
-                        wb.Worksheets[0].Cells[rowIdx, 0].PutValue(cs.StudentNumber);
-                        wb.Worksheets[0].Cells[rowIdx, 1].PutValue(cs.GradeYearDisplay);
-                        wb.Worksheets[0].Cells[rowIdx,2].PutValue(cs.ClassName);
-                        wb.Worksheets[0].Cells[rowIdx, 3].PutValue(cs.SeatNo);
-                        wb.Worksheets[0].Cells[rowIdx, 4].PutValue(cs.StudentName);
-                        // 填入缺漏資料
-                        foreach (string key in cs.NonInputCompleteDict.Keys)
-                        {
-                            if (gpColIdx.ContainsKey(key))
-                                wb.Worksheets[0].Cells[rowIdx, gpColIdx[key]].PutValue(cs.NonInputCompleteDict[key]);
-                        }
+                    // 填入缺漏資料
+                    foreach (string key in cs.NonInputCompleteDict.Keys)
+                    {
+                        if (gpColIdx.ContainsKey(key))
+                            wb.Worksheets[0].Cells[rowIdx, gpColIdx[key]].PutValue(cs.NonInputCompleteDict[key]);
+                    }
 
-                        //2016/9/9 穎驊新增，計算學生完成百分比
-                   
-                        int InputCompletePrecent = (int) ((((decimal)cs.All_TotalCount -(decimal)(cs.All_ErrorCount))/ ((decimal)cs.All_TotalCount))*100);
 
-                        wb.Worksheets[0].Cells[rowIdx, 17].PutValue(InputCompletePrecent+"%");
+                    wb.Worksheets[0].Cells[rowIdx, 0].PutValue(cs.StudentNumber);
+                    wb.Worksheets[0].Cells[rowIdx, 1].PutValue(cs.GradeYearDisplay);
+                    wb.Worksheets[0].Cells[rowIdx, 2].PutValue(cs.ClassName);
+                    wb.Worksheets[0].Cells[rowIdx, 3].PutValue(cs.SeatNo);
+                    wb.Worksheets[0].Cells[rowIdx, 4].PutValue(cs.StudentName);
+                    //2016/9/9 穎驊新增，計算學生完成百分比
+                    decimal inputCompletePrecent = Math.Round((((decimal)cs.All_TotalCount - (decimal)(cs.All_ErrorCount)) / ((decimal)cs.All_TotalCount)), 2, MidpointRounding.AwayFromZero);
+                    wb.Worksheets[0].Cells[rowIdx, 5].PutValue(inputCompletePrecent);
 
-                        rowIdx++;
+                    rowIdx++;
                     //}
-                
+
                 }
                 _bgLoadData.ReportProgress(95);
 
@@ -241,12 +240,13 @@ namespace CounselTools
 
                 _bgLoadData.ReportProgress(100);
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
 
 
                 e.Cancel = true;
             }
         }
-               
+
     }
 }

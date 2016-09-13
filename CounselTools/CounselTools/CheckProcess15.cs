@@ -125,11 +125,11 @@ namespace CounselTools
             if (_ErrorCount > 0)
             {
                 //return "未輸入完整：" + _ErrorCount + "/" + _TotalCount;
-                return "輸入況狀：" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
+                return "" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
             }
             else
                 //return "";
-                return "輸入況狀：" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
+                return "" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
         }
 
 
