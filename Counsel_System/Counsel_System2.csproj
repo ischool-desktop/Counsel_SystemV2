@@ -22,11 +22,12 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\ischool desktop\addmodules\Counsel_System_V2\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Counsel_System.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -301,9 +302,7 @@
     <Compile Include="DAO\AB_StudText.cs" />
     <Compile Include="DAO\AnswerPkey.cs" />
     <Compile Include="DAO\CareRecordItemManager.cs" />
-    <Compile Include="DAO\DataGridViewComboBoxExColumn.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="DAO\DataGridViewComboBoxExColumn.cs" />
     <Compile Include="DAO\DocTemplateTransfer.cs" />
     <Compile Include="DAO\DocumentMerge.cs" />
     <Compile Include="DAO\EnumControlType.cs" />
