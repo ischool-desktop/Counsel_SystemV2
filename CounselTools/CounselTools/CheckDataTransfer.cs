@@ -312,17 +312,29 @@ namespace CounselTools
                 chkTagNames_Relative.Add("cell_phone");
 
                
-               foreach(string key_Titles in chkDict.Keys)
-                {
-                 foreach (string TagName in chkTagNames_Relative)                  
-                 {
-                     if (chkDict[key_Titles][TagName] == null || chkDict[key_Titles][TagName]+"" =="") 
-                     {
-                         retError++;                     
-                     }                    
+               //foreach(string key_Titles in chkDict.Keys)
+               // {
+               //  foreach (string TagName in chkTagNames_Relative)                  
+               //  {
+               //      if (chkDict[key_Titles][TagName] == null || chkDict[key_Titles][TagName]+"" =="") 
+               //      {
+               //          retError++;                     
+               //      }                    
                     
-                 }                                                
-                }
+               //  }                                                
+               // }
+
+               foreach (string key_Titles in chkDict.Keys)
+               {
+                   foreach (string TagName in chkTagNames_Relative)
+                   {
+                       if (chkDict[key_Titles][TagName] == null )
+                       {
+                           retError++;
+                       }
+
+                   }
+               }
 
 
                 //foreach (string ss in Items)

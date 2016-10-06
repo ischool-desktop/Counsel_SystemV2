@@ -17,7 +17,7 @@ namespace Counsel_System2.Contents
         /// <summary>
         /// 題目key
         /// </summary>
-        private enum enumKey { 本人概況_血型, 本人概況_宗教, 本人概況_身高, 本人概況_體重, 本人概況_生理缺陷, 本人概況_曾患特殊疾病, 本人概況_原住民血統 }
+        private enum enumKey { 本人概況_血型, 本人概況_宗教, 本人概況_身高, 本人概況_體重, 本人概況_生理缺陷, 本人概況_曾患特殊疾病, 本人概況_原住民血統, 本人概況_手機號碼 }
 
         List<string> _StudenIDList;
         int _intStudentID = 0;
@@ -65,6 +65,17 @@ namespace Counsel_System2.Contents
         /// 本人概況_原住民血統
         /// </summary>
         UDTSingleRecordDef _udtSrFlp05;
+
+        
+        //2016/9/20，穎驊新增，增加學生手機號碼欄位
+        
+        /// <summary>
+        /// 本人概況_手機號碼
+        /// </summary>
+        UDTSingleRecordDef _udtSrFlp06;
+
+
+
 
         Dictionary<string, QuestionData> _QuestionDict;
 
@@ -546,6 +557,8 @@ namespace Counsel_System2.Contents
                 }
             }
 
+  
+
             //血型
             if (_udtSrFlp01 != null)
             {
@@ -694,6 +707,12 @@ namespace Counsel_System2.Contents
 
                 if (data.Key == enumKey.本人概況_原住民血統.ToString())
                     _udtSrFlp05 = data;
+
+
+                //2016/9/20 穎驊新增，手機號碼
+                if (data.Key == enumKey.本人概況_手機號碼.ToString())
+                    _udtSrFlp06 = data;
+
             }
             List<UDTSemesterDataDef> SemesterDataList = UDTTransfer.ABUDTSemesterDataSelectByStudentIDList(_StudenIDList);
 

@@ -55,6 +55,7 @@ namespace CounselTools
 
             #region SINGLE_ANSWER
             List<string> chkItems1 = new List<string>();
+            chkItems1.Add("手機號碼");
             chkItems1.Add("血型");
             chkItems1.Add("宗教");
             chkItems1.Add("原住民血統");

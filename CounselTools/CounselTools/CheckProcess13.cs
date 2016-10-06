@@ -27,8 +27,18 @@ namespace CounselTools
         }
 
         public int GetErrorCount()
-        {
-            return _ErrorCount;
+        {            
+            //return _ErrorCount;
+
+            if (_ErrorCount > 0)
+            {
+                return _TotalCount;
+            }
+            else 
+            {
+                return 0;
+            
+            }
         }
 
         public int GetTotalCount()
@@ -69,15 +79,31 @@ namespace CounselTools
 
         public string GetMessage()
         {
-            //2016/9/9 穎驊註解，經由與恩正討論，現在無論有缺漏，全部人的資料都要顯示出來，
+
+            ////2016/9/9 穎驊註解，經由與恩正討論，現在無論有缺漏，全部人的資料都要顯示出來，
+            //if (_ErrorCount > 0)
+            //{
+            //    //return "未輸入完整：" + _ErrorCount + "/" + _TotalCount;
+            //    return "" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
+            //}
+            //else
+            //    //return "";
+            //    return "" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
+
+
+
             if (_ErrorCount > 0)
             {
                 //return "未輸入完整：" + _ErrorCount + "/" + _TotalCount;
-                return "" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
+                return "" + 0 + "/" + _TotalCount;
             }
             else
                 //return "";
-                return "" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
+                return "" + (_TotalCount) + "/" + _TotalCount;
+
+
+
+
         }
 
 

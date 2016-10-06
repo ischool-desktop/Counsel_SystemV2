@@ -136,7 +136,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dg01.DefaultCellStyle = dataGridViewCellStyle1;
             this.dg01.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dg01.Location = new System.Drawing.Point(30, 383);
+            this.dg01.Location = new System.Drawing.Point(30, 450);
             this.dg01.Name = "dg01";
             this.dg01.RowHeadersVisible = false;
             this.dg01.RowTemplate.Height = 24;
@@ -319,7 +319,7 @@
             // 
             this.labelX5.BackgroundStyle.Class = "";
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(30, 356);
+            this.labelX5.Location = new System.Drawing.Point(30, 423);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(60, 21);
             this.labelX5.TabIndex = 9;
@@ -529,7 +529,7 @@
             this.Controls.Add(this.labelX2);
             this.Controls.Add(this.labelX1);
             this.Name = "StudABCard01Content";
-            this.Size = new System.Drawing.Size(550, 500);
+            this.Size = new System.Drawing.Size(550, 580);
             ((System.ComponentModel.ISupportInitialize)(this.dg01)).EndInit();
             this.flp05.ResumeLayout(false);
             this.flp05.PerformLayout();

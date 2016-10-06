@@ -56,7 +56,7 @@ namespace CounselTools
             _TotalCount += chkItems3.Count;
 
 
-            //2016/9/10 穎驊註解，如果這邊看不懂可以去看CheckDataTransfer.CheckSINGLE_ANSWER_Error涵式的註解說明，
+            //2016/9/10 穎驊註解，如果這邊看不懂可以去看上面CheckDataTransfer.CheckSINGLE_ANSWER_Error涵式的註解說明，
             //基本上礙於現有架構之下，只能先暫時這樣子做，如果回傳 _ErrorCount == 99999，則我們視此資料為獨子，就不會再做兄弟姊妹的判斷
 
             if (_ErrorCount == 99999) 
@@ -64,6 +64,7 @@ namespace CounselTools
                 IamTheOnlySon = true;
 
                 _ErrorCount = 0;
+                _TotalCount = 6;
             }
 
 
@@ -84,7 +85,7 @@ namespace CounselTools
                 chkItems2.Add("兄弟姊妹_姓名");
                 chkItems2.Add("兄弟姊妹_畢肆業學校");                
                 chkItems2.Add("兄弟姊妹_稱謂");
-                //chkItems2.Add("兄弟姊妹_備註");
+                chkItems2.Add("兄弟姊妹_備註");
 
                 _ErrorCount += CheckDataTransfer.CheckSIBLING_Error("家庭狀況", chkItems2, _Student);
                 _TotalCount += chkItems2.Count;
@@ -121,15 +122,32 @@ namespace CounselTools
 
         public string GetMessage()
         {
-            //2016/9/9 穎驊註解，經由與恩正討論，現在無論有缺漏，全部人的資料都要顯示出來，
-            if (_ErrorCount > 0)
+            ////2016/9/9 穎驊註解，經由與恩正討論，現在無論有缺漏，全部人的資料都要顯示出來，
+            //if (_ErrorCount > 0)
+            //{
+            //    //return "未輸入完整：" + _ErrorCount + "/" + _TotalCount;
+            //    return "" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
+            //}
+            //else
+            //    //return "";
+            //    return "" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
+
+            if (!IamTheOnlySon)
             {
-                //return "未輸入完整：" + _ErrorCount + "/" + _TotalCount;
-                return "" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
+                if (_ErrorCount > 0)
+                {
+                    //return "未輸入完整：" + _ErrorCount + "/" + _TotalCount;
+                    return "" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
+                }
+                else
+                    //return "";
+                    return "" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
             }
-            else
-                //return "";
-                return "" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;
+            else 
+            {
+                return "" + (_TotalCount - _ErrorCount) + "/" + _TotalCount;                        
+            }
+
         }
 
 

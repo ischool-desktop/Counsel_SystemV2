@@ -47,7 +47,8 @@ namespace CounselTools
             items.Add("內容1");
             items.Add("內容2");
             items.Add("內容3");
-
+            items.Add("填寫日期");
+            
             //2016/9/9  由於此項目在WEB上目前不會自動產生日期，故先不驗
             //items.Add("填寫日期");
 

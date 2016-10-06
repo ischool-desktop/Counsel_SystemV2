@@ -302,7 +302,9 @@
     <Compile Include="DAO\AB_StudText.cs" />
     <Compile Include="DAO\AnswerPkey.cs" />
     <Compile Include="DAO\CareRecordItemManager.cs" />
-    <Compile Include="DAO\DataGridViewComboBoxExColumn.cs" />
+    <Compile Include="DAO\DataGridViewComboBoxExColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DAO\DocTemplateTransfer.cs" />
     <Compile Include="DAO\DocumentMerge.cs" />
     <Compile Include="DAO\EnumControlType.cs" />
