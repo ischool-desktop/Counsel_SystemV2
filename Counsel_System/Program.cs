@@ -498,9 +498,17 @@ namespace Counsel_System2
             NLDPanels.Student.RibbonBarItems["輔導"]["匯出"]["家庭聯繫紀錄篩選"].Enable = UserAcl.Current["K12.Student.CounselStudentExport_home_visitfilter"].Executable;
             NLDPanels.Student.RibbonBarItems["輔導"]["匯出"]["家庭聯繫紀錄篩選"].Click += delegate
             {
-                Forms.StudHome_VisitFilterForm Form = new Forms.StudHome_VisitFilterForm();
-
-                Form.ShowDialog();
+                if (NLDPanels.Student.SelectedSource.Count > 0)
+                {
+                    List<string> student_id_List = Utility.GetStudentIDListByStudentID(K12.Presentation.NLDPanels.Student.SelectedSource);
+                    Forms.StudHome_VisitFilterForm Form = new Forms.StudHome_VisitFilterForm(student_id_List);
+                    Form.ShowDialog();
+                }
+                else
+                {
+                    FISCA.Presentation.Controls.MsgBox.Show("請選擇學生.");
+                }     
+           
 
             };
 

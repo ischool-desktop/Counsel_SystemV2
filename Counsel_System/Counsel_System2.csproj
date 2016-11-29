@@ -302,7 +302,9 @@
     <Compile Include="DAO\AB_StudText.cs" />
     <Compile Include="DAO\AnswerPkey.cs" />
     <Compile Include="DAO\CareRecordItemManager.cs" />
-    <Compile Include="DAO\DataGridViewComboBoxExColumn.cs" />
+    <Compile Include="DAO\DataGridViewComboBoxExColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DAO\DocTemplateTransfer.cs" />
     <Compile Include="DAO\DocumentMerge.cs" />
     <Compile Include="DAO\EnumControlType.cs" />
@@ -339,6 +341,7 @@
     <Compile Include="DAO\UDT_CounselStudentInterviewRecordDef.cs" />
     <Compile Include="DAO\UDT_CounselStudent_ListDef.cs" />
     <Compile Include="DAO\UDT_CounselUserDefDataDef.cs" />
+    <Compile Include="DAO\UDT_Counsel_home_visit_RecordDef.cs" />
     <Compile Include="DAO\UDT_QuizDef.cs" />
     <Compile Include="DAO\UDT_StudQuizDataDef.cs" />
     <Compile Include="DAO\UDT_SystemListDef.cs" />
@@ -818,6 +821,7 @@
   <ItemGroup>
     <None Include="Resources\學生晤談紀錄篩選.xls" />
     <None Include="Resources\學生晤談記錄表_新範本.docx" />
+    <None Include="Resources\家庭聯繫紀錄篩選.xls" />
     <None Include="Resources\輔導資料紀錄表範本.doc" />
     <None Include="Templates\晤談紀錄簽認表樣版.xls" />
     <None Include="Templates\綜合表現紀錄表-樣版.doc" />

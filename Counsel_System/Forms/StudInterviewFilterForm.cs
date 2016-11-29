@@ -240,7 +240,7 @@ namespace Counsel_System2.Forms
                 basicDataTitleList.Add("案件類別");
 
                 basicDataTitleList.Add("內容要點");
-                basicDataTitleList.Add("記錄人的登入帳號");
+                //basicDataTitleList.Add("記錄人的登入帳號");
                 basicDataTitleList.Add("記錄人的姓名");
                 basicDataTitleList.Add("是否公開");
                 basicDataTitleList.Add("記錄人");

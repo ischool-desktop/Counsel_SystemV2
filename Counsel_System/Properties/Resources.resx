@@ -181,4 +181,7 @@
   <data name="學生晤談紀錄篩選" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\學生晤談紀錄篩選.xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="家庭聯繫紀錄篩選" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\家庭聯繫紀錄篩選.xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
