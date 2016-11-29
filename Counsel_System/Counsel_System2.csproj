@@ -489,6 +489,12 @@
     <Compile Include="Forms\StudCaseMeetingRecordForm.designer.cs">
       <DependentUpon>StudCaseMeetingRecordForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\StudHome_VisitFilterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudHome_VisitFilterForm.Designer.cs">
+      <DependentUpon>StudHome_VisitFilterForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\StudInterviewDataForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -506,6 +512,12 @@
     </Compile>
     <Compile Include="Forms\StudInterviewDataReportForm.Designer.cs">
       <DependentUpon>StudInterviewDataReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StudInterviewFilterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StudInterviewFilterForm.Designer.cs">
+      <DependentUpon>StudInterviewFilterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\StudQuizDataForm.cs">
       <SubType>Form</SubType>
@@ -710,6 +722,9 @@
     <EmbeddedResource Include="Forms\StudCaseMeetingRecordForm.resx">
       <DependentUpon>StudCaseMeetingRecordForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudHome_VisitFilterForm.resx">
+      <DependentUpon>StudHome_VisitFilterForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\StudInterviewDataForm.resx">
       <DependentUpon>StudInterviewDataForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -718,6 +733,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StudInterviewDataReportForm.resx">
       <DependentUpon>StudInterviewDataReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StudInterviewFilterForm.resx">
+      <DependentUpon>StudInterviewFilterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StudQuizDataForm.resx">
       <DependentUpon>StudQuizDataForm.cs</DependentUpon>
@@ -800,6 +818,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\學生晤談紀錄篩選.xls" />
     <None Include="Resources\學生晤談記錄表_新範本.docx" />
     <None Include="Resources\輔導資料紀錄表範本.doc" />
     <None Include="Templates\晤談紀錄簽認表樣版.xls" />

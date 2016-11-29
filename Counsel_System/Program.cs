@@ -10,6 +10,8 @@ using System.Xml.Linq;
 using System.ComponentModel;
 using FISCA.Data;
 using K12.Data;
+using FISCA.Presentation.Controls;
+using System.Windows.Forms;
 
 namespace Counsel_System2
 {
@@ -69,9 +71,12 @@ namespace Counsel_System2
             if (Utility.CheckAddContent(PermissionCode.輔導相關測驗_資料項目))
                 K12.Presentation.NLDPanels.Student.AddDetailBulider(new FISCA.Presentation.DetailBulider<Contents.StudQuizDataContent>());
 
-            // 晤談
-            if (Utility.CheckAddContent(PermissionCode.輔導晤談紀錄_資料項目))
-                K12.Presentation.NLDPanels.Student.AddDetailBulider(new FISCA.Presentation.DetailBulider<Contents.StudInterviewDataContent>());
+
+            //2016/11/25 穎驊筆記，因應輔導2.0 table counsel.interview_record 調整，牽連到的功能先暫時關閉，日後調整再開啟。
+
+            //// 晤談
+            //if (Utility.CheckAddContent(PermissionCode.輔導晤談紀錄_資料項目))
+            //    K12.Presentation.NLDPanels.Student.AddDetailBulider(new FISCA.Presentation.DetailBulider<Contents.StudInterviewDataContent>());
 
             // 優先關懷
             if (Utility.CheckAddContent(PermissionCode.輔導優先關懷紀錄_資料項目))
@@ -255,6 +260,14 @@ namespace Counsel_System2
             Catalog catalog24 = RoleAclSource.Instance["輔導"]["功能按鈕"];
             catalog23.Add(new RibbonFeature("K12.Teacher.StudInterviewData1Report", "教師.晤談紀錄簽認表"));
 
+            // 匯出學生晤談紀錄篩選
+            Catalog catalog25 = RoleAclSource.Instance["學生"]["功能按鈕"];
+            catalog25.Add(new RibbonFeature("K12.Student.CounselStudentExport_interviewfilter", "學生晤談紀錄篩選"));
+
+            // 匯出家庭聯繫紀錄篩選
+            Catalog catalog26 = RoleAclSource.Instance["學生"]["功能按鈕"];
+            catalog26.Add(new RibbonFeature("K12.Student.CounselStudentExport_home_visitfilter", "家庭聯繫紀錄篩選"));
+
             //RibbonBarItem rbRptItem = MotherForm.RibbonBarItems["學生", "輔導"];
             //rbRptItem["報表"].Image = Properties.Resources.Report;
             //rbRptItem["報表"].Size = RibbonBarButton.MenuButtonSize.Large;
@@ -275,6 +288,7 @@ namespace Counsel_System2
             rbRptItemABNew["報表"].Image = Properties.Resources.Report;
             rbRptItemABNew["報表"].Size = RibbonBarButton.MenuButtonSize.Large;
             rbRptItemABNew["報表"]["綜合資料紀錄表"].Enable = UserAcl.Current["K12.Student.ABCardPrintForm"].Executable;
+
             rbRptItemABNew["報表"]["綜合資料紀錄表"].Click += delegate
             {
                 if (NLDPanels.Student.SelectedSource.Count > 0)
@@ -292,7 +306,12 @@ namespace Counsel_System2
             RibbonBarItem rbRptItem1 = MotherForm.RibbonBarItems["學生", "輔導"];
             rbRptItem1["報表"].Image = Properties.Resources.Report;
             rbRptItem1["報表"].Size = RibbonBarButton.MenuButtonSize.Large;
-            rbRptItem1["報表"]["晤談紀錄表"].Enable = UserAcl.Current["K12.Student.StudInterviewDataReport"].Executable;
+            //rbRptItem1["報表"]["晤談紀錄表"].Enable = UserAcl.Current["K12.Student.StudInterviewDataReport"].Executable;
+
+            //2016/11/25 穎驊筆記，因應輔導2.0 table counsel.interview_record 調整，牽連到的功能先暫時關閉，日後調整再開啟。
+
+            rbRptItem1["報表"]["晤談紀錄表"].Enable = false;
+
             rbRptItem1["報表"]["晤談紀錄表"].Click += delegate
             {
                 if (NLDPanels.Student.SelectedSource.Count > 0)
@@ -436,10 +455,14 @@ namespace Counsel_System2
             NLDPanels.Student.RibbonBarItems["輔導"]["匯出"]["匯出晤談紀錄"].Enable = UserAcl.Current["K12.Student.CounselStudentExportInterViewData"].Executable;
             NLDPanels.Student.RibbonBarItems["輔導"]["匯出"]["匯出晤談紀錄"].Click += delegate
             {
-                SmartSchool.API.PlugIn.Export.Exporter exporter = new Counsel_System2.ImportExport.ExportInterViewData();
-                ImportExport.ExportStudentV2 wizard = new ImportExport.ExportStudentV2(exporter.Text, exporter.Image);
-                exporter.InitializeExport(wizard);
-                wizard.ShowDialog();
+                //2016/11/25 穎驊筆記，因應輔導2.0 table counsel.interview_record 調整，牽連到的功能先暫時關閉，日後調整再開啟。
+
+                MsgBox.Show("晤談紀錄系統調整中，功能暫不開放", "警告",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning);
+
+                //SmartSchool.API.PlugIn.Export.Exporter exporter = new Counsel_System2.ImportExport.ExportInterViewData();
+                //ImportExport.ExportStudentV2 wizard = new ImportExport.ExportStudentV2(exporter.Text, exporter.Image);
+                //exporter.InitializeExport(wizard);
+                //wizard.ShowDialog();
             };
 
 
@@ -452,6 +475,35 @@ namespace Counsel_System2
                 exporter.InitializeExport(wizard);
                 wizard.ShowDialog();
             };
+
+            // 學生晤談紀錄篩選
+            NLDPanels.Student.RibbonBarItems["輔導"]["匯出"]["學生晤談紀錄篩選"].Enable = UserAcl.Current["K12.Student.CounselStudentExport_interviewfilter"].Executable;
+            NLDPanels.Student.RibbonBarItems["輔導"]["匯出"]["學生晤談紀錄篩選"].Click += delegate
+            {
+                if (NLDPanels.Student.SelectedSource.Count > 0)
+                {
+                    List<string> student_id_List = Utility.GetStudentIDListByStudentID(K12.Presentation.NLDPanels.Student.SelectedSource);
+                    Forms.StudInterviewFilterForm Form = new Forms.StudInterviewFilterForm(student_id_List);
+                    Form.ShowDialog();
+                }
+                else 
+                {
+                    FISCA.Presentation.Controls.MsgBox.Show("請選擇學生.");
+                }                
+       
+            };
+
+
+            // 學生家長聯繫篩選
+            NLDPanels.Student.RibbonBarItems["輔導"]["匯出"]["家庭聯繫紀錄篩選"].Enable = UserAcl.Current["K12.Student.CounselStudentExport_home_visitfilter"].Executable;
+            NLDPanels.Student.RibbonBarItems["輔導"]["匯出"]["家庭聯繫紀錄篩選"].Click += delegate
+            {
+                Forms.StudHome_VisitFilterForm Form = new Forms.StudHome_VisitFilterForm();
+
+                Form.ShowDialog();
+
+            };
+
 
             NLDPanels.Student.RibbonBarItems["輔導"]["匯入"].Image = Properties.Resources.Import_Image;
             NLDPanels.Student.RibbonBarItems["輔導"]["匯入"].Size = RibbonBarButton.MenuButtonSize.Large;
@@ -485,11 +537,15 @@ namespace Counsel_System2
             NLDPanels.Student.RibbonBarItems["輔導"]["匯入"]["匯入晤談紀錄"].Enable = UserAcl.Current["K12.Student.CounselStudentImportInterViewData"].Executable;
             NLDPanels.Student.RibbonBarItems["輔導"]["匯入"]["匯入晤談紀錄"].Click += delegate
             {
-                Global._AllStudentNumberStatusIDTemp = Utility.GetAllStudenNumberStatusDict();
-                Global._AllTeacherNameIdDictTemp = Utility.GetAllTeacherNameIDDict();
-                Global._StudentStatusDBDict = Utility.GetStudentStatusDBValDict();
-                ImportExport.ImportStudentInterViewData isivd = new ImportExport.ImportStudentInterViewData();
-                isivd.Execute();
+                //2016/11/25 穎驊筆記，因應輔導2.0 table counsel.interview_record 調整，牽連到的功能先暫時關閉，日後調整再開啟。
+
+                MsgBox.Show("晤談紀錄系統調整中，功能暫不開放", "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                //Global._AllStudentNumberStatusIDTemp = Utility.GetAllStudenNumberStatusDict();
+                //Global._AllTeacherNameIdDictTemp = Utility.GetAllTeacherNameIDDict();
+                //Global._StudentStatusDBDict = Utility.GetStudentStatusDBValDict();
+                //ImportExport.ImportStudentInterViewData isivd = new ImportExport.ImportStudentInterViewData();
+                //isivd.Execute();
             };
 
             // 匯入輔導自訂欄位

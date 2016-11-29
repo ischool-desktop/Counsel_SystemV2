@@ -321,6 +321,16 @@ namespace Counsel_System2.Properties {
         /// <summary>
         ///   查詢類型 System.Byte[] 的當地語系化資源。
         /// </summary>
+        internal static byte[] 學生晤談紀錄篩選 {
+            get {
+                object obj = ResourceManager.GetObject("學生晤談紀錄篩選", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Byte[] 的當地語系化資源。
+        /// </summary>
         internal static byte[] 學生晤談記錄表_新範本 {
             get {
                 object obj = ResourceManager.GetObject("學生晤談記錄表_新範本", resourceCulture);

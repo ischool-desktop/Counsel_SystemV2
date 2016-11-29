@@ -20,6 +20,32 @@ namespace Counsel_System2.DAO
         public string InterviewNo { get; set; }
 
         /// <summary>
+        ///  學年度
+        /// </summary>
+        [Field(Field = "schoolyear", Indexed = false)]
+        public string schoolyear { get; set; }
+
+        /// <summary>
+        ///  學期
+        /// </summary>
+        [Field(Field = "semester", Indexed = false)]
+        public string semester { get; set; }
+
+        ///// <summary>
+        /////  附加檔案
+        ///// </summary>
+        //[Field(Field = "attachment", Indexed = false)]
+        //public string attachment { get; set; }
+
+        /// <summary>
+        ///  記錄人
+        /// </summary>
+        [Field(Field = "author_role", Indexed = false)]
+        public string authorRole { get; set; }
+
+        
+
+        /// <summary>
         /// 學生編號
         /// </summary>
         [Field(Field = "ref_student_id", Indexed = false)]
