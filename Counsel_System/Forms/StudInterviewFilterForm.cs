@@ -124,11 +124,23 @@ namespace Counsel_System2.Forms
                     //日期區間篩選
                     if (isFilterDayBetween)
                     {
-                        if (interviewRecord.InterviewDate.Value < filterDateBegin ||
-                            interviewRecord.InterviewDate >= filterDateEnd)
+                        //2017/1/20 穎驊更新，發現使用者有些晤談紀錄會沒有晤談日期，會造成interviewRecord.InterviewDate.Value 其中的 InterviewDate 變成 nullReference 的狀況爆掉
+                        //因此在這邊處理，若沒有晤談資料沒有晤談日期又有勾選日期區間篩選，因為無法比較日期，直接排除掉此晤談資料
+
+                        if (interviewRecord.InterviewDate == null)
                         {
                             continue;
                         }
+                        else 
+                        {
+                            if (interviewRecord.InterviewDate.Value < filterDateBegin ||
+                                interviewRecord.InterviewDate >= filterDateEnd)
+                            {
+                                continue;
+                            }
+                        
+                        }
+                        
                     }
 
                     //記錄人篩選
@@ -274,8 +286,14 @@ namespace Counsel_System2.Forms
                             row["學年度"] = InterviewRecord.schoolyear;
                             //學期
                             row["學期"] = InterviewRecord.semester;
+
+
+                            //2017/1/20 穎驊更新，發現使用者有些晤談紀錄會沒有晤談日期，會造成interviewRecord.InterviewDate.Value 其中的 InterviewDate 變成 nullReference 的狀況爆掉
+                            // 因此做了例外處理，有日期則顯示日期，沒有則顯示空字串
                             //晤談日期
-                            row["晤談日期"] = InterviewRecord.InterviewDate.Value.ToShortDateString();
+                            row["晤談日期"] = InterviewRecord.InterviewDate.HasValue? InterviewRecord.InterviewDate.Value.ToShortDateString():"";
+
+
                             //晤談時間
                             row["晤談時間"] = InterviewRecord.InterviewTime;
                             //晤談動機
