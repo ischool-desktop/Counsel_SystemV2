@@ -66,6 +66,7 @@ namespace Counsel_System2
                 isqdsqf.ShowDialog();
 
             };
+      
 
             // 測驗
             if (Utility.CheckAddContent(PermissionCode.輔導相關測驗_資料項目))
@@ -161,6 +162,8 @@ namespace Counsel_System2
             // 匯入測驗
             Catalog catalog1b = RoleAclSource.Instance["輔導"]["功能按鈕"];
             catalog1b.Add(new RibbonFeature("K12.Student.StudQuizDataImport", "匯入測驗資料"));
+
+         
 
 
             // 晤談
