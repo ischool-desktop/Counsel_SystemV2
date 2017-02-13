@@ -32,9 +32,11 @@
   <ItemGroup>
     <Reference Include="Aspose.Cells_201402">
       <HintPath>Library\Aspose.Cells_201402.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Campus.DocumentValidator">
       <HintPath>Library\Campus.DocumentValidator.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="DevComponents.DotNetBar2, Version=9.5.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -42,34 +44,44 @@
     </Reference>
     <Reference Include="FISCA">
       <HintPath>Library\FISCA.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="FISCA.Data">
       <HintPath>Library\FISCA.Data.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="FISCA.DSAClient">
       <HintPath>Library\FISCA.DSAClient.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="FISCA.DSAUtil, Version=3.9.0.10, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\FISCA.DSAUtil.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="FISCA.LogAgent">
       <HintPath>Library\FISCA.LogAgent.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="FISCA.Permission">
       <HintPath>Library\FISCA.Permission.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="FISCA.Presentation">
       <HintPath>Library\FISCA.Presentation.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="FISCA.UDT">
       <HintPath>Library\FISCA.UDT.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="K12.Data">
       <HintPath>Library\K12.Data.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="K12.Presentation">
       <HintPath>Library\K12.Presentation.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
