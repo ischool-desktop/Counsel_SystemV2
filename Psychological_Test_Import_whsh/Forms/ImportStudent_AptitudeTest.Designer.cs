@@ -64,6 +64,7 @@
             this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.textBoxX1.Location = new System.Drawing.Point(82, 30);
             this.textBoxX1.Name = "textBoxX1";
+            this.textBoxX1.ReadOnly = true;
             this.textBoxX1.Size = new System.Drawing.Size(163, 25);
             this.textBoxX1.TabIndex = 1;
             // 

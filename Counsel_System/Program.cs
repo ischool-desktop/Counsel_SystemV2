@@ -45,27 +45,30 @@ namespace Counsel_System2
             //輔導->測驗->匯入測驗資料。
             //學生->資料項目->測驗資料。
 
-            RibbonBarItem rbItem1 = MotherForm.RibbonBarItems["學生", "輔導"];// MotherForm.RibbonBarItems["輔導", "測驗"];
-            rbItem1["設定"].Image = Properties.Resources.設定;
-            rbItem1["設定"].Size = RibbonBarButton.MenuButtonSize.Large;
-            rbItem1["設定"].Items["設定心理測驗試別"].Enable = UserAcl.Current["K12.Student.StudQuizDataManager"].Executable;
-            rbItem1["設定"].Items["設定心理測驗試別"].Click += delegate
-            {
-                Forms.QuizForm qf = new Forms.QuizForm();
-                qf.ShowDialog();
 
-            };
+            //2017/2/16 穎驊註解，因應靜文與文華老師溝通後，決議 將設定心理測驗試別、匯入心理測驗 兩功能關閉。
 
-            rbItem1["匯入"].Items["匯入心理測驗"].Enable = UserAcl.Current["K12.Student.StudQuizDataImport"].Executable;
-            rbItem1["匯入"].Items["匯入心理測驗"].Click += delegate
-            {
-                Global._AllStudentNumberStatusIDTemp = Utility.GetAllStudenNumberStatusDict();
-                Global._AllStudentClassSeatNoDictTemp = Utility.GetAllStudentClassSeatNoStatusDict();
-                Global._StudentStatusDBDict = Utility.GetStudentStatusDBValDict();
-                Forms.ImportStudQuizDataSelectQuizNameForm isqdsqf = new Forms.ImportStudQuizDataSelectQuizNameForm();
-                isqdsqf.ShowDialog();
+            //RibbonBarItem rbItem1 = MotherForm.RibbonBarItems["學生", "輔導"];// MotherForm.RibbonBarItems["輔導", "測驗"];
+            //rbItem1["設定"].Image = Properties.Resources.設定;
+            //rbItem1["設定"].Size = RibbonBarButton.MenuButtonSize.Large;
+            //rbItem1["設定"].Items["設定心理測驗試別"].Enable = UserAcl.Current["K12.Student.StudQuizDataManager"].Executable;
+            //rbItem1["設定"].Items["設定心理測驗試別"].Click += delegate
+            //{
+            //    Forms.QuizForm qf = new Forms.QuizForm();
+            //    qf.ShowDialog();
 
-            };
+            //};
+
+            //rbItem1["匯入"].Items["匯入心理測驗"].Enable = UserAcl.Current["K12.Student.StudQuizDataImport"].Executable;
+            //rbItem1["匯入"].Items["匯入心理測驗"].Click += delegate
+            //{
+            //    Global._AllStudentNumberStatusIDTemp = Utility.GetAllStudenNumberStatusDict();
+            //    Global._AllStudentClassSeatNoDictTemp = Utility.GetAllStudentClassSeatNoStatusDict();
+            //    Global._StudentStatusDBDict = Utility.GetStudentStatusDBValDict();
+            //    Forms.ImportStudQuizDataSelectQuizNameForm isqdsqf = new Forms.ImportStudQuizDataSelectQuizNameForm();
+            //    isqdsqf.ShowDialog();
+
+            //};
       
 
             // 測驗
