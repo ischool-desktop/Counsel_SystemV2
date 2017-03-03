@@ -9,6 +9,7 @@ using K12.Presentation;
 using System.Xml.Linq;
 using System.ComponentModel;
 using FISCA.Data;
+using FISCA.UDT;
 using K12.Data;
 using FISCA.Presentation.Controls;
 using System.Windows.Forms;
@@ -23,6 +24,17 @@ namespace Psychological_Test_Import_whsh
 
         public static void Main()
         {
+
+
+            #region 處理UDT Table沒有的問題
+         
+            // 初始化 強迫新增，可以避開 Web第一次使用找不到Table的錯誤
+                AccessHelper _accessHelper = new AccessHelper();
+                _accessHelper.Select<DAO.UDT_Aptitude_Test_Data_Def>("UID = '00000'");
+                 
+            #endregion
+
+
 
             // 匯入測驗(新編多元性向測驗文華高中測驗結果)
             Catalog catalog1b2 = RoleAclSource.Instance["輔導"]["功能按鈕"];

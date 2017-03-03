@@ -237,6 +237,9 @@ namespace Psychological_Test_Import_whsh.Forms
                 }
                 #endregion
 
+                // 錯誤資料List
+                List<string> errorList = new List<string>();
+
                 // 建立班級、座號  對應 StudentID 對照表(使用 ClassIDs 來選取 本次範圍的學生)
                 List<StudentRecord> allStudentList = K12.Data.Student.SelectByClassIDs(target_grade_classID_list);
 
@@ -245,7 +248,7 @@ namespace Psychological_Test_Import_whsh.Forms
 
                 foreach (StudentRecord sr in allStudentList)
                 {
-                    if (sr.Class != null)
+                    if (sr.Class != null && (sr.Status == StudentRecord.StudentStatus.一般 |sr.Status == StudentRecord.StudentStatus.延修))
                     {
                         // 同時具有班級名稱 與座號，才加入對照
                         if (sr.Class.Name != "" && "" + sr.SeatNo != "")
@@ -253,13 +256,20 @@ namespace Psychological_Test_Import_whsh.Forms
                             // key = 班級名稱_座號  ,EX: 一年01班_21號
                             string key = sr.Class.Name + "_" + sr.SeatNo;
 
-                            class_SeatNO_To_StudentID.Add(key, sr.ID);
+                            if (!class_SeatNO_To_StudentID.ContainsKey(key))
+                            {
+                                class_SeatNO_To_StudentID.Add(key, sr.ID);
+                            }
+                            else 
+                            {
+                                errorList.Add("班級:" + sr.Class.Name + "座號:" + sr.SeatNo+"在系統中具有兩筆資料，將導致無法分辨確切學生身分，請確認檢查該資料。");                            
+                            }
+                            
                         }
                     }
                 }
 
-                // 錯誤資料List
-                List<string> errorList = new List<string>();
+                
 
                 // 1.驗證資料
 
