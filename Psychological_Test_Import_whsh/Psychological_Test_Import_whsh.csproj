@@ -96,7 +96,14 @@
   <ItemGroup>
     <Compile Include="DAO\LogTransfer.cs" />
     <Compile Include="DAO\LogValue.cs" />
+    <Compile Include="DAO\UDT_Interest_Test_Data_Def.cs" />
     <Compile Include="DAO\UDT_Aptitude_Test_Data_Def.cs" />
+    <Compile Include="Forms\ImportStudent_InterestTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImportStudent_InterestTest.Designer.cs">
+      <DependentUpon>ImportStudent_InterestTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ImportStudent_AptitudeTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +122,9 @@
     <Folder Include="Library\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\ImportStudent_InterestTest.resx">
+      <DependentUpon>ImportStudent_InterestTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ImportStudent_AptitudeTest.resx">
       <DependentUpon>ImportStudent_AptitudeTest.cs</DependentUpon>
     </EmbeddedResource>
@@ -124,6 +134,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\INT407%28支援樣板格式%29.XLS" />
     <None Include="Resources\新編多元性向測驗文華高中測驗範例樣板.CSV.xlsx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

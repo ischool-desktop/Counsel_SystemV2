@@ -63,6 +63,16 @@ namespace Psychological_Test_Import_whsh.Properties {
         /// <summary>
         ///   查詢類型 System.Byte[] 的當地語系化資源。
         /// </summary>
+        internal static byte[] INT407_支援樣板格式_ {
+            get {
+                object obj = ResourceManager.GetObject("INT407_支援樣板格式_", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Byte[] 的當地語系化資源。
+        /// </summary>
         internal static byte[] 新編多元性向測驗文華高中測驗範例樣板_CSV {
             get {
                 object obj = ResourceManager.GetObject("新編多元性向測驗文華高中測驗範例樣板_CSV", resourceCulture);

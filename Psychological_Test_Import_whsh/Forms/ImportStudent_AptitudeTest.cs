@@ -421,17 +421,17 @@ namespace Psychological_Test_Import_whsh.Forms
                     }
                     if (row.Index >= 5 && "" + cells[row.Index, 0].Value == "" && !row.IsBlank)
                     {
-                        errorList.Add("選擇檔案EXCEL 欄位 於 第" + row.Index + "列 第" + 1 + "行處，沒有班級");
+                        errorList.Add("選擇檔案EXCEL 欄位 於 第" + (row.Index + 1) + "列 第" + 1 + "行處，沒有班級");
                     }
                     if (row.Index >= 5 && "" + cells[row.Index, 1].Value == "" && !row.IsBlank)
                     {
-                        errorList.Add("選擇檔案EXCEL 欄位 於 第" + row.Index + "列 第" + 2 + "行處，沒有座號");
+                        errorList.Add("選擇檔案EXCEL 欄位 於 第" + (row.Index + 1) + "列 第" + 2 + "行處，沒有座號");
                     }
                     if (row.Index >= 5 && "" + cells[row.Index, 0].Value != "" && !row.IsBlank)
                     {
                         if (!classNO_To_ClassName.ContainsKey("" + cells[row.Index, 0].Value))
                         {
-                            errorList.Add("選擇檔案EXCEL 欄位 於 第" + row.Index + "列 第" + 1 + "行處，不存在此班級編號，目前僅支援1~30班級編號。");
+                            errorList.Add("選擇檔案EXCEL 欄位 於 第" + (row.Index + 1) + "列 第" + 1 + "行處，不存在此班級編號，目前僅支援1~30班級編號。");
                         }
 
                     }
@@ -448,7 +448,7 @@ namespace Psychological_Test_Import_whsh.Forms
 
                         if (!class_SeatNO_To_StudentID.ContainsKey(key))
                         {
-                            errorList.Add("第" + (row.Index + 1) + "行，該班級座號的學生並不存在於本系統中，請檢察");
+                            errorList.Add("第" + (row.Index + 1) + "列，該班級座號的學生並不存在於本系統中，請檢察");
                         }
                     }
 
