@@ -306,9 +306,8 @@ namespace Counsel_System2
                 else
                     FISCA.Presentation.Controls.MsgBox.Show("請選擇學生.");
             };
+         
 
-
-            
             RibbonBarItem rbRptItem1 = MotherForm.RibbonBarItems["學生", "輔導"];
             rbRptItem1["報表"].Image = Properties.Resources.Report;
             rbRptItem1["報表"].Size = RibbonBarButton.MenuButtonSize.Large;
