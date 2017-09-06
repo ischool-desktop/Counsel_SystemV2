@@ -87,10 +87,10 @@ namespace IdentityReport_whsh
                 if ((pr.Father.Nationality !="中華民國" && pr.Father.Nationality != "台灣") || (pr.Mother.Nationality != "中華民國" && pr.Mother.Nationality != "台灣"))
                 {
                     cells[row_counter, 0].Value = pr.Student.StudentNumber;
-                    cells[row_counter, 3].Value = pr.Student.Class.Name;
-                    cells[row_counter, 4].Value = pr.Student.SeatNo;
-                    cells[row_counter, 1].Value = pr.Student.Name;
-                    cells[row_counter, 2].Value = pr.Student.Gender;                                        
+                    cells[row_counter, 1].Value = pr.Student.Class !=null? pr.Student.Class.Name:"" ;
+                    cells[row_counter, 2].Value = pr.Student.SeatNo;
+                    cells[row_counter, 3].Value = pr.Student.Name;
+                    cells[row_counter, 4].Value = pr.Student.Gender;                                        
                     cells[row_counter, 5].Value = pr.Father.Name;
                     cells[row_counter, 6].Value = pr.Mother.Name;
 

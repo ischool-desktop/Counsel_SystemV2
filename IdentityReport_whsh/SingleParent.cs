@@ -100,7 +100,7 @@ namespace IdentityReport_whsh
                                     cells[row_counter, 0].Value = sr.StudentNumber;
                                     cells[row_counter, 1].Value = sr.Name;
                                     cells[row_counter, 2].Value = sr.Gender;
-                                    cells[row_counter, 3].Value = sr.Class.Name;
+                                    cells[row_counter, 3].Value = sr.Class != null? sr.Class.Name:"";
                                     cells[row_counter, 4].Value = sr.SeatNo;
                                     cells[row_counter, 5].Value = "" + dr["g" + sr.Class.GradeYear];
 
