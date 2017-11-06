@@ -530,9 +530,10 @@ namespace AfterGratuationStatics_whsh.Forms
                         }
                     }
                 }
-            } 
+            }
             #endregion
 
+            wb.CalculateFormula();
 
             e.Result = wb;
         }

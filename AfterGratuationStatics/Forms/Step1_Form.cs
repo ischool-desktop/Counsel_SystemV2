@@ -275,6 +275,8 @@ namespace AfterGratuationStatics_whsh.Forms
 
             wb.Worksheets["學校清單"].MoveTo(0);
 
+            wb.CalculateFormula();
+
 
             e.Result = wb;
         }

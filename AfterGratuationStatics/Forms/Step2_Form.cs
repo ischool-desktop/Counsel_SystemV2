@@ -249,7 +249,9 @@ namespace AfterGratuationStatics_whsh.Forms
                 {
                     MsgBox.Show(ex.Message, "錯誤", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 }
-            }                        
+            }
+
+            wb_school_list.CalculateFormula();
 
             e.Result = wb_school_list;
         }
