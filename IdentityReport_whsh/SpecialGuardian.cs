@@ -80,11 +80,19 @@ namespace IdentityReport_whsh
             int row_counter = 2;
             int success_count = 0;
 
+            
+
+            //填寫表頭
+            cells[0, 0].Value = "市立臺中文華高級中學 \n " + K12.Data.School.DefaultSchoolYear +"學年度第 "+ K12.Data.School.DefaultSemester + "學期 特殊監護人學生一覽表";
+
             foreach (K12.Data.ParentRecord pr in pr_list)
             {
 
                 //當監護人 身分字號 與父、母 身分字號皆不同時，判定為特殊監護
-                if (pr.Custodian.IDNumber != pr.Father.IDNumber && pr.Custodian.IDNumber != pr.Mother.IDNumber)
+                //if (pr.Custodian.IDNumber != pr.Father.IDNumber && pr.Custodian.IDNumber != pr.Mother.IDNumber)
+
+                // 2017/12/15 穎驊新增，因應 文華反映需求調整， 日後將以 監護人姓名 與 父、母 姓名作比對
+                if (pr.Custodian.Name != pr.Father.Name && pr.Custodian.Name != pr.Mother.Name)
                 {
                     cells[row_counter, 0].Value = pr.Student.StudentNumber;
                     cells[row_counter, 1].Value = pr.Student.Name;

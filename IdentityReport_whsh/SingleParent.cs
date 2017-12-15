@@ -95,7 +95,11 @@ namespace IdentityReport_whsh
                         {
                             if (sr.Class.GradeYear != null)
                             {
-                                if ("" + dr["g" + sr.Class.GradeYear] == "離婚" || "" + dr["g" + sr.Class.GradeYear] == "單親-父" || "" + dr["g" + sr.Class.GradeYear] == "單親-母" || "" + dr["g" + sr.Class.GradeYear] == "單親-其他親屬")
+                                
+                                //if ("" + dr["g" + sr.Class.GradeYear] == "離婚" || "" + dr["g" + sr.Class.GradeYear] == "單親-父" || "" + dr["g" + sr.Class.GradeYear] == "單親-母" || "" + dr["g" + sr.Class.GradeYear] == "單親-其他親屬")
+
+                                // 2017/12/15 穎驊新增，因應 文華反映需求調整， 日後將以 離婚、單親判斷
+                                if ("" + dr["g" + sr.Class.GradeYear] == "離婚" || "" + dr["g" + sr.Class.GradeYear] == "單親" )
                                 {
                                     cells[row_counter, 0].Value = sr.StudentNumber;
                                     cells[row_counter, 1].Value = sr.Name;
