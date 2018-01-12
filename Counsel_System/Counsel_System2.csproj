@@ -301,8 +301,10 @@
     <Compile Include="DAO\AB_StudDateString.cs" />
     <Compile Include="DAO\AB_StudSemsDomainScore.cs" />
     <Compile Include="DAO\AB_StudText.cs" />
+    <Compile Include="DAO\AllCounselCaseStaticticsRecord.cs" />
     <Compile Include="DAO\AnswerPkey.cs" />
     <Compile Include="DAO\CareRecordItemManager.cs" />
+    <Compile Include="DAO\AllCounselStaticticsTeacherRecord.cs" />
     <Compile Include="DAO\DataGridViewComboBoxExColumn.cs" />
     <Compile Include="DAO\DocTemplateTransfer.cs" />
     <Compile Include="DAO\DocumentMerge.cs" />
@@ -512,6 +514,12 @@
     </Compile>
     <Compile Include="Forms\StudInterviewDataReportForm.Designer.cs">
       <DependentUpon>StudInterviewDataReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AllCounselStatisticsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AllCounselStatisticsForm.Designer.cs">
+      <DependentUpon>AllCounselStatisticsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\StudInterviewFilterForm.cs">
       <SubType>Form</SubType>
@@ -734,6 +742,9 @@
     <EmbeddedResource Include="Forms\StudInterviewDataReportForm.resx">
       <DependentUpon>StudInterviewDataReportForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AllCounselStatisticsForm.resx">
+      <DependentUpon>AllCounselStatisticsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\StudInterviewFilterForm.resx">
       <DependentUpon>StudInterviewFilterForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -821,6 +832,7 @@
     <None Include="Resources\學生晤談紀錄篩選.xls" />
     <None Include="Resources\學生晤談記錄表_新範本.docx" />
     <None Include="Resources\家庭聯繫紀錄篩選.xls" />
+    <None Include="Resources\輔導案量統計空白樣板.xls" />
     <None Include="Resources\輔導資料紀錄表範本.doc" />
     <None Include="Templates\晤談紀錄簽認表樣版.xls" />
     <None Include="Templates\綜合表現紀錄表-樣版.doc" />

@@ -79,9 +79,7 @@ namespace Counsel_System2.Properties {
         ///      &lt;Qs&gt;
         ///        &lt;!-- 題目清單 --&gt;
         ///        &lt;Q type=&quot;combobox&quot; name=&quot;AAA10000001&quot; label=&quot;&quot; /&gt;
-        ///        &lt;!-- 題目 --&gt;
-        ///      &lt;/Qs&gt;
-        ///  [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
+        ///        &lt;!-- 題目 [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
         /// </summary>
         internal static string ABCardTemplate {
             get {
@@ -95,8 +93,7 @@ namespace Counsel_System2.Properties {
         ///  &lt;Item GroupName=&quot;1.本人概況&quot; QuestionName=&quot;血型&quot; Key=&quot;AAA10000001&quot; AType=&quot;&quot; TableName=&quot;本人概況&quot; ColumnName=&quot;血型&quot; /&gt;
         ///  &lt;Item GroupName=&quot;1.本人概況&quot; QuestionName=&quot;宗教&quot; Key=&quot;AAA10000002&quot; AType=&quot;&quot; TableName=&quot;本人概況&quot; ColumnName=&quot;宗教&quot; /&gt;
         ///  &lt;Item GroupName=&quot;1.本人概況&quot; QuestionName=&quot;身高一上&quot; Key=&quot;AAA10000005&quot; AType=&quot;&quot; TableName=&quot;本人概況&quot; ColumnName=&quot;身高一上&quot; /&gt;
-        ///  &lt;Item GroupName=&quot;1.本人概況&quot; QuestionName=&quot;身高二上&quot; Key=&quot;AAA10000006&quot; AType=&quot;&quot; TableName=&quot;本人概況&quot; ColumnName=&quot;身高二上&quot; /&gt;
-        ///   [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
+        ///  &lt;Item GroupName=&quot;1.本人概況&quot; QuestionName=&quot;身高二上&quot; Key=&quot;AAA10000006&quot; AType=&quot;&quot; TableName=&quot;本人概況&quot; ColumnName=&quot;身高二上&quot;  [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
         /// </summary>
         internal static string ABCardTransferDataOldMapping {
             get {
@@ -142,7 +139,7 @@ namespace Counsel_System2.Properties {
         ///    &lt;/Field&gt;
         ///    
         ///    &lt;Field Required=&quot;True&quot; Name=&quot;學號&quot;&gt;
-        ///      &lt;Validate AutoCorrect=&quot;False&quot; Description=&quot;「學號」不允許空白。&quot; ErrorTyp [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
+        ///      &lt;Validate AutoCorrect=&quot;False&quot; Description=&quot;「學號 [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
         /// </summary>
         internal static string ImportStudentCareRecordVal {
             get {
@@ -166,9 +163,7 @@ namespace Counsel_System2.Properties {
         ///
         ///    &lt;Field Required=&quot;True&quot; Name=&quot;學號&quot;&gt;
         ///      &lt;Validate AutoCorrect=&quot;False&quot; Description=&quot;「學號」不允許空白。&quot; ErrorType=&quot;Error&quot; Validator=&quot;不可空白&quot; When=&quot;&quot; /&gt;
-        ///    &lt;/Field&gt;
-        ///
-        ///    &lt;Field R [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
+        ///    &lt;/Field [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
         /// </summary>
         internal static string ImportStudentCaseMeetingRecordVal {
             get {
@@ -192,9 +187,7 @@ namespace Counsel_System2.Properties {
         ///
         ///    &lt;Field Required=&quot;True&quot; Name=&quot;學號&quot;&gt;
         ///      &lt;Validate AutoCorrect=&quot;False&quot; Description=&quot;「學號」不允許空白。&quot; ErrorType=&quot;Error&quot; Validator=&quot;不可空白&quot; When=&quot;&quot; /&gt;
-        ///    &lt;/Field&gt;
-        ///
-        ///    &lt;Fiel [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
+        ///    &lt;/Fi [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
         /// </summary>
         internal static string ImportStudentInterViewDataVal {
             get {
@@ -219,7 +212,7 @@ namespace Counsel_System2.Properties {
         ///      &lt;Validate AutoCorrect=&quot;False&quot; Description=&quot;「學號」不允許空白。&quot; ErrorType=&quot;Error&quot; Validator=&quot;不可空白&quot; When=&quot;&quot; /&gt;
         ///    &lt;/Field&gt;
         ///
-        ///    &lt;Field Required=&quot;True&quot; Name=&quot;狀態 [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
+        ///    &lt;Field Required [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
         /// </summary>
         internal static string ImportStudentUserDefDataVal {
             get {
@@ -242,8 +235,7 @@ namespace Counsel_System2.Properties {
         ///    &lt;Field Required=&quot;True&quot; Name=&quot;班級&quot;&gt;
         ///      &lt;Validate AutoCorrect=&quot;False&quot; Description=&quot;「班級」不允許空白。&quot; ErrorType=&quot;Error&quot; Validator=&quot;不可空白&quot; When=&quot;&quot; /&gt;
         ///    &lt;/Field&gt;
-        ///    &lt;Field Required=&quot;True&quot; Name=&quot;座號&quot;&gt;
-        ///     [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
+        ///    &lt;Field Required=&quot;True&quot; N [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
         /// </summary>
         internal static string ImportStudQuizDataVa_CSeatNo {
             get {
@@ -266,7 +258,7 @@ namespace Counsel_System2.Properties {
         ///      &lt;Validate AutoCorrect=&quot;False&quot; Description=&quot;「學號」不允許空白。&quot; ErrorType=&quot;Error&quot; Validator=&quot;不可空白&quot; When=&quot;&quot; /&gt;
         ///    &lt;/Field&gt;
         ///    &lt;Field Required=&quot;True&quot; Name=&quot;狀態&quot;&gt;
-        ///      &lt;Validate AutoCorrect=&quot;F [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
+        ///      &lt;Validate  [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
         /// </summary>
         internal static string ImportStudQuizDataVal_SNum {
             get {
@@ -300,7 +292,7 @@ namespace Counsel_System2.Properties {
         ///      &lt;item key=&quot;A&quot; has_remark=&quot;False&quot; /&gt;
         ///      &lt;item key=&quot;B&quot; has_remark=&quot;False&quot; /&gt;
         ///      &lt;item key=&quot;O&quot; has_remark=&quot;False&quot; /&gt;
-        ///      &lt;item key=&quot;AB&quot; has_r [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
+        ///      &lt;item [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
         /// </summary>
         internal static string Questions {
             get {
@@ -385,6 +377,16 @@ namespace Counsel_System2.Properties {
             get {
                 object obj = ResourceManager.GetObject("設定", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Byte[] 的當地語系化資源。
+        /// </summary>
+        internal static byte[] 輔導案量統計空白樣板 {
+            get {
+                object obj = ResourceManager.GetObject("輔導案量統計空白樣板", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

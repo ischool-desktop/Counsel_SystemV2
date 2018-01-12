@@ -274,6 +274,12 @@ namespace Counsel_System2
             Catalog catalog26 = RoleAclSource.Instance["學生"]["功能按鈕"];
             catalog26.Add(new RibbonFeature("K12.Student.CounselStudentExport_home_visitfilter", "家庭聯繫紀錄篩選"));
 
+
+            // 列印輔導案量統計
+            Catalog catalog27 = RoleAclSource.Instance["輔導"]["功能按鈕"];
+            catalog27.Add(new RibbonFeature("AllCounselStatistics", "輔導案量統計"));
+
+
             //RibbonBarItem rbRptItem = MotherForm.RibbonBarItems["學生", "輔導"];
             //rbRptItem["報表"].Image = Properties.Resources.Report;
             //rbRptItem["報表"].Size = RibbonBarButton.MenuButtonSize.Large;
@@ -289,7 +295,7 @@ namespace Counsel_System2
             //        FISCA.Presentation.Controls.MsgBox.Show("請選擇學生.");
             //};
 
-            
+
             RibbonBarItem rbRptItemABNew = MotherForm.RibbonBarItems["學生", "輔導"];
             rbRptItemABNew["報表"].Image = Properties.Resources.Report;
             rbRptItemABNew["報表"].Size = RibbonBarButton.MenuButtonSize.Large;
@@ -357,6 +363,15 @@ namespace Counsel_System2
                 }
                 else
                     FISCA.Presentation.Controls.MsgBox.Show("請選擇教師.");
+            };
+
+            // 2018/1/11 穎驊 依據文華在2017/7 的需求文件，補齊了 輔導案量統計功能
+            rbRptItem3["報表"]["輔導案量統計"].Enable = UserAcl.Current["AllCounselStatistics"].Executable;
+            rbRptItem3["報表"]["輔導案量統計"].Click += delegate
+            {
+                Forms.AllCounselStatisticsForm asf = new Forms.AllCounselStatisticsForm();
+
+                asf.Show();
             };
 
             // 刪除學生測驗資料
