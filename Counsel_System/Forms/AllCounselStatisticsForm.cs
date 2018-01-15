@@ -23,9 +23,14 @@ namespace Counsel_System2.Forms
         private string defaultYear;
         private string defaultSemester;
 
+        //學生ID 與科別的對照
+        private Dictionary<string, string> stuIdToDeptDict = new Dictionary<string, string>();
+
+        //學生ID 與年級的對照
+        private Dictionary<string, string> stuIdToGradeDict = new Dictionary<string, string>();
+
         // 欄數與英文的對照
         private Dictionary<int, string> colLetter = new Dictionary<int, string>();
-
 
         // 老師ID與其下所有"有晤談或是聯繫"的學生IDList
         private Dictionary<string, List<int>> teacher_studentList_Dict = new Dictionary<string, List<int>>();
@@ -34,14 +39,43 @@ namespace Counsel_System2.Forms
         private Dictionary<string, DAO.AllCounselCaseStaticticsRecord> counselCase_Dict = new Dictionary<string, DAO.AllCounselCaseStaticticsRecord>();
 
 
+        // 輔導老師與其下所有 訪談資料
+        private Dictionary<string, DAO.CounselTeacherHomeVisitWaysRecord> counselTeacherHomeVisit_Dict = new Dictionary<string, DAO.CounselTeacherHomeVisitWaysRecord>();
+
+        // 輔導老師與其下所有 晤談資料
+        private Dictionary<string, DAO.CounselTeacherInterviewWaysRecord> counselTeacherInterview_Dict = new Dictionary<string, DAO.CounselTeacherInterviewWaysRecord>();
+
+        // 老師(高一、高二、高三)與其下所有 訪談資料
+        private Dictionary<string, DAO.TeacherHomeVisitWaysRecord> TeacherHomeVisit_Dict = new Dictionary<string, DAO.TeacherHomeVisitWaysRecord>();
+
+        // 老師(高一、高二、高三)與其下所有 晤談資料
+        private Dictionary<string, DAO.CounselTeacherInterviewRecord> TeacherInterview_Dict = new Dictionary<string, DAO.CounselTeacherInterviewRecord>();
+
+
+        //所有的輔導案件類別
+        private List<string> counselTypeKindList = new List<string>();
+
+        //所有的輔導老師 訪談方式
+        private List<string> counselTeacherHomeVisitWaysList = new List<string>();
+
+        //所有的輔導老師 晤談方式
+        private List<string> counselTeacherInterviewWaysList = new List<string>();
+
+        //所有的老師(高一、高二、高三) 訪談方式
+        private List<string> TeacherHomeVisitWaysList = new List<string>();
+
+        //所有的老師(高一、高二、高三) 晤談方式
+        private List<string> TeacherInterviewWaysList = new List<string>();
+
+        //所有的年級 
+        private List<string> gradeYearList = new List<string>();
+
 
         public AllCounselStatisticsForm()
         {
-
-
             InitializeComponent();
 
-            List<string> counselTypeKindList = new List<string>();
+            
             counselTypeKindList.Add("家人議題");
             counselTypeKindList.Add("違規行為");
             counselTypeKindList.Add("心理困擾");
@@ -60,10 +94,19 @@ namespace Counsel_System2.Forms
             counselTypeKindList.Add("法定通報-家暴(18 歲以上)");
             counselTypeKindList.Add("其他(含生活關懷)");
 
+            //另外補上老師身分 (與輔導案例接近的分類)
+            counselTypeKindList.Add("班導師");
+            counselTypeKindList.Add("任輔老師");
+            counselTypeKindList.Add("輔導老師");
+
             //將輔導案例加入字典
             foreach (string counselcase in counselTypeKindList)
             {
                 counselCase_Dict.Add(counselcase, new DAO.AllCounselCaseStaticticsRecord());
+
+                //建立 其子字典
+                counselCase_Dict[counselcase].CaseStaticsPeopleCountDict = new Dictionary<string, int>();
+                counselCase_Dict[counselcase].CaseStaticsPeopleDict = new Dictionary<string, List<string>>();
             }
 
             List<string> authorRoleList = new List<string>();
@@ -75,6 +118,33 @@ namespace Counsel_System2.Forms
             defaultYear = K12.Data.School.DefaultSchoolYear;
             defaultSemester = K12.Data.School.DefaultSemester;
 
+
+            //建立 所有的輔導老師 訪談方式 
+            // 2017/1/15 穎驊註記， 訪談為 電話連絡，而非 電話 ， 先暫時寫死，未來要能夠動態支援顯示每次不同的方式
+            counselTeacherHomeVisitWaysList.Add("電話聯絡");
+            counselTeacherHomeVisitWaysList.Add("家庭訪問");
+            counselTeacherHomeVisitWaysList.Add("家長座談");
+            counselTeacherHomeVisitWaysList.Add("個別約談家長");
+            counselTeacherHomeVisitWaysList.Add("其他");
+
+            //建立 所有的輔導老師 晤談方式
+            counselTeacherInterviewWaysList.Add("電話");
+            counselTeacherInterviewWaysList.Add("面談");
+
+            //建立 所有的老師老師(高一、高二、高三) 訪談方式 
+            // 2017/1/15 穎驊註記， 訪談為 電話連絡，而非 電話 ， 先暫時寫死，未來要能夠動態支援顯示每次不同的方式
+            TeacherHomeVisitWaysList.Add("電話聯絡");
+            TeacherHomeVisitWaysList.Add("家庭訪問");
+            TeacherHomeVisitWaysList.Add("家長座談");
+            TeacherHomeVisitWaysList.Add("個別約談家長");
+            TeacherHomeVisitWaysList.Add("其他");
+
+            TeacherInterviewWaysList.Add("電話");
+            TeacherInterviewWaysList.Add("面談");
+
+            gradeYearList.Add("1");
+            gradeYearList.Add("2");
+            gradeYearList.Add("3");
 
             #region 建立行數 英文對照表
             // 建立行數 英文對照表
@@ -143,12 +213,19 @@ namespace Counsel_System2.Forms
                 string strSQL = "SELECT class_name,grade_year,class.ref_teacher_id,class.status,display_order,ref_dept_id,teacher.teacher_name,dept.name AS dept_name  FROM class INNER JOIN teacher ON  class.ref_teacher_id=teacher.id INNER JOIN dept ON class.ref_dept_id =dept.id";
                 DataTable dt_class = hepler.Select(strSQL);
 
+                //抓班級 年級、科別、學生的對應  
+                strSQL = "SELECT student.id,student.name,student.status,student.ref_class_id,class_name,dept.name AS dept_name,class.grade_year FROM student INNER JOIN class ON student.ref_class_id=class.id INNER JOIN dept ON class.ref_dept_id =dept.id";
+                DataTable dt_student = hepler.Select(strSQL);
 
+                //抓系統內的輔導老師
+                strSQL = "select distinct teacher.id as id1,tag_teacher.id as id2,teacher.teacher_name,teacher.nickname,tag.name,tag.prefix from teacher inner join tag_teacher on teacher.id=tag_teacher.ref_teacher_id inner join tag on tag_teacher.ref_tag_id=tag.id where tag.prefix='輔導' and tag.name='輔導老師';";
+                DataTable dt_counselTeacher = hepler.Select(strSQL);
 
                 List<DAO.AllCounselStaticticsTeacherRecord> CounselTeacherList_grade1 = new List<DAO.AllCounselStaticticsTeacherRecord>();
                 List<DAO.AllCounselStaticticsTeacherRecord> CounselTeacherList_grade2 = new List<DAO.AllCounselStaticticsTeacherRecord>();
                 List<DAO.AllCounselStaticticsTeacherRecord> CounselTeacherList_grade3 = new List<DAO.AllCounselStaticticsTeacherRecord>();
 
+                //整理導師班級
                 foreach (DataRow dr in dt_class.Rows)
                 {
                     DAO.AllCounselStaticticsTeacherRecord AllcounselTeacherRec = new DAO.AllCounselStaticticsTeacherRecord();
@@ -188,6 +265,153 @@ namespace Counsel_System2.Forms
                 CounselTeacherList_grade1.Sort((x, y) => { return x.ClassDisplayOrder.CompareTo(y.ClassDisplayOrder); });
                 CounselTeacherList_grade2.Sort((x, y) => { return x.ClassDisplayOrder.CompareTo(y.ClassDisplayOrder); });
                 CounselTeacherList_grade3.Sort((x, y) => { return x.ClassDisplayOrder.CompareTo(y.ClassDisplayOrder); });
+
+
+                //整理學生科別
+                foreach (DataRow dr in dt_student.Rows)
+                {
+                    //加入 [學生ID ，科別]
+                    stuIdToDeptDict.Add(dr[0].ToString(), dr[5].ToString());
+
+                    //加入 [學生ID ，年級]
+                    stuIdToGradeDict.Add(dr[0].ToString(), dr[6].ToString());
+
+                }
+
+
+                //整理輔導老師_訪談對照
+                foreach (DataRow dr in dt_counselTeacher.Rows)
+                {
+                    DAO.CounselTeacherHomeVisitWaysRecord record = new DAO.CounselTeacherHomeVisitWaysRecord();
+
+                    record.CounselTeacherName = dr[2].ToString();
+
+                    record.WaysStaticsPeopleDict = new Dictionary<string, List<string>>();
+
+                    //依序加入 訪談方式種類
+                    foreach (string ways in counselTeacherHomeVisitWaysList)
+                    {
+                        record.WaysStaticsPeopleDict.Add(ways, new List<string>());
+                    }
+
+                    record.WaysStaticsPeopleCountDict = new Dictionary<string, int>();
+
+                    //依序加入 訪談方式種類
+                    foreach (string ways in counselTeacherHomeVisitWaysList)
+                    {
+                        record.WaysStaticsPeopleCountDict.Add(ways, 0);
+                    }
+
+                    //加入 [輔導老師ID ，資料]
+                    counselTeacherHomeVisit_Dict.Add(dr[0].ToString(), record);
+                }
+
+
+                //整理輔導老師_晤談對照
+                foreach (DataRow dr in dt_counselTeacher.Rows)
+                {
+                    DAO.CounselTeacherInterviewWaysRecord record = new DAO.CounselTeacherInterviewWaysRecord();
+
+                    record.CounselTeacherName = dr[2].ToString();
+
+                    record.WaysStaticsPeopleDict = new Dictionary<string, List<string>>();
+
+                    //依序加入 晤談方式種類
+                    foreach (string ways in counselTeacherInterviewWaysList)
+                    {
+                        record.WaysStaticsPeopleDict.Add(ways, new List<string>());
+                    }
+
+                    record.WaysStaticsPeopleCountDict = new Dictionary<string, int>();
+
+                    //依序加入 晤談方式種類
+                    foreach (string ways in counselTeacherInterviewWaysList)
+                    {
+                        record.WaysStaticsPeopleCountDict.Add(ways, 0);
+                    }
+
+                    //加入 [輔導老師ID ，資料]
+                    counselTeacherInterview_Dict.Add(dr[0].ToString(), record);
+
+                    
+                }
+
+
+                // 整理老師(高一、高二、高三)_訪談對照
+                foreach (string grade in gradeYearList)
+                {
+                    DAO.TeacherHomeVisitWaysRecord record = new DAO.TeacherHomeVisitWaysRecord();
+
+                    if (grade == "1")
+                    {
+                        record.CounselTeacherName = "高一導";
+                    }
+                    if (grade == "2")
+                    {
+                        record.CounselTeacherName = "高二導";
+                    }
+                    if (grade == "3")
+                    {
+                        record.CounselTeacherName = "高三導";
+                    }
+
+                    record.WaysStaticsPeopleDict = new Dictionary<string, List<string>>();
+
+                    //依序加入 訪談方式種類
+                    foreach (string ways in TeacherHomeVisitWaysList)
+                    {
+                        record.WaysStaticsPeopleDict.Add(ways, new List<string>());
+                    }
+
+                    record.WaysStaticsPeopleCountDict = new Dictionary<string, int>();
+
+                    //依序加入 訪談方式種類
+                    foreach (string ways in TeacherHomeVisitWaysList)
+                    {
+                        record.WaysStaticsPeopleCountDict.Add(ways, 0);
+                    }
+
+                    //加入 [輔導老師ID ，資料]
+                    TeacherHomeVisit_Dict.Add(grade, record);
+                }
+                
+                // 整理老師(高一、高二、高三)_晤談對照
+                foreach (string grade in gradeYearList)
+                {
+                    DAO.CounselTeacherInterviewRecord record = new DAO.CounselTeacherInterviewRecord();
+
+                    if (grade == "1")
+                    {
+                        record.CounselTeacherName = "高一導";
+                    }
+                    if (grade == "2")
+                    {
+                        record.CounselTeacherName = "高二導";
+                    }
+                    if (grade == "3")
+                    {
+                        record.CounselTeacherName = "高三導";
+                    }
+
+                    record.WaysStaticsPeopleDict = new Dictionary<string, List<string>>();
+
+                    //依序加入 訪談方式種類
+                    foreach (string ways in TeacherHomeVisitWaysList)
+                    {
+                        record.WaysStaticsPeopleDict.Add(ways, new List<string>());
+                    }
+
+                    record.WaysStaticsPeopleCountDict = new Dictionary<string, int>();
+
+                    //依序加入 訪談方式種類
+                    foreach (string ways in TeacherHomeVisitWaysList)
+                    {
+                        record.WaysStaticsPeopleCountDict.Add(ways, 0);
+                    }
+
+                    //加入 [輔導老師ID ，資料]
+                    TeacherInterview_Dict.Add(grade, record);
+                }
 
 
 
@@ -271,6 +495,7 @@ namespace Counsel_System2.Forms
                 //晤談紀錄
                 foreach (KeyValuePair<string, List<DAO.UDT_CounselStudentInterviewRecordDef>> record in dicStudentInterviewRecord)
                 {
+                    #region 導師統計(年級)
                     //一年級老師
                     foreach (DAO.AllCounselStaticticsTeacherRecord teacherRecord in CounselTeacherList_grade1)
                     {
@@ -304,15 +529,14 @@ namespace Counsel_System2.Forms
                             teacherRecord.CounselPeopleCount += record.Value.Count();
                         }
                     }
+                    #endregion
 
+                    #region 輔導案件類別
+                    // 輔導案件類別
                     foreach (DAO.UDT_CounselStudentInterviewRecordDef interviewRecord in record.Value)
                     {
-                        if (counselCase_Dict.ContainsKey(interviewRecord.CounselTypeKind))
-                        {
 
-
-                        }
-
+                        #region 解析輔導類型Xml
                         XmlDocument doc3 = new XmlDocument();
                         //幫忙加根目錄
                         string xmlContent3 = "<root>" + interviewRecord.CounselTypeKind + "</root>";
@@ -320,43 +544,195 @@ namespace Counsel_System2.Forms
                         XmlNode newNode3 = doc3.DocumentElement;
                         doc3.AppendChild(newNode3);
                         XElement xmlabs3 = XElement.Parse(doc3.OuterXml);
-                        string CounselTypeKind = "";
-                        string CounselTypeKind_for_basic = "";
 
                         foreach (XElement abs in xmlabs3.Elements("Item"))
                         {
+                            string CounselTypeKind_for_basic = "";
                             CounselTypeKind_for_basic += abs.Attribute("name").Value;
-                            if (abs.Attribute("name").Value == "其他")
-                            {
-                                if (abs.Attribute("remark") != null)
-                                    CounselTypeKind_for_basic += ":" + abs.Attribute("remark").Value;
-                            }
-                            if (abs != xmlabs3.LastNode)
-                            {
-                                CounselTypeKind_for_basic += "、";
-                            }
 
-
-                            CounselTypeKind = abs.Attribute("name").Value;
-                            if (abs.Attribute("name").Value == "其他")
+                            //藉由查表，把輔導案件 以類型、 科別分類
+                            if (counselCase_Dict.ContainsKey(CounselTypeKind_for_basic))
                             {
-                                if (abs.Attribute("remark") != null)
-                                    CounselTypeKind += ":" + abs.Attribute("remark").Value;
-                            }
-                           
+                                //人次
+                                //沒有的話，就新增。
+                                if (!counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleCountDict.ContainsKey(stuIdToDeptDict["" + interviewRecord.StudentID]))
+                                {
+                                    counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleCountDict.Add(stuIdToDeptDict["" + interviewRecord.StudentID], 1);
 
+                                }
+                                else
+                                {   //若有的話 就加一
+                                    counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleCountDict[stuIdToDeptDict["" + interviewRecord.StudentID]]++;
+
+                                }
+
+                                //人數
+                                //沒有的話，就新增。
+                                if (!counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleDict.ContainsKey(stuIdToDeptDict["" + interviewRecord.StudentID]))
+                                {
+                                    counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleDict.Add(stuIdToDeptDict["" + interviewRecord.StudentID], new List<string>());
+
+                                    if (!counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleDict[stuIdToDeptDict["" + interviewRecord.StudentID]].Contains("" + interviewRecord.StudentID))
+                                    {
+                                        counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleDict[stuIdToDeptDict["" + interviewRecord.StudentID]].Add("" + interviewRecord.StudentID);
+                                    }
+                                }
+                                else
+                                {
+                                    if (!counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleDict[stuIdToDeptDict["" + interviewRecord.StudentID]].Contains("" + interviewRecord.StudentID))
+                                    {
+                                        counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleDict[stuIdToDeptDict["" + interviewRecord.StudentID]].Add("" + interviewRecord.StudentID);
+                                    }
+                                }
+                            }
                         }
+                        #endregion
+
+                        #region 老師身分類別
+                        //藉由查表，把輔導案件 以類型、 科別分類
+                        if (counselCase_Dict.ContainsKey(interviewRecord.authorRole))
+                        {
+                            //人次
+                            //沒有的話，就新增。
+                            if (!counselCase_Dict[interviewRecord.authorRole].CaseStaticsPeopleCountDict.ContainsKey(stuIdToDeptDict["" + interviewRecord.StudentID]))
+                            {
+                                counselCase_Dict[interviewRecord.authorRole].CaseStaticsPeopleCountDict.Add(stuIdToDeptDict["" + interviewRecord.StudentID], 1);
+
+                            }
+                            else
+                            {   //若有的話 就加一
+                                counselCase_Dict[interviewRecord.authorRole].CaseStaticsPeopleCountDict[stuIdToDeptDict["" + interviewRecord.StudentID]]++;
+
+                            }
+
+                            //人數
+                            //沒有的話，就新增。
+                            if (!counselCase_Dict[interviewRecord.authorRole].CaseStaticsPeopleDict.ContainsKey(stuIdToDeptDict["" + interviewRecord.StudentID]))
+                            {
+                                counselCase_Dict[interviewRecord.authorRole].CaseStaticsPeopleDict.Add(stuIdToDeptDict["" + interviewRecord.StudentID], new List<string>());
+
+                                if (!counselCase_Dict[interviewRecord.authorRole].CaseStaticsPeopleDict[stuIdToDeptDict["" + interviewRecord.StudentID]].Contains("" + interviewRecord.StudentID))
+                                {
+                                    counselCase_Dict[interviewRecord.authorRole].CaseStaticsPeopleDict[stuIdToDeptDict["" + interviewRecord.StudentID]].Add("" + interviewRecord.StudentID);
+                                }
+                            }
+                            else
+                            {
+                                if (!counselCase_Dict[interviewRecord.authorRole].CaseStaticsPeopleDict[stuIdToDeptDict["" + interviewRecord.StudentID]].Contains("" + interviewRecord.StudentID))
+                                {
+                                    counselCase_Dict[interviewRecord.authorRole].CaseStaticsPeopleDict[stuIdToDeptDict["" + interviewRecord.StudentID]].Add("" + interviewRecord.StudentID);
+                                }
+                            }
+                        }
+                        #endregion
 
                     }
+                    #endregion
 
 
                     
 
+                    #region 輔導教師統計
+                    // 輔導案件類別
+                    foreach (DAO.UDT_CounselStudentInterviewRecordDef interviewRecord in record.Value)
+                    {
+                        #region 輔導老師身分類別
+                        //藉由查表，把有該老師ID 的 紀錄 整理
+                        if (counselTeacherInterview_Dict.ContainsKey("" + "" + interviewRecord.TeacherID))
+                        {
+                            //人次
+                            //沒有的話，就新增。
+                            if (!counselTeacherInterview_Dict["" + interviewRecord.TeacherID].WaysStaticsPeopleCountDict.ContainsKey(interviewRecord.InterviewType))
+                            {
+                                counselTeacherInterview_Dict["" + interviewRecord.TeacherID].WaysStaticsPeopleCountDict.Add(interviewRecord.InterviewType, 1);
+                            }
+                            else
+                            {   //若有的話 就加一
+                                counselTeacherInterview_Dict["" + interviewRecord.TeacherID].WaysStaticsPeopleCountDict[interviewRecord.InterviewType]++;
+                            }
+
+                            //人數
+                            //沒有的話，就新增。
+                            if (!counselTeacherInterview_Dict["" + interviewRecord.TeacherID].WaysStaticsPeopleDict.ContainsKey(interviewRecord.InterviewType))
+                            {
+                                counselTeacherInterview_Dict["" + interviewRecord.TeacherID].WaysStaticsPeopleDict.Add(interviewRecord.InterviewType, new List<string>());
+
+                                if (!counselTeacherInterview_Dict["" + interviewRecord.TeacherID].WaysStaticsPeopleDict[interviewRecord.InterviewType].Contains("" + interviewRecord.StudentID))
+                                {
+                                    counselTeacherInterview_Dict["" + interviewRecord.TeacherID].WaysStaticsPeopleDict[interviewRecord.InterviewType].Add("" + interviewRecord.StudentID);
+                                }
+                            }
+                            else
+                            {
+                                if (!counselTeacherInterview_Dict["" + interviewRecord.TeacherID].WaysStaticsPeopleDict[interviewRecord.InterviewType].Contains("" + interviewRecord.StudentID))
+                                {
+                                    counselTeacherInterview_Dict["" + interviewRecord.TeacherID].WaysStaticsPeopleDict[interviewRecord.InterviewType].Add("" + interviewRecord.StudentID);
+                                }
+                            }
+                        }
+                        #endregion
+
+                    }
+                    #endregion
+
+                    #region 老師(高一、高二、高三)統計 
+
+                    // 輔導案件類別
+                    foreach (DAO.UDT_CounselStudentInterviewRecordDef interviewRecord in record.Value)
+                    {
+                        #region 輔導老師身分類別
+                        // 只統計班導
+                        if (interviewRecord.authorRole == "班導師")
+                        {
+                            //藉由查表，把有該老師ID 的 紀錄 整理
+                            if (TeacherInterview_Dict.ContainsKey(stuIdToGradeDict["" + interviewRecord.StudentID]))
+                            {
+                                //人次
+                                //沒有的話，就新增。
+                                if (!TeacherInterview_Dict[stuIdToGradeDict["" + interviewRecord.StudentID]].WaysStaticsPeopleCountDict.ContainsKey(interviewRecord.InterviewType))
+                                {
+                                    TeacherInterview_Dict[stuIdToGradeDict["" + interviewRecord.StudentID]].WaysStaticsPeopleCountDict.Add(interviewRecord.InterviewType, 1);
+                                }
+                                else
+                                {   //若有的話 就加一
+                                    TeacherInterview_Dict[stuIdToGradeDict["" + interviewRecord.StudentID]].WaysStaticsPeopleCountDict[interviewRecord.InterviewType]++;
+                                }
+
+                                //人數
+                                //沒有的話，就新增。
+                                if (!TeacherInterview_Dict[stuIdToGradeDict["" + interviewRecord.StudentID]].WaysStaticsPeopleDict.ContainsKey(interviewRecord.InterviewType))
+                                {
+                                    TeacherInterview_Dict[stuIdToGradeDict["" + interviewRecord.StudentID]].WaysStaticsPeopleDict.Add(interviewRecord.InterviewType, new List<string>());
+
+                                    if (!TeacherInterview_Dict[stuIdToGradeDict["" + interviewRecord.StudentID]].WaysStaticsPeopleDict[interviewRecord.InterviewType].Contains("" + interviewRecord.StudentID))
+                                    {
+                                        TeacherInterview_Dict[stuIdToGradeDict["" + interviewRecord.StudentID]].WaysStaticsPeopleDict[interviewRecord.InterviewType].Add("" + interviewRecord.StudentID);
+                                    }
+                                }
+                                else
+                                {
+                                    if (!TeacherInterview_Dict[stuIdToGradeDict["" + interviewRecord.StudentID]].WaysStaticsPeopleDict[interviewRecord.InterviewType].Contains("" + interviewRecord.StudentID))
+                                    {
+                                        TeacherInterview_Dict[stuIdToGradeDict["" + interviewRecord.StudentID]].WaysStaticsPeopleDict[interviewRecord.InterviewType].Add("" + interviewRecord.StudentID);
+                                    }
+                                }
+                            }
+
+                        }
+
+
+                        #endregion
+
+                    }
+                    #endregion
+
                 }
+
 
                 //聯繫紀錄
                 foreach (KeyValuePair<string, List<DAO.UDT_Counsel_home_visit_RecordDef>> record in dicHomeVisitRecord)
                 {
+                    #region 導師統計(年級)
                     //一年級老師
                     foreach (DAO.AllCounselStaticticsTeacherRecord teacherRecord in CounselTeacherList_grade1)
                     {
@@ -390,7 +766,199 @@ namespace Counsel_System2.Forms
                             teacherRecord.CounselPeopleCount += record.Value.Count();
                         }
                     }
+                    #endregion
 
+                    #region 輔導案件類別
+                    // 輔導案件類別
+                    foreach (DAO.UDT_Counsel_home_visit_RecordDef homeVisitRecord in record.Value)
+                    {
+
+                        #region 解析輔導類型Xml
+                        XmlDocument doc3 = new XmlDocument();
+                        //幫忙加根目錄
+                        string xmlContent3 = "<root>" + homeVisitRecord.CounselTypeKind + "</root>";
+                        doc3.LoadXml(xmlContent3);
+                        XmlNode newNode3 = doc3.DocumentElement;
+                        doc3.AppendChild(newNode3);
+                        XElement xmlabs3 = XElement.Parse(doc3.OuterXml);
+
+                        foreach (XElement abs in xmlabs3.Elements("Item"))
+                        {
+                            string CounselTypeKind_for_basic = "";
+                            CounselTypeKind_for_basic += abs.Attribute("name").Value;
+
+                            //藉由查表，把輔導案件 以類型、 科別分類
+                            if (counselCase_Dict.ContainsKey(CounselTypeKind_for_basic))
+                            {
+                                //人次
+                                //沒有的話，就新增。
+                                if (!counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleCountDict.ContainsKey(stuIdToDeptDict["" + homeVisitRecord.StudentID]))
+                                {
+                                    counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleCountDict.Add(stuIdToDeptDict["" + homeVisitRecord.StudentID], 1);
+
+                                }
+                                else
+                                {   //若有的話 就加一
+                                    counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleCountDict[stuIdToDeptDict["" + homeVisitRecord.StudentID]]++;
+
+                                }
+
+                                //人數
+                                //沒有的話，就新增。
+                                if (!counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleDict.ContainsKey(stuIdToDeptDict["" + homeVisitRecord.StudentID]))
+                                {
+                                    counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleDict.Add(stuIdToDeptDict["" + homeVisitRecord.StudentID], new List<string>());
+
+                                    if (!counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleDict[stuIdToDeptDict["" + homeVisitRecord.StudentID]].Contains("" + homeVisitRecord.StudentID))
+                                    {
+                                        counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleDict[stuIdToDeptDict["" + homeVisitRecord.StudentID]].Add("" + homeVisitRecord.StudentID);
+                                    }
+                                }
+                                else
+                                {
+                                    if (!counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleDict[stuIdToDeptDict["" + homeVisitRecord.StudentID]].Contains("" + homeVisitRecord.StudentID))
+                                    {
+                                        counselCase_Dict[CounselTypeKind_for_basic].CaseStaticsPeopleDict[stuIdToDeptDict["" + homeVisitRecord.StudentID]].Add("" + homeVisitRecord.StudentID);
+                                    }
+                                }
+                            }
+                        }
+                        #endregion
+
+                        #region 老師身分類別
+                        //藉由查表，把輔導案件 以類型、 科別分類
+                        if (counselCase_Dict.ContainsKey(homeVisitRecord.authorRole))
+                        {
+                            //人次
+                            //沒有的話，就新增。
+                            if (!counselCase_Dict[homeVisitRecord.authorRole].CaseStaticsPeopleCountDict.ContainsKey(stuIdToDeptDict["" + homeVisitRecord.StudentID]))
+                            {
+                                counselCase_Dict[homeVisitRecord.authorRole].CaseStaticsPeopleCountDict.Add(stuIdToDeptDict["" + homeVisitRecord.StudentID], 1);
+
+                            }
+                            else
+                            {   //若有的話 就加一
+                                counselCase_Dict[homeVisitRecord.authorRole].CaseStaticsPeopleCountDict[stuIdToDeptDict["" + homeVisitRecord.StudentID]]++;
+
+                            }
+
+                            //人數
+                            //沒有的話，就新增。
+                            if (!counselCase_Dict[homeVisitRecord.authorRole].CaseStaticsPeopleDict.ContainsKey(stuIdToDeptDict["" + homeVisitRecord.StudentID]))
+                            {
+                                counselCase_Dict[homeVisitRecord.authorRole].CaseStaticsPeopleDict.Add(stuIdToDeptDict["" + homeVisitRecord.StudentID], new List<string>());
+
+                                if (!counselCase_Dict[homeVisitRecord.authorRole].CaseStaticsPeopleDict[stuIdToDeptDict["" + homeVisitRecord.StudentID]].Contains("" + homeVisitRecord.StudentID))
+                                {
+                                    counselCase_Dict[homeVisitRecord.authorRole].CaseStaticsPeopleDict[stuIdToDeptDict["" + homeVisitRecord.StudentID]].Add("" + homeVisitRecord.StudentID);
+                                }
+                            }
+                            else
+                            {
+                                if (!counselCase_Dict[homeVisitRecord.authorRole].CaseStaticsPeopleDict[stuIdToDeptDict["" + homeVisitRecord.StudentID]].Contains("" + homeVisitRecord.StudentID))
+                                {
+                                    counselCase_Dict[homeVisitRecord.authorRole].CaseStaticsPeopleDict[stuIdToDeptDict["" + homeVisitRecord.StudentID]].Add("" + homeVisitRecord.StudentID);
+                                }
+                            }
+                        }
+                        #endregion
+
+                    }
+                    #endregion
+
+                    #region 輔導教師統計
+                    // 輔導案件類別
+                    foreach (DAO.UDT_Counsel_home_visit_RecordDef homeVisitRecord in record.Value)
+                    {
+                        #region 輔導老師身分類別
+                        //藉由查表，把有該老師ID 的 紀錄 整理
+                        if (counselTeacherHomeVisit_Dict.ContainsKey("" + "" + homeVisitRecord.TeacherID))
+                        {
+                            //人次
+                            //沒有的話，就新增。
+                            if (!counselTeacherHomeVisit_Dict["" + homeVisitRecord.TeacherID].WaysStaticsPeopleCountDict.ContainsKey(homeVisitRecord.home_visit_type))
+                            {
+                                counselTeacherHomeVisit_Dict["" + homeVisitRecord.TeacherID].WaysStaticsPeopleCountDict.Add(homeVisitRecord.home_visit_type, 1);
+                            }
+                            else
+                            {   //若有的話 就加一
+                                counselTeacherHomeVisit_Dict["" + homeVisitRecord.TeacherID].WaysStaticsPeopleCountDict[homeVisitRecord.home_visit_type]++;
+                            }
+
+                            //人數
+                            //沒有的話，就新增。
+                            if (!counselTeacherHomeVisit_Dict["" + homeVisitRecord.TeacherID].WaysStaticsPeopleDict.ContainsKey(homeVisitRecord.home_visit_type))
+                            {
+                                counselTeacherHomeVisit_Dict["" + homeVisitRecord.TeacherID].WaysStaticsPeopleDict.Add(homeVisitRecord.home_visit_type, new List<string>());
+
+                                if (!counselTeacherHomeVisit_Dict["" + homeVisitRecord.TeacherID].WaysStaticsPeopleDict[homeVisitRecord.home_visit_type].Contains("" + homeVisitRecord.StudentID))
+                                {
+                                    counselTeacherHomeVisit_Dict["" + homeVisitRecord.TeacherID].WaysStaticsPeopleDict[homeVisitRecord.home_visit_type].Add("" + homeVisitRecord.StudentID);
+                                }
+                            }
+                            else
+                            {
+                                if (!counselTeacherHomeVisit_Dict["" + homeVisitRecord.TeacherID].WaysStaticsPeopleDict[homeVisitRecord.home_visit_type].Contains("" + homeVisitRecord.StudentID))
+                                {
+                                    counselTeacherHomeVisit_Dict["" + homeVisitRecord.TeacherID].WaysStaticsPeopleDict[homeVisitRecord.home_visit_type].Add("" + homeVisitRecord.StudentID);
+                                }
+                            }
+                        }
+                        #endregion
+
+                    }
+                    #endregion
+
+                    #region 老師(高一、高二、高三)統計 
+                    
+                    // 輔導案件類別
+                    foreach (DAO.UDT_Counsel_home_visit_RecordDef homeVisitRecord in record.Value)
+                    {
+                        #region 輔導老師身分類別
+                        // 只統計班導
+                        if (homeVisitRecord.authorRole == "班導師")
+                        {
+                            //藉由查表，把有該老師ID 的 紀錄 整理
+                            if (TeacherHomeVisit_Dict.ContainsKey(stuIdToGradeDict["" + homeVisitRecord.StudentID]))
+                            {
+                                //人次
+                                //沒有的話，就新增。
+                                if (!TeacherHomeVisit_Dict[stuIdToGradeDict["" + homeVisitRecord.StudentID]].WaysStaticsPeopleCountDict.ContainsKey(homeVisitRecord.home_visit_type))
+                                {
+                                    TeacherHomeVisit_Dict[stuIdToGradeDict["" + homeVisitRecord.StudentID]].WaysStaticsPeopleCountDict.Add(homeVisitRecord.home_visit_type, 1);
+                                }
+                                else
+                                {   //若有的話 就加一
+                                    TeacherHomeVisit_Dict[stuIdToGradeDict["" + homeVisitRecord.StudentID]].WaysStaticsPeopleCountDict[homeVisitRecord.home_visit_type]++;
+                                }
+
+                                //人數
+                                //沒有的話，就新增。
+                                if (!TeacherHomeVisit_Dict[stuIdToGradeDict["" + homeVisitRecord.StudentID]].WaysStaticsPeopleDict.ContainsKey(homeVisitRecord.home_visit_type))
+                                {
+                                    TeacherHomeVisit_Dict[stuIdToGradeDict["" + homeVisitRecord.StudentID]].WaysStaticsPeopleDict.Add(homeVisitRecord.home_visit_type, new List<string>());
+
+                                    if (!TeacherHomeVisit_Dict[stuIdToGradeDict["" + homeVisitRecord.StudentID]].WaysStaticsPeopleDict[homeVisitRecord.home_visit_type].Contains("" + homeVisitRecord.StudentID))
+                                    {
+                                        TeacherHomeVisit_Dict[stuIdToGradeDict["" + homeVisitRecord.StudentID]].WaysStaticsPeopleDict[homeVisitRecord.home_visit_type].Add("" + homeVisitRecord.StudentID);
+                                    }
+                                }
+                                else
+                                {
+                                    if (!TeacherHomeVisit_Dict[stuIdToGradeDict["" + homeVisitRecord.StudentID]].WaysStaticsPeopleDict[homeVisitRecord.home_visit_type].Contains("" + homeVisitRecord.StudentID))
+                                    {
+                                        TeacherHomeVisit_Dict[stuIdToGradeDict["" + homeVisitRecord.StudentID]].WaysStaticsPeopleDict[homeVisitRecord.home_visit_type].Add("" + homeVisitRecord.StudentID);
+                                    }
+                                }
+                            }
+
+                        }
+
+                        
+                        #endregion
+
+                    }
+                    #endregion
                 }
 
 
@@ -471,10 +1039,18 @@ namespace Counsel_System2.Forms
 
                 Cells cs_classTeacher_template = wb.Worksheets["導師統計(樣板)"].Cells;
 
+                Cells cs_CounselTypeKind_template = wb.Worksheets["案件類別(樣板)"].Cells;
+
 
                 Cells cs_classTeacher1 = wb.Worksheets["導師統計(一年級)"].Cells;
                 Cells cs_classTeacher2 = wb.Worksheets["導師統計(二年級)"].Cells;
                 Cells cs_classTeacher3 = wb.Worksheets["導師統計(三年級)"].Cells;
+
+                Cells cs_CounselTypeKind = wb.Worksheets["案件類別"].Cells;
+
+                Cells cs_CounselTeacherWays = wb.Worksheets["輔導教師統計"].Cells;
+
+                Cells cs_TeacherWays = wb.Worksheets["導師統計"].Cells;
 
 
                 // 科別表格
@@ -482,6 +1058,12 @@ namespace Counsel_System2.Forms
 
                 //合計表格
                 Range totalStatistics = cs_classTeacher_template.CreateRange(5, 2, false);
+
+                // 科別表格(案件類別)
+                Range deparment_CounselTypeKind = cs_CounselTypeKind_template.CreateRange(3, 2, false);
+
+                //合計表格(案件類別)
+                Range totalStatistics_CounselTypeKind = cs_CounselTypeKind_template.CreateRange(5, 2, false);
 
                 //統計 各年級有幾個科別
                 List<string> departmentList1 = new List<string>();
@@ -492,6 +1074,14 @@ namespace Counsel_System2.Forms
                 Dictionary<string, int> departmentRow1 = new Dictionary<string, int>();
                 Dictionary<string, int> departmentRow2 = new Dictionary<string, int>();
                 Dictionary<string, int> departmentRow3 = new Dictionary<string, int>();
+
+                //統計 全年級有幾個科別
+                List<string> departmentList_CounselTypeKind = new List<string>();
+
+                //建立各科別對應的行數位置(案件類別)
+                Dictionary<string, int> departmentRow1_CounselTypeKind = new Dictionary<string, int>();
+
+                #region 導師統計
 
                 #region 一年級
                 foreach (DAO.AllCounselStaticticsTeacherRecord acstr in CounselTeacherList_grade1)
@@ -514,7 +1104,7 @@ namespace Counsel_System2.Forms
 
                 //新增 合計表格區域
                 cs_classTeacher1.CreateRange(3 + departmentList1.Count * 2, 2, false).Copy(totalStatistics);
-                
+
                 //補上合計公式
                 for (int i = 0; i < CounselTeacherList_grade1.Count; i++)
                 {
@@ -584,7 +1174,7 @@ namespace Counsel_System2.Forms
                 }
 
                 #endregion
-          
+
 
                 #region 一年級填值
                 foreach (DAO.AllCounselStaticticsTeacherRecord acstr in CounselTeacherList_grade1)
@@ -647,32 +1237,243 @@ namespace Counsel_System2.Forms
                 }
                 #endregion
 
+                #endregion
+
+                #region 案件類別
+
+                //將三個年級 科別 統一統計
+                #region 彙整科別
+                foreach (string dept in departmentList1)
+                {
+                    if (!departmentList_CounselTypeKind.Contains(dept))
+                    {
+                        departmentList_CounselTypeKind.Add(dept);
+                    }
+                }
+                foreach (string dept in departmentList2)
+                {
+                    if (!departmentList_CounselTypeKind.Contains(dept))
+                    {
+                        departmentList_CounselTypeKind.Add(dept);
+                    }
+                }
+                foreach (string dept in departmentList3)
+                {
+                    if (!departmentList_CounselTypeKind.Contains(dept))
+                    {
+                        departmentList_CounselTypeKind.Add(dept);
+                    }
+                }
+                #endregion
+
+                #region 表格建立
+                for (int i = 0; i < departmentList_CounselTypeKind.Count; i++)
+                {
+                    //新增科別表格區域
+                    cs_CounselTypeKind.CreateRange(3 + i * 2, 2, false).Copy(deparment_CounselTypeKind);
+                    //填上科別
+                    cs_CounselTypeKind[3 + i * 2, 0].PutValue(departmentList_CounselTypeKind[i]);
+                    //建立科別對應行數
+                    departmentRow1_CounselTypeKind.Add(departmentList_CounselTypeKind[i], 3 + i * 2);
+                }
+
+                //新增 合計表格區域
+                cs_CounselTypeKind.CreateRange(3 + departmentList_CounselTypeKind.Count * 2, 2, false).Copy(totalStatistics_CounselTypeKind);
+
+                //補上合計公式
+                for (int i = 0; i < counselCase_Dict.Count; i++)
+                {
+                    cs_CounselTypeKind[3 + departmentList_CounselTypeKind.Count * 2, i + 3].Formula = GetCounselPeopleTotalSumFormula(departmentList_CounselTypeKind, i + 3);
+                    cs_CounselTypeKind[4 + departmentList_CounselTypeKind.Count * 2, i + 3].Formula = GetCounselPeopleCountTotalSumFormula(departmentList_CounselTypeKind, i + 3);
+                }
+                #endregion
+
+                // 將col_index 歸正
+                col_index = 3;
+                //填值
+                foreach (KeyValuePair<string, DAO.AllCounselCaseStaticticsRecord> record in counselCase_Dict)
+                {
+                    // 表頭
+                    cs_CounselTypeKind[0, 0].PutValue("臺中市立文華高級中等學校" + defaultYear + "學年度第" + defaultSemester + "學期 學生家庭聯繫＆個人晤談情況統計表 \r\n（" + filterDateBegin.ToShortDateString() + "～" + filterDateEnd.ToShortDateString() + "）");
+
+                    
+                    //人數
+                    foreach (KeyValuePair<string,List<string>> r1 in record.Value.CaseStaticsPeopleDict)
+                    {
+                        cs_CounselTypeKind[departmentRow1_CounselTypeKind[r1.Key], col_index].PutValue(r1.Value.Count());
+                    }
+                    //人次
+                    foreach (KeyValuePair<string, int> r1 in record.Value.CaseStaticsPeopleCountDict)
+                    {
+                        cs_CounselTypeKind[departmentRow1_CounselTypeKind[r1.Key]+1, col_index].PutValue(r1.Value);
+                    }
+                   
+                    col_index++;
+                }
+
+
+                #endregion
+
+
+
+                #region 輔導教師統計
+                //輔導教師統計
+                
+                //家訪紀錄
+                row_index = 3; // 從第4列 開始填
+
+                foreach (KeyValuePair<string, DAO.CounselTeacherHomeVisitWaysRecord> record in counselTeacherHomeVisit_Dict)
+                {
+                    col_index = 1;  // 從第2行 開始填
+
+                    //表頭
+                    cs_CounselTeacherWays[0, 0].PutValue("家庭教育自我檢核統計表-輔導處   \r\n 統計時間:" + filterDateBegin.ToShortDateString() + "～" + filterDateEnd.ToShortDateString());
+
+                    //輔導老師姓名
+                    cs_CounselTeacherWays[row_index, 0].PutValue(record.Value.CounselTeacherName);
+
+                    //填上人數
+                    foreach (KeyValuePair<string, List<string>> r1 in record.Value.WaysStaticsPeopleDict)
+                    {
+                        cs_CounselTeacherWays[row_index, col_index].PutValue(r1.Value.Count());
+
+                        col_index = col_index + 2;
+                    }
+
+                    col_index = 2; // 從第3行 開始填
+                    //填上人次
+                    foreach (KeyValuePair<string, int> r1 in record.Value.WaysStaticsPeopleCountDict)
+                    {
+                        cs_CounselTeacherWays[row_index, col_index].PutValue(r1.Value);
+
+                        col_index = col_index + 2;
+                    }
+
+                    row_index++;
+                }
 
 
 
 
+                // 晤談紀錄
+                row_index = 15; // 從第16列 開始填
+
+                foreach (KeyValuePair<string, DAO.CounselTeacherInterviewWaysRecord> record in counselTeacherInterview_Dict)
+                {
+                    col_index = 1;  // 從第2行 開始填
+
+                    //表頭
+                    cs_CounselTeacherWays[12, 0].PutValue("學生晤談自我檢核統計表-輔導處  \r\n 統計時間:" + filterDateBegin.ToShortDateString() + "～" + filterDateEnd.ToShortDateString());
+
+                    //輔導老師姓名
+                    cs_CounselTeacherWays[row_index, 0].PutValue(record.Value.CounselTeacherName);
+
+                    //填上人數
+                    foreach (KeyValuePair<string, List<string>> r1 in record.Value.WaysStaticsPeopleDict)
+                    {
+                        cs_CounselTeacherWays[row_index, col_index].PutValue(r1.Value.Count());
+
+                        col_index = col_index + 2;
+                    }
+
+
+                    col_index = 2; // 從第3行 開始填
+                    //填上人次
+                    foreach (KeyValuePair<string, int> r1 in record.Value.WaysStaticsPeopleCountDict)
+                    {
+                        cs_CounselTeacherWays[row_index, col_index].PutValue(r1.Value);
+
+                        col_index = col_index + 2;
+                    }
+
+                    row_index++;
+                }
+                #endregion
+
+                
+
+                #region 老師(高一、高二、高三)統計
+                //輔導教師統計
+
+                //家訪紀錄
+                row_index = 3; // 從第4列 開始填
+
+                foreach (KeyValuePair<string, DAO.TeacherHomeVisitWaysRecord> record in TeacherHomeVisit_Dict)
+                {
+                    col_index = 1;  // 從第2行 開始填
+
+                    //表頭
+                    cs_TeacherWays[0, 0].PutValue("家庭教育自我檢核統計表-導師   \r\n 統計時間:" + filterDateBegin.ToShortDateString() + "～" + filterDateEnd.ToShortDateString());
+
+                    //輔導老師姓名
+                    cs_TeacherWays[row_index, 0].PutValue(record.Value.CounselTeacherName);
+
+                    //填上人數
+                    foreach (KeyValuePair<string, List<string>> r1 in record.Value.WaysStaticsPeopleDict)
+                    {
+                        cs_TeacherWays[row_index, col_index].PutValue(r1.Value.Count());
+
+                        col_index = col_index + 2;
+                    }
+
+                    col_index = 2; // 從第3行 開始填
+                    //填上人次
+                    foreach (KeyValuePair<string, int> r1 in record.Value.WaysStaticsPeopleCountDict)
+                    {
+                        cs_TeacherWays[row_index, col_index].PutValue(r1.Value);
+
+                        col_index = col_index + 2;
+                    }
+
+                    row_index++;
+                }
+
+
+
+
+                // 晤談紀錄
+                row_index = 12; // 從第13列 開始填
+
+                foreach (KeyValuePair<string, DAO.CounselTeacherInterviewRecord> record in TeacherInterview_Dict)
+                {
+                    col_index = 1;  // 從第2行 開始填
+
+                    //表頭
+                    cs_TeacherWays[9, 0].PutValue("學生晤談自我檢核統計表-導師  \r\n 統計時間:" + filterDateBegin.ToShortDateString() + "～" + filterDateEnd.ToShortDateString());
+
+                    //輔導老師姓名
+                    cs_TeacherWays[row_index, 0].PutValue(record.Value.CounselTeacherName);
+
+                    //填上人數
+                    foreach (KeyValuePair<string, List<string>> r1 in record.Value.WaysStaticsPeopleDict)
+                    {
+                        cs_TeacherWays[row_index, col_index].PutValue(r1.Value.Count());
+
+                        col_index = col_index + 2;
+                    }
+
+
+                    col_index = 2; // 從第3行 開始填
+                    //填上人次
+                    foreach (KeyValuePair<string, int> r1 in record.Value.WaysStaticsPeopleCountDict)
+                    {
+                        cs_TeacherWays[row_index, col_index].PutValue(r1.Value);
+
+                        col_index = col_index + 2;
+                    }
+
+                    row_index++;
+                }
+                #endregion
+
+                //移除樣板
 
                 wb.Worksheets.RemoveAt("導師統計(樣板)");
+                wb.Worksheets.RemoveAt("案件類別(樣板)");
 
                 #endregion
 
-                #region 開始Excel填值
-                //foreach (DataRow row in dt.Rows)
-                //{
-                //    col_index = 0;
-
-                //    //基本資料
-                //    foreach (string title in basicDataTitleList)
-                //    {
-                //        cs[row_index, col_index].PutValue(row[title]);
-
-                //        col_index++;
-                //    }
-
-                //    row_index++;
-
-                //}
-                #endregion
+             
 
                 #region 舊列印方式
                 //foreach (var student_id in student_id_List) 

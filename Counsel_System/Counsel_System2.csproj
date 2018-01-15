@@ -302,6 +302,10 @@
     <Compile Include="DAO\AB_StudSemsDomainScore.cs" />
     <Compile Include="DAO\AB_StudText.cs" />
     <Compile Include="DAO\AllCounselCaseStaticticsRecord.cs" />
+    <Compile Include="DAO\TeacherHomeVisitWaysRecord.cs" />
+    <Compile Include="DAO\TeacherInterviewWaysRecord.cs" />
+    <Compile Include="DAO\CounselTeacherHomeVisitWaysRecord.cs" />
+    <Compile Include="DAO\CounselTeacherInterviewWaysRecord.cs" />
     <Compile Include="DAO\AnswerPkey.cs" />
     <Compile Include="DAO\CareRecordItemManager.cs" />
     <Compile Include="DAO\AllCounselStaticticsTeacherRecord.cs" />
