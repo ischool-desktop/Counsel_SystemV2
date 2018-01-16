@@ -38,7 +38,6 @@ namespace Counsel_System2.Forms
         // 輔導類型與其下所有 資料
         private Dictionary<string, DAO.AllCounselCaseStaticticsRecord> counselCase_Dict = new Dictionary<string, DAO.AllCounselCaseStaticticsRecord>();
 
-
         // 輔導老師與其下所有 訪談資料
         private Dictionary<string, DAO.CounselTeacherHomeVisitWaysRecord> counselTeacherHomeVisit_Dict = new Dictionary<string, DAO.CounselTeacherHomeVisitWaysRecord>();
 
@@ -50,7 +49,6 @@ namespace Counsel_System2.Forms
 
         // 老師(高一、高二、高三)與其下所有 晤談資料
         private Dictionary<string, DAO.CounselTeacherInterviewRecord> TeacherInterview_Dict = new Dictionary<string, DAO.CounselTeacherInterviewRecord>();
-
 
         //所有的輔導案件類別
         private List<string> counselTypeKindList = new List<string>();
@@ -69,6 +67,10 @@ namespace Counsel_System2.Forms
 
         //所有的年級 
         private List<string> gradeYearList = new List<string>();
+
+        //2018/1/6 哀...穎驊超無言原本以為可以不用再用到 K12 去抓學生資料，結果在最後出資料清單，為了抓學號、班座 還是不得不用
+        //整理學生StudentRecord 資料 
+        private Dictionary<string, StudentRecord> dicStudentRecord = new Dictionary<string, StudentRecord>();
 
 
         public AllCounselStatisticsForm()
@@ -134,8 +136,8 @@ namespace Counsel_System2.Forms
             //建立 所有的老師老師(高一、高二、高三) 訪談方式 
             // 2017/1/15 穎驊註記， 訪談為 電話連絡，而非 電話 ， 先暫時寫死，未來要能夠動態支援顯示每次不同的方式
             TeacherHomeVisitWaysList.Add("電話聯絡");
+            TeacherHomeVisitWaysList.Add("函件聯絡");
             TeacherHomeVisitWaysList.Add("家庭訪問");
-            TeacherHomeVisitWaysList.Add("家長座談");
             TeacherHomeVisitWaysList.Add("個別約談家長");
             TeacherHomeVisitWaysList.Add("其他");
 
@@ -396,7 +398,7 @@ namespace Counsel_System2.Forms
                     record.WaysStaticsPeopleDict = new Dictionary<string, List<string>>();
 
                     //依序加入 訪談方式種類
-                    foreach (string ways in TeacherHomeVisitWaysList)
+                    foreach (string ways in TeacherInterviewWaysList)
                     {
                         record.WaysStaticsPeopleDict.Add(ways, new List<string>());
                     }
@@ -404,7 +406,7 @@ namespace Counsel_System2.Forms
                     record.WaysStaticsPeopleCountDict = new Dictionary<string, int>();
 
                     //依序加入 訪談方式種類
-                    foreach (string ways in TeacherHomeVisitWaysList)
+                    foreach (string ways in TeacherInterviewWaysList)
                     {
                         record.WaysStaticsPeopleCountDict.Add(ways, 0);
                     }
@@ -420,7 +422,7 @@ namespace Counsel_System2.Forms
 
                 #region 篩選晤談紀錄(日期區間)
 
-                Dictionary<string, List<DAO.UDT_CounselStudentInterviewRecordDef>> dicStudentInterviewRecord = new Dictionary<string, List<DAO.UDT_CounselStudentInterviewRecordDef>>();
+                Dictionary<string, List<DAO.UDT_CounselStudentInterviewRecordDef>> dicInterviewRecord = new Dictionary<string, List<DAO.UDT_CounselStudentInterviewRecordDef>>();
 
                 Dictionary<string, List<DAO.UDT_Counsel_home_visit_RecordDef>> dicHomeVisitRecord = new Dictionary<string, List<DAO.UDT_Counsel_home_visit_RecordDef>>();
                 printWorker.ReportProgress(20);
@@ -445,17 +447,24 @@ namespace Counsel_System2.Forms
                     }
 
                     // 加入資料， Key 為 TeacherID
-                    if (!dicStudentInterviewRecord.ContainsKey("" + interviewRecord.TeacherID))
+                    if (!dicInterviewRecord.ContainsKey("" + interviewRecord.TeacherID))
                     {
-                        dicStudentInterviewRecord.Add("" + interviewRecord.TeacherID, new List<DAO.UDT_CounselStudentInterviewRecordDef>());
+                        dicInterviewRecord.Add("" + interviewRecord.TeacherID, new List<DAO.UDT_CounselStudentInterviewRecordDef>());
 
-                        dicStudentInterviewRecord["" + interviewRecord.TeacherID].Add(interviewRecord);
+                        dicInterviewRecord["" + interviewRecord.TeacherID].Add(interviewRecord);
 
                     }
                     else
                     {
-                        dicStudentInterviewRecord["" + interviewRecord.TeacherID].Add(interviewRecord);
+                        dicInterviewRecord["" + interviewRecord.TeacherID].Add(interviewRecord);
                     }
+
+                    //將所有有輔導資料的學生ID 加入整理，以便取得學生基本資料
+                    if (!_StudentIDList.Contains(""+interviewRecord.StudentID))
+                    {
+                        _StudentIDList.Add("" + interviewRecord.StudentID);
+                    }
+
 
                     progressCount++;
 
@@ -485,15 +494,29 @@ namespace Counsel_System2.Forms
                         dicHomeVisitRecord["" + homeVisitRecord.TeacherID].Add(homeVisitRecord);
                     }
 
+                    //將所有有輔導資料的學生ID 加入整理，以便取得學生基本資料
+                    if (!_StudentIDList.Contains("" + homeVisitRecord.StudentID))
+                    {
+                        _StudentIDList.Add("" + homeVisitRecord.StudentID);
+                    }
+
                     progressCount++;
 
                     printWorker.ReportProgress(45 + 25 * progressCount / HomeVisitRecordList.Count);
                 }
 
+
+                //使用 K12 API 將所有有輔導資料的學生 個人基本資料抓出來，以便出清單
+                foreach (var studentRecord in K12.Data.Student.SelectByIDs(_StudentIDList))
+                {
+                    dicStudentRecord.Add(studentRecord.ID, studentRecord);
+                }
+
+
                 #endregion
 
                 //晤談紀錄
-                foreach (KeyValuePair<string, List<DAO.UDT_CounselStudentInterviewRecordDef>> record in dicStudentInterviewRecord)
+                foreach (KeyValuePair<string, List<DAO.UDT_CounselStudentInterviewRecordDef>> record in dicInterviewRecord)
                 {
                     #region 導師統計(年級)
                     //一年級老師
@@ -629,9 +652,7 @@ namespace Counsel_System2.Forms
                     }
                     #endregion
 
-
                     
-
                     #region 輔導教師統計
                     // 輔導案件類別
                     foreach (DAO.UDT_CounselStudentInterviewRecordDef interviewRecord in record.Value)
@@ -1052,6 +1073,7 @@ namespace Counsel_System2.Forms
 
                 Cells cs_TeacherWays = wb.Worksheets["導師統計"].Cells;
 
+                Cells cs_Detail = wb.Worksheets["來源清單"].Cells;
 
                 // 科別表格
                 Range deparment = cs_classTeacher_template.CreateRange(3, 2, false);
@@ -1411,18 +1433,26 @@ namespace Counsel_System2.Forms
                     //填上人數
                     foreach (KeyValuePair<string, List<string>> r1 in record.Value.WaysStaticsPeopleDict)
                     {
-                        cs_TeacherWays[row_index, col_index].PutValue(r1.Value.Count());
+                        //2018/1/16 穎驊註記，假如其類別是有在 規範的List 上，才填值
+                        if (TeacherHomeVisitWaysList.Contains(r1.Key))
+                        {
+                            cs_TeacherWays[row_index, col_index].PutValue(r1.Value.Count());
 
-                        col_index = col_index + 2;
+                            col_index = col_index + 2;
+                        }                        
                     }
 
                     col_index = 2; // 從第3行 開始填
                     //填上人次
                     foreach (KeyValuePair<string, int> r1 in record.Value.WaysStaticsPeopleCountDict)
                     {
-                        cs_TeacherWays[row_index, col_index].PutValue(r1.Value);
+                        //2018/1/16 穎驊註記，假如其類別是有在 規範的List 上，才填值
+                        if (TeacherHomeVisitWaysList.Contains(r1.Key))
+                        {
+                            cs_TeacherWays[row_index, col_index].PutValue(r1.Value);
 
-                        col_index = col_index + 2;
+                            col_index = col_index + 2;
+                        }                        
                     }
 
                     row_index++;
@@ -1447,9 +1477,14 @@ namespace Counsel_System2.Forms
                     //填上人數
                     foreach (KeyValuePair<string, List<string>> r1 in record.Value.WaysStaticsPeopleDict)
                     {
-                        cs_TeacherWays[row_index, col_index].PutValue(r1.Value.Count());
+                        //2018/1/16 穎驊註記，假如其類別是有在 規範的List 上，才填值
+                        if (TeacherInterviewWaysList.Contains(r1.Key))
+                        {
+                            cs_TeacherWays[row_index, col_index].PutValue(r1.Value.Count());
 
-                        col_index = col_index + 2;
+                            col_index = col_index + 2;
+                        }
+                        
                     }
 
 
@@ -1457,172 +1492,199 @@ namespace Counsel_System2.Forms
                     //填上人次
                     foreach (KeyValuePair<string, int> r1 in record.Value.WaysStaticsPeopleCountDict)
                     {
-                        cs_TeacherWays[row_index, col_index].PutValue(r1.Value);
+                        //2018/1/16 穎驊註記，假如其類別是有在 規範的List 上，才填值
+                        if (TeacherInterviewWaysList.Contains(r1.Key))
+                        {
+                            cs_TeacherWays[row_index, col_index].PutValue(r1.Value);
 
-                        col_index = col_index + 2;
+                            col_index = col_index + 2;
+                        }                        
                     }
 
                     row_index++;
                 }
                 #endregion
 
-                //移除樣板
 
+                row_index = 1;
+
+                //晤談紀錄清單
+                foreach (KeyValuePair<string, List<DAO.UDT_CounselStudentInterviewRecordDef>> record in dicInterviewRecord)
+                {
+                    foreach (DAO.UDT_CounselStudentInterviewRecordDef r1 in record.Value)
+                    {
+
+                        //類別
+                        cs_Detail[row_index, 0].PutValue("學生晤談");
+                        //學號
+                        cs_Detail[row_index, 1].PutValue(dicStudentRecord["" + r1.StudentID].StudentNumber);
+                        //學生姓名
+                        cs_Detail[row_index, 2].PutValue(dicStudentRecord["" + r1.StudentID].Name);
+                        //性別
+                        cs_Detail[row_index, 3].PutValue(dicStudentRecord["" + r1.StudentID].Gender);
+                        //班級
+                        cs_Detail[row_index, 4].PutValue(dicStudentRecord["" + r1.StudentID].Class != null ? dicStudentRecord["" + r1.StudentID].Class.Name : "");
+                        //座號
+                        cs_Detail[row_index, 5].PutValue(dicStudentRecord["" + r1.StudentID].SeatNo);
+                        //學年度
+                        cs_Detail[row_index, 6].PutValue(r1.schoolyear);
+                        //學期
+                        cs_Detail[row_index, 7].PutValue(r1.semester);
+                        //日期
+                        cs_Detail[row_index, 8].PutValue(r1.InterviewDate.Value.ToShortDateString());
+                        //方式
+                        cs_Detail[row_index, 9].PutValue(r1.InterviewType);
+
+                        #region row["輔導類別"]整理
+                        XmlDocument doc3 = new XmlDocument();
+                        //幫忙加根目錄
+                        string xmlContent3 = "<root>" + r1.CounselTypeKind + "</root>";
+                        doc3.LoadXml(xmlContent3);
+                        XmlNode newNode3 = doc3.DocumentElement;
+                        doc3.AppendChild(newNode3);
+                        XElement xmlabs3 = XElement.Parse(doc3.OuterXml);
+                        string CounselTypeKind = "";
+                        string CounselTypeKind_for_basic = "";
+
+                        foreach (XElement abs in xmlabs3.Elements("Item"))
+                        {
+                            CounselTypeKind_for_basic += abs.Attribute("name").Value;
+                            if (abs.Attribute("name").Value == "其他")
+                            {
+                                if (abs.Attribute("remark") != null)
+                                    CounselTypeKind_for_basic += ":" + abs.Attribute("remark").Value;
+                            }
+                            if (abs != xmlabs3.LastNode)
+                            {
+                                CounselTypeKind_for_basic += "、";
+                            }
+
+
+                            CounselTypeKind = abs.Attribute("name").Value;
+                            if (abs.Attribute("name").Value == "其他")
+                            {
+                                if (abs.Attribute("remark") != null)
+                                    CounselTypeKind += ":" + abs.Attribute("remark").Value;
+                            }
+                            //假如使用者有需要聯繫類別分析資料，則新增欄位，並在其值填 "是"
+                            if (!dt.Columns.Contains("聯繫類別:" + CounselTypeKind))
+                            {
+                                dt.Columns.Add("聯繫類別:" + CounselTypeKind);
+                                counselTypeKindDataTitleList.Add("聯繫類別:" + CounselTypeKind);
+                            }
+
+                            
+                            //輔導類別
+                            cs_Detail[row_index, 10].PutValue(CounselTypeKind_for_basic);
+                        }
+                        #endregion
+
+                        //記錄人姓名
+                        cs_Detail[row_index, 11].PutValue(r1.AuthorName);
+
+                        //記錄人
+                        cs_Detail[row_index, 12].PutValue(r1.authorRole);
+
+                        row_index++;
+                    }
+                }
+
+
+                
+
+                //聯繫紀錄清單
+                foreach (KeyValuePair<string, List<DAO.UDT_Counsel_home_visit_RecordDef>> record in dicHomeVisitRecord)
+                {
+                    foreach (DAO.UDT_Counsel_home_visit_RecordDef r1 in record.Value)
+                    {
+                        cs_Detail[row_index, 0].PutValue("家庭聯繫");
+
+                        //學號
+                        cs_Detail[row_index, 1].PutValue(dicStudentRecord["" + r1.StudentID].StudentNumber);
+                        //學生姓名
+                        cs_Detail[row_index, 2].PutValue(dicStudentRecord["" + r1.StudentID].Name);
+                        //性別
+                        cs_Detail[row_index, 3].PutValue(dicStudentRecord["" + r1.StudentID].Gender);
+                        //班級
+                        cs_Detail[row_index, 4].PutValue(dicStudentRecord["" + r1.StudentID].Class != null ? dicStudentRecord["" + r1.StudentID].Class.Name : "");
+                        //座號
+                        cs_Detail[row_index, 5].PutValue(dicStudentRecord["" + r1.StudentID].SeatNo);
+                        //學年度
+                        cs_Detail[row_index, 6].PutValue(r1.schoolyear);
+                        //學期
+                        cs_Detail[row_index, 7].PutValue(r1.semester);
+                        //日期
+                        cs_Detail[row_index, 8].PutValue(r1.home_visit_date.Value.ToShortDateString());
+                        //方式
+                        cs_Detail[row_index, 9].PutValue(r1.home_visit_type);
+
+                        #region row["輔導類別"]整理
+                        XmlDocument doc3 = new XmlDocument();
+                        //幫忙加根目錄
+                        string xmlContent3 = "<root>" + r1.CounselTypeKind + "</root>";
+                        doc3.LoadXml(xmlContent3);
+                        XmlNode newNode3 = doc3.DocumentElement;
+                        doc3.AppendChild(newNode3);
+                        XElement xmlabs3 = XElement.Parse(doc3.OuterXml);
+                        string CounselTypeKind = "";
+                        string CounselTypeKind_for_basic = "";
+
+                        foreach (XElement abs in xmlabs3.Elements("Item"))
+                        {
+                            CounselTypeKind_for_basic += abs.Attribute("name").Value;
+                            if (abs.Attribute("name").Value == "其他")
+                            {
+                                if (abs.Attribute("remark") != null)
+                                    CounselTypeKind_for_basic += ":" + abs.Attribute("remark").Value;
+                            }
+                            if (abs != xmlabs3.LastNode)
+                            {
+                                CounselTypeKind_for_basic += "、";
+                            }
+
+
+                            CounselTypeKind = abs.Attribute("name").Value;
+                            if (abs.Attribute("name").Value == "其他")
+                            {
+                                if (abs.Attribute("remark") != null)
+                                    CounselTypeKind += ":" + abs.Attribute("remark").Value;
+                            }
+                            //假如使用者有需要聯繫類別分析資料，則新增欄位，並在其值填 "是"
+                            if (!dt.Columns.Contains("聯繫類別:" + CounselTypeKind))
+                            {
+                                dt.Columns.Add("聯繫類別:" + CounselTypeKind);
+                                counselTypeKindDataTitleList.Add("聯繫類別:" + CounselTypeKind);
+                            }
+
+
+                            //輔導類別
+                            cs_Detail[row_index, 10].PutValue(CounselTypeKind_for_basic);
+                        }
+                        #endregion
+
+                        //記錄人姓名
+                        cs_Detail[row_index, 11].PutValue(r1.AuthorName);
+
+                        //記錄人
+                        cs_Detail[row_index, 12].PutValue(r1.authorRole);
+
+                        row_index++;
+
+                    }
+
+                }
+
+
+
+
+
+                //移除樣板
                 wb.Worksheets.RemoveAt("導師統計(樣板)");
                 wb.Worksheets.RemoveAt("案件類別(樣板)");
 
                 #endregion
 
-             
-
-                #region 舊列印方式
-                //foreach (var student_id in student_id_List) 
-                //{
-                //    StudentRecord stuRec = new StudentRecord();
-
-                //    if (InterviewRecord_Dict.ContainsKey(student_id))
-                //    {
-                //        if (studentRecord_Dict.ContainsKey(student_id)) 
-                //        {
-                //            stuRec = studentRecord_Dict[student_id];
-                //        }
-
-                //        foreach (var InterviewRecord in InterviewRecord_Dict[student_id]) 
-                //        {
-                //            //學生姓名
-                //            cs[row_index, 0].PutValue(stuRec.Name);
-                //            //學號
-                //            cs[row_index, 1].PutValue(stuRec.StudentNumber);
-                //            //性別
-                //            cs[row_index, 2].PutValue(stuRec.Gender);
-                //            //班級
-                //            cs[row_index, 3].PutValue(  stuRec.Class !=null? stuRec.Class.Name:"");
-                //            //座號
-                //            cs[row_index, 4].PutValue(stuRec.SeatNo);
-                //            //晤談編號
-                //            cs[row_index, 5].PutValue(InterviewRecord.InterviewNo);
-                //            //學年度
-                //            cs[row_index, 6].PutValue(InterviewRecord.schoolyear);
-                //            //學期
-                //            cs[row_index, 7].PutValue(InterviewRecord.semester);
-                //            //晤談日期
-                //            cs[row_index, 8].PutValue(InterviewRecord.InterviewDate.Value.ToShortDateString());
-                //            //晤談時間
-                //            cs[row_index, 9].PutValue(InterviewRecord.InterviewTime);
-                //            //晤談動機
-                //            cs[row_index, 10].PutValue(InterviewRecord.Cause);
-                //            //輔導對象
-                //            cs[row_index, 11].PutValue(InterviewRecord.IntervieweeType);
-                //            //晤談方式
-                //            cs[row_index, 12].PutValue(InterviewRecord.InterviewType);
-                //            //地點
-                //            cs[row_index, 13].PutValue(InterviewRecord.Place);
-
-                //            XmlDocument doc1 = new XmlDocument();
-                //            //幫忙加根目錄
-                //            string xmlContent1 = "<root>" + InterviewRecord.Attendees + "</root>";
-                //            doc1.LoadXml(xmlContent1);
-                //            XmlNode newNode1 = doc1.DocumentElement;
-                //            doc1.AppendChild(newNode1);
-                //            XElement xmlabs1 = XElement.Parse(doc1.OuterXml);
-                //            string attendees = "";
-
-                //            foreach (XElement abs in xmlabs1.Elements("Item"))
-                //            {
-                //              attendees += abs.Attribute("name").Value;
-                //              if (abs != xmlabs1.LastNode) 
-                //              {
-                //                  attendees += "、";                          
-                //              }                         
-                //            }
-
-                //            //參與人員
-                //            cs[row_index, 14].PutValue(attendees);
-
-                //            XmlDocument doc2 = new XmlDocument();
-                //            //幫忙加根目錄
-                //            string xmlContent2 = "<root>" + InterviewRecord.CounselType + "</root>";
-                //            doc2.LoadXml(xmlContent2);
-                //            XmlNode newNode2 = doc2.DocumentElement;
-                //            doc2.AppendChild(newNode2);
-                //            XElement xmlabs2 = XElement.Parse(doc2.OuterXml);
-                //            string CounselType = "";
-
-                //            foreach (XElement abs in xmlabs2.Elements("Item"))
-                //            {
-                //                CounselType += abs.Attribute("name").Value;
-                //                if (abs.Attribute("name").Value == "其他") 
-                //                {
-                //                    if(abs.Attribute("remark")!=null)
-                //                    CounselType += ":"+abs.Attribute("remark").Value;                            
-                //                }
-                //                if (abs != xmlabs2.LastNode)
-                //                {
-                //                    CounselType += "、";
-                //                }
-                //            }
-
-                //            //處理方式
-                //            cs[row_index, 15].PutValue(CounselType);
-                //            XmlDocument doc3 = new XmlDocument();
-                //            //幫忙加根目錄
-                //            string xmlContent3 = "<root>" + InterviewRecord.CounselTypeKind + "</root>";
-                //            doc3.LoadXml(xmlContent3);
-                //            XmlNode newNode3 = doc3.DocumentElement;
-                //            doc3.AppendChild(newNode3);
-                //            XElement xmlabs3 = XElement.Parse(doc3.OuterXml);
-                //            string CounselTypeKind = "";
-                //            foreach (XElement abs in xmlabs3.Elements("Item"))
-                //            {
-                //                CounselTypeKind += abs.Attribute("name").Value;
-                //                if (abs.Attribute("name").Value == "其他")
-                //                {
-                //                    if (abs.Attribute("remark") != null)
-                //                        CounselTypeKind += ":" + abs.Attribute("remark").Value;
-                //                }
-                //                if (abs != xmlabs3.LastNode)
-                //                {
-                //                    CounselTypeKind += "、";
-                //                }
-                //            }
-
-                //            //案件類別
-                //            cs[row_index, 16].PutValue(CounselTypeKind);
-
-                //            //參與人員(XML)
-                //            //cs[row_index, 14].PutValue(InterviewRecord.Attendees);
-                //            //處理方式(XML)
-                //            //cs[row_index, 15].PutValue(InterviewRecord.CounselType);
-                //            //案件類別(XML)
-                //            //cs[row_index, 16].PutValue(InterviewRecord.CounselTypeKind);
-
-                //            //內容要點
-                //            cs[row_index, 17].PutValue(InterviewRecord.ContentDigest);
-                //            //記錄人的登入帳號
-                //            cs[row_index, 18].PutValue(InterviewRecord.AuthorID);
-                //            //記錄人的姓名
-                //            cs[row_index, 19].PutValue(InterviewRecord.AuthorName);
-                //            //是否公開(認輔老師、班導師之間互相可見)
-                //            cs[row_index, 20].PutValue(InterviewRecord.isPublic? "是":"否");
-                //            //記錄人
-                //            cs[row_index, 21].PutValue(InterviewRecord.authorRole);                       
-                //            row_index++;
-
-                //        }
-
-
-                //    }
-                //    else 
-                //    {
-                //        if (studentRecord_Dict.ContainsKey(student_id))
-                //        {
-                //            stuRec = studentRecord_Dict[student_id];
-                //        }
-
-                //    }          
-                //} 
-                #endregion
-
+                             
                 printWorker.ReportProgress(100);
             };
             printWorker.RunWorkerCompleted += delegate
@@ -1769,9 +1831,34 @@ namespace Counsel_System2.Forms
             return formula;
         }
 
+        private void dateTimeInput1_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateTimeInput1.Values[0] > DateTime.MinValue)
+            {
+                dateTimeInput2.Enabled = true;
+            }
 
+            if (dateTimeInput2.Values[0] > dateTimeInput1.Values[0])
+            {
+                buttonX1.Enabled = true;
+            }
+            else
+            {
+                buttonX1.Enabled = false;
+            }
 
+        }
 
-
+        private void dateTimeInput2_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateTimeInput2.Values[0] > dateTimeInput1.Values[0])
+            {
+                buttonX1.Enabled = true;
+            }
+            else
+            {
+                buttonX1.Enabled = false;
+            }
+        }
     }
 }

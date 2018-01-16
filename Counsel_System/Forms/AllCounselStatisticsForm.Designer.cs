@@ -43,6 +43,7 @@
             this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonX1.BackColor = System.Drawing.Color.Transparent;
             this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX1.Enabled = false;
             this.buttonX1.Location = new System.Drawing.Point(181, 43);
             this.buttonX1.Name = "buttonX1";
             this.buttonX1.Size = new System.Drawing.Size(75, 23);
@@ -129,7 +130,7 @@
             this.dateTimeInput1.Size = new System.Drawing.Size(121, 25);
             this.dateTimeInput1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dateTimeInput1.TabIndex = 17;
-            this.dateTimeInput1.Value = new System.DateTime(2017, 9, 1, 0, 0, 0, 0);
+            this.dateTimeInput1.ValueChanged += new System.EventHandler(this.dateTimeInput1_ValueChanged);
             // 
             // dateTimeInput2
             // 
@@ -141,6 +142,7 @@
             this.dateTimeInput2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.dateTimeInput2.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.dateTimeInput2.ButtonDropDown.Visible = true;
+            this.dateTimeInput2.Enabled = false;
             this.dateTimeInput2.IsPopupCalendarOpen = false;
             this.dateTimeInput2.Location = new System.Drawing.Point(228, 12);
             // 
@@ -182,7 +184,7 @@
             this.dateTimeInput2.Size = new System.Drawing.Size(121, 25);
             this.dateTimeInput2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.dateTimeInput2.TabIndex = 18;
-            this.dateTimeInput2.Value = new System.DateTime(2017, 10, 18, 0, 0, 0, 0);
+            this.dateTimeInput2.ValueChanged += new System.EventHandler(this.dateTimeInput2_ValueChanged);
             // 
             // labelX4
             // 
@@ -210,6 +212,8 @@
             this.Controls.Add(this.buttonX2);
             this.Controls.Add(this.buttonX1);
             this.DoubleBuffered = true;
+            this.MaximumSize = new System.Drawing.Size(384, 113);
+            this.MinimumSize = new System.Drawing.Size(384, 113);
             this.Name = "AllCounselStatisticsForm";
             this.Text = "輔導案量統計";
             ((System.ComponentModel.ISupportInitialize)(this.dateTimeInput1)).EndInit();
