@@ -117,17 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="INT407_支援樣板格式_" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\int407(支援樣板格式).xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="_2017興趣量表新樣板格式" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\2017興趣量表新樣板格式.xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="學系探索量表測驗匯入樣板" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\學系探索量表測驗匯入樣板.xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="新編多元性向測驗文華高中測驗範例樣板_CSV" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\新編多元性向測驗文華高中測驗範例樣板.csv.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
 </root>

@@ -63,9 +63,29 @@ namespace Psychological_Test_Import_whsh.Properties {
         /// <summary>
         ///   查詢類型 System.Byte[] 的當地語系化資源。
         /// </summary>
+        internal static byte[] _2017興趣量表新樣板格式 {
+            get {
+                object obj = ResourceManager.GetObject("_2017興趣量表新樣板格式", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Byte[] 的當地語系化資源。
+        /// </summary>
         internal static byte[] INT407_支援樣板格式_ {
             get {
                 object obj = ResourceManager.GetObject("INT407_支援樣板格式_", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Byte[] 的當地語系化資源。
+        /// </summary>
+        internal static byte[] 學系探索量表測驗匯入樣板 {
+            get {
+                object obj = ResourceManager.GetObject("學系探索量表測驗匯入樣板", resourceCulture);
                 return ((byte[])(obj));
             }
         }

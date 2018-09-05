@@ -134,8 +134,9 @@ namespace Psychological_Test_Import_whsh.Forms
                 #region 驗證欄位 List
                 List<string> verifiedDomainList1 = new List<string>();
 
-                verifiedDomainList1.Add("學校代碼");
+                verifiedDomainList1.Add("單位識別碼");
                 verifiedDomainList1.Add("班級代碼");
+                verifiedDomainList1.Add("班級名稱");
                 verifiedDomainList1.Add("座號");
                 verifiedDomainList1.Add("身分證號");
                 verifiedDomainList1.Add("抓週第一碼");
@@ -151,10 +152,10 @@ namespace Psychological_Test_Import_whsh.Forms
                 verifiedDomainList1.Add("E型總分");
                 verifiedDomainList1.Add("C型總分");
                 verifiedDomainList1.Add("興趣代碼");
-                verifiedDomainList1.Add("扇型區域");
+                //verifiedDomainList1.Add("扇型區域");
                 verifiedDomainList1.Add("諧和度");
                 verifiedDomainList1.Add("區分值");
-                verifiedDomainList1.Add("一致性");
+                //verifiedDomainList1.Add("一致性");
       
                 #endregion
 
@@ -216,7 +217,7 @@ namespace Psychological_Test_Import_whsh.Forms
                         if (sr.Class.Name != "" && "" + sr.SeatNo != "")
                         {
                             // key = 班級名稱_座號  ,EX: 一年01班_21號
-                            string key = ""+sr.Class.Name + "_" + (sr.SeatNo <10 ? "0":"" )+sr.SeatNo;
+                            string key = ""+sr.Class.Name + "_" + sr.SeatNo;
 
                             if (!class_SeatNO_To_StudentID.ContainsKey(key))
                             {
@@ -275,15 +276,15 @@ namespace Psychological_Test_Import_whsh.Forms
 
                 foreach (var row in ws.Cells.Rows)
                 {
-                    if (row.Index>0 && "" + cells[row.Index, 1].Value != "" && "" + cells[row.Index, 2].Value != "")
+                    if (row.Index>0 && "" + cells[row.Index, 2].Value != "" && "" + cells[row.Index, 3].Value != "")
                     {
                         string class_name = "";
 
                         string student_seat_number = "";
 
-                        class_name = "" + cells[row.Index, 1].Value;
+                        class_name = "" + cells[row.Index, 2].Value;
 
-                        student_seat_number = "" + cells[row.Index, 2].Value;
+                        student_seat_number = "" + cells[row.Index, 3].Value;
 
                         if (!studentDict_By_Class.ContainsKey(class_name))
                         {
@@ -303,37 +304,37 @@ namespace Psychological_Test_Import_whsh.Forms
                             }
                         }
                     }
-                    if (row.Index > 0 && "" + cells[row.Index, 1].Value == "" && !row.IsBlank)
+                    if (row.Index > 0 && "" + cells[row.Index, 2].Value == "" && !row.IsBlank)
                     {
                         errorList.Add("第" + (row.Index + 1) + "列 第" + 2 + "行處，沒有班級");
                     }
-                    if (row.Index > 0 && "" + cells[row.Index, 2].Value == "" && !row.IsBlank)
+                    if (row.Index > 0 && "" + cells[row.Index, 3].Value == "" && !row.IsBlank)
                     {
                         errorList.Add("第" + (row.Index + 1) + "列 第" + 3 + "行處，沒有座號");
                     }
-                    if (row.Index > 0 && "" + cells[row.Index, 1].Value != "" && !row.IsBlank)
+                    if (row.Index > 0 && "" + cells[row.Index, 2].Value != "" && !row.IsBlank)
                     {
-                        if (!classNO_To_ClassName.ContainsKey("" + cells[row.Index, 1].Value))
+                        if (!classNO_To_ClassName.ContainsKey("" + cells[row.Index, 2].Value))
                         {
                             errorList.Add("第" + (row.Index + 1) + "列 ，不存在此班級編號");
                         }
                     }
                     // 身分證字號 與班級座號座的驗證
-                    if (useIDNumberCheck && row.Index > 0 && "" + cells[row.Index, 1].Value != "" && "" + cells[row.Index, 2].Value != "" && "" + cells[row.Index, 3].Value != "" && !row.IsBlank)
+                    if (useIDNumberCheck && row.Index > 0 && "" + cells[row.Index, 2].Value != "" && "" + cells[row.Index, 3].Value != "" && "" + cells[row.Index, 4].Value != "" && !row.IsBlank)
                     {
-                        if (classNO_To_ClassName.ContainsKey("" + cells[row.Index, 1].Value))
+                        if (classNO_To_ClassName.ContainsKey("" + cells[row.Index, 2].Value))
                         {
-                            string key = "" + classNO_To_ClassName["" + cells[row.Index, 1].Value] + "_" + cells[row.Index, 2].Value;
+                            string key = "" + classNO_To_ClassName["" + cells[row.Index, 2].Value] + "_" + cells[row.Index, 3].Value;
 
                             if (!class_SeatNO_To_IDNumber.ContainsKey(key))
                             {                                
-                                errorList.Add("第" + (row.Index + 1) + "列 第" + 4 + "行處，在身分證字號驗證無法找到對照，請檢察其班級、座號、身分證字號輸入格式是否與他人不相同。");
+                                errorList.Add("第" + (row.Index + 1) + "列 第" + 5 + "行處，在身分證字號驗證無法找到對照，請檢察其班級、座號、身分證字號輸入格式是否與他人不相同。");
                             }
                             else
                             {
-                                if ("" + cells[row.Index, 3].Value != class_SeatNO_To_IDNumber[key])
+                                if ("" + cells[row.Index, 4].Value != class_SeatNO_To_IDNumber[key])
                                 {
-                                    errorList.Add("第" + (row.Index + 1) + "列 第" + 4 + "行處，該學生身分證字號與系統中不同，請檢察。");
+                                    errorList.Add("第" + (row.Index + 1) + "列 第" + 5 + "行處，該學生身分證字號與系統中不同，請檢察。");
                                 }
                             }
                         }
@@ -348,9 +349,9 @@ namespace Psychological_Test_Import_whsh.Forms
                         string key = "";
 
                         // 取得學生ID Key, key = 班級名稱_座號  ,EX: 一年01班_21號
-                        if (classNO_To_ClassName.ContainsKey("" + cells[row.Index, 1].Value))
+                        if (classNO_To_ClassName.ContainsKey("" + cells[row.Index, 2].Value))
                         {
-                            key = classNO_To_ClassName["" + cells[row.Index, 1].Value] + "_" + cells[row.Index, 2].Value;
+                            key = classNO_To_ClassName["" + cells[row.Index, 2].Value] + "_" + cells[row.Index, 3].Value;
                         }
                         if (!class_SeatNO_To_StudentID.ContainsKey(key))
                         {
@@ -376,7 +377,7 @@ namespace Psychological_Test_Import_whsh.Forms
                 }
 
                 //3.讀取資料，寫入物件
-                List<DAO.UDT_Interest_Test_Data_Def> interest_Test_Data_List = new List<DAO.UDT_Interest_Test_Data_Def>();
+                List<DAO.UDT_Interest_Test_Data_Def_2018_09> interest_Test_Data_List = new List<DAO.UDT_Interest_Test_Data_Def_2018_09>();
 
                 // 警告資料List
                 List<string> warningList = new List<string>();
@@ -393,9 +394,9 @@ namespace Psychological_Test_Import_whsh.Forms
                     if (row.Index > 0 && !row.IsBlank)
                     {
                         // 取得學生ID Key, key = 班級名稱_座號  ,EX: 一年01班_01號
-                        if (classNO_To_ClassName.ContainsKey("" + cells[row.Index, 1].Value))
+                        if (classNO_To_ClassName.ContainsKey("" + cells[row.Index, 2].Value))
                         {
-                            key = classNO_To_ClassName["" + cells[row.Index, 1].Value] + "_" + cells[row.Index, 2].Value;
+                            key = classNO_To_ClassName["" + cells[row.Index, 2].Value] + "_" + cells[row.Index, 3].Value;
                         }
 
                         if (class_SeatNO_To_StudentID.ContainsKey(key))
@@ -407,48 +408,45 @@ namespace Psychological_Test_Import_whsh.Forms
                         {
                             warningList.Add("第" + (row.Index + 1) + "行，該班級座號的學生並不存在於本系統中，請檢察");
                         }
-                        List<DAO.UDT_Interest_Test_Data_Def> dataList = accesshelper.Select<DAO.UDT_Interest_Test_Data_Def>("ref_student_id =" + "'" + studentID + "'");
+                        List<DAO.UDT_Interest_Test_Data_Def_2018_09> dataList = accesshelper.Select<DAO.UDT_Interest_Test_Data_Def_2018_09>("ref_student_id =" + "'" + studentID + "'");
 
                         if (dataList.Count == 0)
                         {
-                            DAO.UDT_Interest_Test_Data_Def data = new DAO.UDT_Interest_Test_Data_Def();
+                            DAO.UDT_Interest_Test_Data_Def_2018_09 data = new DAO.UDT_Interest_Test_Data_Def_2018_09();
 
                             #region 填值
 
                             //抓週第一碼
-                            data.gift_test_first_code = ("" + cells[row.Index, 4].Value == "" ? "_" : "" + cells[row.Index, 4].Value);
+                            data.gift_test_first_code = ("" + cells[row.Index, 5].Value == "" ? "_" : "" + cells[row.Index, 5].Value);
                             //抓週第二碼
-                            data.gift_test_second_code = ("" + cells[row.Index, 5].Value == "" ? "_" : "" + cells[row.Index, 5].Value);
+                            data.gift_test_second_code = ("" + cells[row.Index, 6].Value == "" ? "_" : "" + cells[row.Index, 6].Value);
                             //抓週第三碼
-                            data.gift_test_third_code = ("" + cells[row.Index, 6].Value == "" ? "_" : "" + cells[row.Index, 6].Value);
+                            data.gift_test_third_code = ("" + cells[row.Index, 7].Value == "" ? "_" : "" + cells[row.Index, 7].Value);
                             //興趣第一碼
-                            data.interest_first_code = ("" + cells[row.Index, 7].Value == "" ? "_" : "" + cells[row.Index, 7].Value);
+                            data.interest_first_code = ("" + cells[row.Index, 8].Value == "" ? "_" : "" + cells[row.Index, 8].Value);
                             //興趣第二碼
-                            data.interest_second_code = ("" + cells[row.Index, 8].Value == "" ? "_" : "" + cells[row.Index, 8].Value);
+                            data.interest_second_code = ("" + cells[row.Index, 9].Value == "" ? "_" : "" + cells[row.Index, 9].Value);
                             //興趣第三碼
-                            data.interest_third_code = ("" + cells[row.Index, 9].Value == "" ? "_" : "" + cells[row.Index, 9].Value);
+                            data.interest_third_code = ("" + cells[row.Index, 10].Value == "" ? "_" : "" + cells[row.Index, 10].Value);
                             //R型總分
-                            data.r_type_score = ("" + cells[row.Index, 10].Value == "" ? "_" : "" + cells[row.Index, 10].Value);
+                            data.r_type_score = ("" + cells[row.Index, 11].Value == "" ? "_" : "" + cells[row.Index, 11].Value);
                             //I型總分
-                            data.i_type_score = ("" + cells[row.Index, 11].Value == "" ? "_" : "" + cells[row.Index, 11].Value);
+                            data.i_type_score = ("" + cells[row.Index, 12].Value == "" ? "_" : "" + cells[row.Index, 12].Value);
                             //A型總分
-                            data.a_type_score = ("" + cells[row.Index, 12].Value == "" ? "_" : "" + cells[row.Index, 12].Value);
+                            data.a_type_score = ("" + cells[row.Index, 13].Value == "" ? "_" : "" + cells[row.Index, 13].Value);
                             //S型總分
-                            data.s_type_score = ("" + cells[row.Index, 13].Value == "" ? "_" : "" + cells[row.Index, 13].Value);
+                            data.s_type_score = ("" + cells[row.Index, 14].Value == "" ? "_" : "" + cells[row.Index, 14].Value);
                             //E型總分
-                            data.e_type_score = ("" + cells[row.Index, 14].Value == "" ? "_" : "" + cells[row.Index, 14].Value);
+                            data.e_type_score = ("" + cells[row.Index, 15].Value == "" ? "_" : "" + cells[row.Index, 15].Value);
                             //C型總分
-                            data.c_type_score = ("" + cells[row.Index, 15].Value == "" ? "_" : "" + cells[row.Index, 15].Value);
+                            data.c_type_score = ("" + cells[row.Index, 16].Value == "" ? "_" : "" + cells[row.Index, 16].Value);
                             //興趣代碼
-                            data.interest_code = ("" + cells[row.Index, 16].Value == "" ? "_" : "" + cells[row.Index, 16].Value);
-                            //扇型區域
-                            data.sector_area = ("" + cells[row.Index, 17].Value == "" ? "_" : "" + cells[row.Index, 17].Value);
+                            data.interest_code = ("" + cells[row.Index, 17].Value == "" ? "_" : "" + cells[row.Index, 17].Value);                            
                             //諧和度
                             data.coordinate_index = ("" + cells[row.Index, 18].Value == "" ? "_" : "" + cells[row.Index, 18].Value);
                             //區分值
                             data.distinguishing_index = ("" + cells[row.Index, 19].Value == "" ? "_" : "" + cells[row.Index, 19].Value);
-                            //一致性
-                            data.consistency_index = ("" + cells[row.Index, 20].Value == "" ? "_" : "" + cells[row.Index, 20].Value);
+                           
                                                                                                                 
                             //// 學生ID
                             data.StudentID = studentID;
@@ -462,43 +460,40 @@ namespace Psychological_Test_Import_whsh.Forms
                         }
                         else
                         {
-                            DAO.UDT_Interest_Test_Data_Def data = dataList[0];
+                            DAO.UDT_Interest_Test_Data_Def_2018_09 data = dataList[0];
 
                             #region 填值
                             //抓週第一碼
-                            data.gift_test_first_code = ("" + cells[row.Index, 4].Value == "" ? "_" : "" + cells[row.Index, 4].Value);
+                            data.gift_test_first_code = ("" + cells[row.Index, 5].Value == "" ? "_" : "" + cells[row.Index, 5].Value);
                             //抓週第二碼
-                            data.gift_test_second_code = ("" + cells[row.Index, 5].Value == "" ? "_" : "" + cells[row.Index, 5].Value);
+                            data.gift_test_second_code = ("" + cells[row.Index, 6].Value == "" ? "_" : "" + cells[row.Index, 6].Value);
                             //抓週第三碼
-                            data.gift_test_third_code = ("" + cells[row.Index, 6].Value == "" ? "_" : "" + cells[row.Index, 6].Value);
+                            data.gift_test_third_code = ("" + cells[row.Index, 7].Value == "" ? "_" : "" + cells[row.Index, 7].Value);
                             //興趣第一碼
-                            data.interest_first_code = ("" + cells[row.Index, 7].Value == "" ? "_" : "" + cells[row.Index, 7].Value);
+                            data.interest_first_code = ("" + cells[row.Index, 8].Value == "" ? "_" : "" + cells[row.Index, 8].Value);
                             //興趣第二碼
-                            data.interest_second_code = ("" + cells[row.Index, 8].Value == "" ? "_" : "" + cells[row.Index, 8].Value);
+                            data.interest_second_code = ("" + cells[row.Index, 9].Value == "" ? "_" : "" + cells[row.Index, 9].Value);
                             //興趣第三碼
-                            data.interest_third_code = ("" + cells[row.Index, 9].Value == "" ? "_" : "" + cells[row.Index, 9].Value);
+                            data.interest_third_code = ("" + cells[row.Index, 10].Value == "" ? "_" : "" + cells[row.Index, 10].Value);
                             //R型總分
-                            data.r_type_score = ("" + cells[row.Index, 10].Value == "" ? "_" : "" + cells[row.Index, 10].Value);
+                            data.r_type_score = ("" + cells[row.Index, 11].Value == "" ? "_" : "" + cells[row.Index, 11].Value);
                             //I型總分
-                            data.i_type_score = ("" + cells[row.Index, 11].Value == "" ? "_" : "" + cells[row.Index, 11].Value);
+                            data.i_type_score = ("" + cells[row.Index, 12].Value == "" ? "_" : "" + cells[row.Index, 12].Value);
                             //A型總分
-                            data.a_type_score = ("" + cells[row.Index, 12].Value == "" ? "_" : "" + cells[row.Index, 12].Value);
+                            data.a_type_score = ("" + cells[row.Index, 13].Value == "" ? "_" : "" + cells[row.Index, 13].Value);
                             //S型總分
-                            data.s_type_score = ("" + cells[row.Index, 13].Value == "" ? "_" : "" + cells[row.Index, 13].Value);
+                            data.s_type_score = ("" + cells[row.Index, 14].Value == "" ? "_" : "" + cells[row.Index, 14].Value);
                             //E型總分
-                            data.e_type_score = ("" + cells[row.Index, 14].Value == "" ? "_" : "" + cells[row.Index, 14].Value);
+                            data.e_type_score = ("" + cells[row.Index, 15].Value == "" ? "_" : "" + cells[row.Index, 15].Value);
                             //C型總分
-                            data.c_type_score = ("" + cells[row.Index, 15].Value == "" ? "_" : "" + cells[row.Index, 15].Value);
+                            data.c_type_score = ("" + cells[row.Index, 16].Value == "" ? "_" : "" + cells[row.Index, 16].Value);
                             //興趣代碼
-                            data.interest_code = ("" + cells[row.Index, 16].Value == "" ? "_" : "" + cells[row.Index, 16].Value);
-                            //扇型區域
-                            data.sector_area = ("" + cells[row.Index, 17].Value == "" ? "_" : "" + cells[row.Index, 17].Value);
+                            data.interest_code = ("" + cells[row.Index, 17].Value == "" ? "_" : "" + cells[row.Index, 17].Value);                            
                             //諧和度
                             data.coordinate_index = ("" + cells[row.Index, 18].Value == "" ? "_" : "" + cells[row.Index, 18].Value);
                             //區分值
                             data.distinguishing_index = ("" + cells[row.Index, 19].Value == "" ? "_" : "" + cells[row.Index, 19].Value);
-                            //一致性
-                            data.consistency_index = ("" + cells[row.Index, 20].Value == "" ? "_" : "" + cells[row.Index, 20].Value);
+                            
                             
                             //// 學生ID
                             data.StudentID = studentID;
@@ -596,7 +591,7 @@ namespace Psychological_Test_Import_whsh.Forms
         // 檢視 支援樣板
         private void labelX4_Click(object sender, EventArgs e)
         {
-            Workbook wb = new Workbook(new MemoryStream(Properties.Resources.INT407_支援樣板格式_));
+            Workbook wb = new Workbook(new MemoryStream(Properties.Resources._2017興趣量表新樣板格式));
             
             SaveFileDialog sd = new SaveFileDialog();
             sd.Title = "另存新檔";

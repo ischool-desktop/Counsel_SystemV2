@@ -317,7 +317,7 @@ namespace Counsel_System2
             RibbonBarItem rbRptItem1 = MotherForm.RibbonBarItems["學生", "輔導"];
             rbRptItem1["報表"].Image = Properties.Resources.Report;
             rbRptItem1["報表"].Size = RibbonBarButton.MenuButtonSize.Large;
-            //rbRptItem1["報表"]["晤談紀錄表"].Enable = UserAcl.Current["K12.Student.StudInterviewDataReport"].Executable;
+            rbRptItem1["報表"]["晤談紀錄表"].Enable = UserAcl.Current["K12.Student.StudInterviewDataReport"].Executable;
 
             //2016/11/25 穎驊筆記，因應輔導2.0 table counsel.interview_record 調整，牽連到的功能先暫時關閉，日後調整再開啟。
 
