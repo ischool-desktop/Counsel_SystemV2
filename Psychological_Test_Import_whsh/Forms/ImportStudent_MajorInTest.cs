@@ -26,9 +26,11 @@ namespace Psychological_Test_Import_whsh.Forms
 
         public string source_data = "";
         string target_grade_year = "";
-        
+
         bool useIDNumberCheck = false;
-        
+
+        DateTime dt;
+
 
         public ImportStudent_MajorInTest()
         {
@@ -58,10 +60,19 @@ namespace Psychological_Test_Import_whsh.Forms
 
             useIDNumberCheck = checkBox1.Checked;
 
+            dt = dateTimeInput1.Value;
+
             // 若沒選取來源檔案，中止程序
             if (source_data == "")
             {
                 MsgBox.Show("請選擇來源檔案", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 若沒選取送出日期，中止程序
+            if ("" + dateTimeInput1.Text == "")
+            {
+                MsgBox.Show("請選擇送出日期", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -352,7 +363,9 @@ namespace Psychological_Test_Import_whsh.Forms
                             //// 學生ID
                             data.StudentID = studentID;
 
-                  
+                            // 送出日期
+                            data.ImplementationDate = dt;
+
                             #endregion
 
                             // 將 data 加入 list                                                                                        
@@ -442,6 +455,9 @@ namespace Psychological_Test_Import_whsh.Forms
 
                             //// 學生ID
                             data.StudentID = studentID;
+
+                            // 送出日期
+                            data.ImplementationDate = dt;
 
                             // 將 data 加入 list                                                                                        
                             interest_Test_Data_List.Add(data);

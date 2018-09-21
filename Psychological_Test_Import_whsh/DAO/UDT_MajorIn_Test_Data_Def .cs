@@ -279,5 +279,12 @@ namespace Psychological_Test_Import_whsh.DAO
         [Field(Field = "ref_student_id", Indexed = false)]
         public string StudentID { get; set; }
 
+
+        /// <summary>
+        /// 實施日期
+        /// </summary>        
+        [Field(Field = "implementation_date", Indexed = false)]
+        public DateTime? ImplementationDate { get; set; }
+
     }
 }
